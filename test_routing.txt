@@ -1,0 +1,69 @@
+import './App.css';
+import {Link, Route, Routes} from "react-router-dom";
+import Home from "./Pages/Home"
+import About from "./Pages/About"
+import MovieList from "./Pages/MovieList"
+import Movie from "./Pages/Movie"
+import NotFound from "./Pages/NotFound"
+
+
+function App() {
+  return (
+    <>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/MovieList">MovieList</Link>
+          </li>
+          <li>
+            <Link to="/About">About</Link>
+          </li>
+        </ul>
+      </nav>
+
+      {/**
+       * The only stuff that changes is inside the Routes tag when we click the links above.
+       * Now this is really nice Cause all your navigation is really quick cause you don't have to refresh
+       * your entire page. You only have to change the things that change inside the Routes component.
+       * 
+       * Also you don't necessariliy need to have a single <Routes> you could have multiple routes, so that if you want to show some content that is not
+       * related to you rmain content.
+       */}
+
+        <Routes>
+          <Route path = "/" element={<Home/>}/> {/* So the path variable here is for us to provide the URL, and the element could be any JSX */}
+
+          {/**Here we are  nesting routesr and any path for route defined inside it continues after the path of the parent one
+           * also the index keyword tells us what to show if just the parent route url is rendered. This way we could even add layouts which 
+           * we'd want to persist through all the URL.
+          */}
+          <Route path="/MovieList"> {/**Now Suppose you wanted an element to appear with all the renderings within this nested rout what we could
+           * do for that is we could add an attribute element = {<MovieLayout/>} in the parent Route and add a <Outlet/> tag in it now with the outlet
+           * tag we could pass in a useContext to all the nested routes like this: <Outlet context{{hello: "world";}}, for example we have passed a 
+           * object here with the key 'hello'.
+           */}
+           {/**Now here your nested componenets have same path but if you want them to have completely different path what we could do is that we could
+            * remove the 'path' variable in the parent <Route>, what this will do is that it'll just wrap the nested loops without shared URL with the shared
+            * componenet you used in the 'element' variable.
+            */}
+            <Route index element={<MovieList/>}/>
+            <Route path=":id" element={<Movie/>}/> {/**Here the id value is a custom  paramter we pass via the route */}
+          </Route>
+
+          {/* <Route path="/MovieList/new" element={<Movie/>}/>   Now suppose you gotta have this, now how will react router determine
+          which to choose i.e should it consier it as a paramter passed as :id or should it render this route, now react is smart enough to know
+          if oyu have hard coded some URL then it'll prefer that URL over the parameter one, so if you tryrendering /MovieList/new it'll first check if there
+          are any hardcoded route which match this or not and if not then it goes to the paramter one.*/}
+
+          <Route path="*" element={<NotFound/>}/> {/**This basically represent all the possible URLs, now what this does is if react doesn't find any matching URL it fall backs to this URL */}
+
+          <Route path = "/About" element={<About/>}/> 
+        </Routes>
+    </>
+  )
+}
+
+export default App;

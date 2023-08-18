@@ -1,0 +1,72 @@
+.main_nav{
+    flex: 2 1 auto;
+    max-width: 20vw;
+    min-width: 200px;
+    position: sticky;
+    top: 0px;
+}
+
+.navigation{
+    position: sticky;
+    top: 0px;
+}
+.nav_logo{
+    padding-top: 3vh;
+    padding-bottom: 2vh;
+    display:flex;
+    justify-content: center;
+}
+
+.nav_logo > img{
+    width: 5em;
+    height: auto;
+}
+
+.pageLink{
+    display: flex;
+    justify-content:center;
+    color: #999999;
+}
+.pageLink:hover{
+    color: #DEDEDE
+}
+
+.pageLinkTab{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    column-gap: 10px;
+    width: 150px;
+}
+
+.pageLinkButton{
+    -webkit-appearnce: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;
+    border: none;
+    transition: color 0.4s;
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    text-align: center;
+    color:inherit;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+#pageIcon{
+    font-size: 30px;
+}
+
+#pageLinks{
+    padding: 0px;
+}
+#pageLinks li{
+    list-style-type: none;
+}
+
+#pageLinks .pageLink{
+    text-decoration: none;
+}

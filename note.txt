@@ -1,0 +1,101 @@
+3. LOOP CINEMA
+
+advantages:
+- multiple cinema locations around Australia
+- focus on a premium - unique experience and bringing community into cinema exp
+- displaying latest and greatest films - hold few community events & art shows at locations
+
+disadvantages:
+- not kept up with times - little tech as part of business
+- competitors have:
+	+ online booking
+	+ film ratings
+	+ reviews
+	+ search
+--> customers go to other cinemas for better UX before cinema
+
+
+--> At this stage: 
+		- discover upcoming films 
+		- session times
+		- ratings
+		- reviews
+
+3.1. Features
+	a. Complete UI <header - footer - nav - main>
+	b. Authentication client side <guest - user>
+	c. User profile (CRUD)
+	d. User review (stars - written) for a movie (CRUD)
+
+3.2. Data stored in LocalStorage
+
+3.3. Website must make sense - styled - professional
+
+3.4. Digital assets
+	- https://unsplash.com/ (Images)
+	- https://uifaces.co/ (Avatars)
+	- https://fonts.google.com/icons?selected=Material+Icons:home (Icons)
+	- https://www.flaticon.com/ (Icons)
+
+3.5. Do not add features at this stage
+
+
+
+
+
+
+
+
+4. TASKS
+
+
+4.1. PA (13)
+	- Styling and content of pages and landing page 					(5)
+		+ no online templates
+		+ allow css libraries (only primitive components - not nav and etc.)
+		+ clearly distinguishable areas - individual components
+		+ Landing page could contain:
+			# brief information about Loop Cinema
+			# locations
+			# key difference with other cinema chains
+		+ marked on styling css - defining components - clean
+	- Sign-up page											(3)
+		+ form with name - email - password - confirm password
+		+ password should not be clear text format
+		+ perform all validations - save data to localStorage:
+			# required name - email - password
+			# email must be proper format (Regex)
+			# strong password format (Regex)
+		+ visual cue for successful registration
+		+ auto login after register
+	- Sign-in page											(2)
+		+ email - password
+		+ after sign in - redirected to profile page with visual cue
+	- Profile page											(3)
+		+ Profile component show user info in the main content area (?)
+		+ completed Profile display user detail - date of joining
+
+4.2. CR (4)
+	- Profile management										(4)
+		+ Edit and Delete
+			# edit info with a form similar to sign up
+			# self delete user (all reviews must be deleted)
+			# visual cues
+
+4.3. DI (3)
+	- Review page											(3)
+		+ user can see a link to leave a review on the film info page
+		+ review has 1-5 stars & written comments
+		+ validations such as:
+			# comments not empty
+			# length cannot exceed 250 chars
+			# 1 <= rating <= 5
+		+ list all reviews and ratings in the film page
+		+ do not need to calculate average rating
+
+4.4. HD (5)
+	- Edit & Delete reviews 									(1)
+	- Calculate & display film based on average ratings					(1)
+	- Fake reviews											(3)
+		+ large number of reviews in a short period -> fake reviews
+		+ think how to add logic to prevent (frontend is ok)	

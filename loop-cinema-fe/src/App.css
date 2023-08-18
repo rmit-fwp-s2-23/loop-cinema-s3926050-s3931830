@@ -1,38 +1,34 @@
-.App {
-  text-align: center;
+.container{
+    margin: 0rm;
+    display: flex;
+    flex-direction: column;
+    background-color: #121212;
+}
+/*CHECKOUT: Why gradient isn't showing up?*/
+.gradient{
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 520px;
+    background: linear-gradient(180deg,#2e2e2e 0%,#121212 100%);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.main_page{
+    display:flex;
+    flex-direction: row;
+    background: transparent;
+    z-index: 1;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+
+.main_content{
+    flex: 5 1 auto;
+    min-height: 100vh;
+    color: #FFFFFF;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.footer{
+    background-color: black;
+    color: white;
+    height: 10vh;
 }

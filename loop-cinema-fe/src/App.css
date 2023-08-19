@@ -1,8 +1,9 @@
-.container{
-    margin: 0rm;
+.main_container{
+    margin: 0px;
     display: flex;
     flex-direction: column;
     background-color: #121212;
+    width: 100vw;
 }
 /*CHECKOUT: Why gradient isn't showing up?*/
 .gradient{

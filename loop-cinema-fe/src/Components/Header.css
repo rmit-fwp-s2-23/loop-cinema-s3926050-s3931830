@@ -15,7 +15,7 @@
 #searchButton{
     appearance: none;
     border: none;
-    height: 42px;
+    height: 5vh;
     background-color: #383838;
     color: #fff;
     cursor: pointer;
@@ -25,7 +25,7 @@
 #searchInput{
     appearance: none;
     border: none;
-    height: 40px;
+    height: 5vh;
     width: 100%;
     background: #383838;
     font-size: 20px;

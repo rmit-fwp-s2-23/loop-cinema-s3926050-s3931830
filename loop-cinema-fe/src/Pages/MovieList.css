@@ -1,0 +1,16 @@
+.movielist_ul{
+    display: flex;
+    flex-flow: row wrap;
+    width: 85%;
+    margin: 0px;
+    padding: 0px;
+}
+
+.movielist_ul, movie_card{
+    list-style: none;
+}
+
+.cardLink{
+    text-decoration: none;
+    color: white;
+}

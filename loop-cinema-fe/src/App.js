@@ -8,34 +8,35 @@ import NotFound from "./Pages/NotFound"
 import Header from "./Components/Header"
 import Navigation from "./Components/Navigation"
 import UserProfile from "./Pages/UserProfile"
-
+import Manifest from "./data/Manifest"
+import ScrolltoTop from './Components/ScrolltoTop';
 
 function App() {
   return (
     <>
+    <Manifest/>
     {/**CHECKOUT: Try making it more concise. */}
       <span className="gradient"></span>
-      <div className = "container">
+      <div className = "main_container">
         <div className = "main_page">
           <Navigation/>
 
           <div className = "main_content">
             <Header/>
-            
+
             <div className = "main_display">
+              <ScrolltoTop/>
               <Routes>
-                <Route path = "/" element={<Home/>}/>
-                <Route path="/MovieList"> 
+                <Route path = "/" element={<Home/>}>
                   <Route index element={<MovieList/>}/>
-                  <Route path=":id" element={<Movie/>}/>
                 </Route>
+                <Route path="/Movie/:id" element={<Movie/>}/>
                 <Route path="*" element={<NotFound/>}/>
                 <Route path = "/About" element={<About/>}/> 
               </Routes>
-            </div>
 
+            </div>
           </div>
-          
         </div>
 
         <div className = "footer">Footer</div>

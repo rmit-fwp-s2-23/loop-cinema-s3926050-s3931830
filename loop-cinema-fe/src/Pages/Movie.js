@@ -6,7 +6,7 @@ function Movie(){
     const { id } = useParams(); //This function in react router gets us all the custom parameter we passed via route(we got in the url ':id').
 
     return(
-        <h1>Movie {id}</h1> 
+        <h1>{id}</h1> 
     )
 }
 export default Movie

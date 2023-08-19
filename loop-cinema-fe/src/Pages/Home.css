@@ -1,0 +1,17 @@
+.home_page{
+    display: flex;
+    flex-direction: column;
+    align-items:baseline;
+}
+.home_slider{
+    width: 70%;
+    box-shadow: 0 0 8px #0a0a0a;
+}
+
+.movie_card{
+    appearance: none;
+}
+.moveiList_ul li{
+    appearance: none;
+
+}

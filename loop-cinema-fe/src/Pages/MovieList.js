@@ -3,15 +3,14 @@ import { useStatusTheme } from "../Components/StatusThemeProvider"
 import MovieCard from "../Components/MovieCard"
 import "./MovieList.css"
 
-function MovieList(){
+function MovieList() {
     const storedData = localStorage.getItem('movie_data')
     const parsedData = JSON.parse(storedData)
     console.log("loading data from localStorage")
     const status = useStatusTheme()
     return(
         <div className="movielist_container">
-            <ul className="movielist_ul">
-                
+            <ul className="movielist_ul">      
                 { 
                     parsedData.filter((obj)=>obj.ComingSoon == status).map((obj)=>(
                         <li classNaem="movie_card">
@@ -25,7 +24,6 @@ function MovieList(){
                                 />
                             </Link>
                         </li>
-
                     ))
                 }
             </ul>

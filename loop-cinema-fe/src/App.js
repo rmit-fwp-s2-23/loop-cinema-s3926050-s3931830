@@ -10,8 +10,20 @@ import Navigation from "./Components/Navigation"
 import UserProfile from "./Pages/UserProfile"
 import Manifest from "./data/Manifest"
 import ScrolltoTop from './Components/ScrolltoTop';
+import { useEffect, useState } from 'react';
+import movieData from "./data/movie_data.json"
+import MyAccount from "./Pages/myAccount/MyAccount"
 
 function App() {
+  // const [isLoaded, setIsLoaded] = useState("");
+   
+  // useEffect(() => {
+  //   console.log("loading data")
+  //   localStorage.setItem("movie_data", JSON.stringify(movieData))
+  //   console.log("load data successfully")
+  //   setIsLoaded(prev => true)
+  // }, [])
+
   return (
     <>
     <Manifest/>
@@ -28,11 +40,14 @@ function App() {
               <ScrolltoTop/>
               <Routes>
                 <Route path = "/" element={<Home/>}>
-                  <Route index element={<MovieList/>}/>
+                  {/* <Route index element={<MovieList/>}/> */}
                 </Route>
                 <Route path="/Movie/:id" element={<Movie/>}/>
                 <Route path="*" element={<NotFound/>}/>
                 <Route path = "/About" element={<About/>}/> 
+
+                {/* bao hoang */}
+                <Route path = "/account" element={<MyAccount />}/>
               </Routes>
 
             </div>

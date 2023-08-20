@@ -1,7 +1,7 @@
 .main_nav{
     flex: 2 1 auto;
     max-width: 20vw;
-    min-width: 200px;
+    min-width: 230px;
     position: sticky;
     top: 0px;
 }

@@ -6,9 +6,12 @@ function Navigation(){
     return(
         <div className = "main_nav">
             <div className = "navigation">
-              <div className ="nav_logo">
-                <img src={logo} alt="Logo"/>
-              </div>
+              <Link className="homeLink" to="/">
+                <div className ="nav_logo">
+                  {/**Do conditnoa */}
+                  <img src={logo} alt="Logo"/>
+                </div>
+              </Link>
               <nav>
                 <ul id="pageLinks">
                   <li>
@@ -19,14 +22,14 @@ function Navigation(){
                       </div>
                     </Link>
                   </li>
-                  <li>
+                  {/* <li>
                     <Link className = "pageLink" to="/MovieList">
                       <div className ="pageLinkTab">
                         <i className="material-icons" id="pageIcon">theaters</i>
                         <button className = "pageLinkButton">MOVIES</button>
                       </div>
                     </Link>
-                  </li>
+                  </li> */}
                   <li>
                     <Link className = "pageLink" to="/About">
                       <div className ="pageLinkTab">

@@ -43,6 +43,7 @@ function App() {
                   {/* <Route index element={<MovieList/>}/> */}
                 </Route>
                 <Route path="/Movie/:id" element={<Movie/>}/>
+                <Route path="/Profile" element={<UserProfile/>}/>
                 <Route path="*" element={<NotFound/>}/>
                 <Route path = "/About" element={<About/>}/> 
 

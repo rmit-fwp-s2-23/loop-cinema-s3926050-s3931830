@@ -1,4 +1,5 @@
-import "./Header.css"
+import "./Header.css";
+import { Link } from "react-router-dom";
 
 function Header(){
     return(
@@ -24,7 +25,9 @@ function Header(){
               <div className="headerProfile">
                 <div className = "profile">
                     {/**CHECKOUT: Add a Link Here */}
-                    <i className="material-icons" id="profileIcon">person_outline</i>
+                    <Link className="profileLink" to="/UserProfile">
+                        <i className="material-icons" id="profileIcon">person_outline</i>
+                    </Link>
                 </div>
               </div>
             </div>

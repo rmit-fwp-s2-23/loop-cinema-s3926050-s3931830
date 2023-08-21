@@ -1,0 +1,9 @@
+.main-content {
+    flex-grow: 1;
+}
+
+@media (min-width: 1241px) {
+    .main-content {
+        padding-left: 8px;
+    }
+}

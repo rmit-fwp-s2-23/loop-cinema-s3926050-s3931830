@@ -1,11 +1,11 @@
-.main_container{
+/* .main_container{
     margin: 0px;
     display: flex;
     flex-direction: column;
     background-color: #121212;
     width: 100vw;
 }
-/*CHECKOUT: Why gradient isn't showing up?*/
+CHECKOUT: Why gradient isn't showing up?
 .gradient{
     position: absolute;
     left: 0;
@@ -32,4 +32,38 @@
     background-color: black;
     color: white;
     height: 10vh;
+} */
+
+#root {
+    display: flex;
 }
+
+.outside-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    flex-grow: 1;
+}
+
+.container-fluid {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+}
+
+/* Grey Dark scheme (Forced) */
+/* Enabled if forced with data-theme="dark" */
+[data-theme="dark"] {
+    --primary: #757575;
+    --primary-hover: #ff5722;
+    /* --primary-focus: rgba(117, 117, 117, 0.25); */
+    --primary-focus: none;
+    --primary-inverse: #FFF;
+  }
+
+  :root {
+    --form-element-active-border-color: var(--primary);
+    --form-element-focus-color: var(--primary-focus);
+    --switch-color: var(--primary-inverse);
+    --switch-checked-background-color: var(--primary);
+  }

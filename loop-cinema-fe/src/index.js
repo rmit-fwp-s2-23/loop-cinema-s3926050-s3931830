@@ -1,17 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import {BrowserRouter} from "react-router-dom"
-/**This browserRouter is basiaclly a react context and this will provde 
- * a bunch of information to every component about routing which will make
- * make every thing work seamlesly.
-*/
+import { BrowserRouter as Router } from "react-router-dom";
+import ScrollToTop from "./Components/Ultilities/ScrollToTop"
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <Router>
+      <ScrollToTop/>
       <App />
-    </BrowserRouter>
+    </Router>
   </React.StrictMode>
 );

@@ -3,7 +3,7 @@ export default function RegisterValidate (values) {
     let registerErrors = {};
     /*  firstName
         lastName
-        mobile
+        phone
         dob
         postCode
         email
@@ -17,8 +17,8 @@ export default function RegisterValidate (values) {
       registerErrors.firstName = 'First name is required';
     } else if (!values.lastName) {
       registerErrors.lastName = 'Last name is required';
-    } else if (!values.mobile) {
-      registerErrors.mobile = 'Mobile number is required';
+    } else if (!values.phone) {
+      registerErrors.phone = 'Phone number is required';
     } else if (!values.dob) {
       registerErrors.dob = 'Date of birth is required';
     } else if (!values.postCode) {
@@ -33,8 +33,8 @@ export default function RegisterValidate (values) {
 
 
     // regex validation
-    if (!/^[\d]{1,10}$/.test(values.mobile)) {
-      registerErrors.mobile = 'Invalid mobile number'
+    if (!/^[\d]{1,10}$/.test(values.phone)) {
+      registerErrors.phone = 'Invalid phone number'
     } else if (!/^[\d]{1,10}$/.test(values.postCode)) {
       registerErrors.postCode = 'Invalid post code'
 

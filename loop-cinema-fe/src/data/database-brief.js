@@ -23,7 +23,7 @@ const casts = [
     "Emily Blunt"
 ]
 
-const director = [
+const directors = [
     "Christopher Nolan",
     "Tim Burton",
     "Mel Gibson",
@@ -115,6 +115,7 @@ const users = [
         postCode: 3000,
         subscribe: true,
         points: 1000,
+        createdAt: "10/08/2023"
     },
     {
         user_id: "U006",
@@ -126,7 +127,8 @@ const users = [
         dob: "01/01/2003",
         postCode: 3001,
         subscribe: true,
-        points: 700
+        points: 700,
+        createdAt: "11/08/2023"
     },
     {
         user_id: "U005",
@@ -138,7 +140,8 @@ const users = [
         dob: "01/01/2000",
         postCode: 3054,
         subscribe: false,
-        points: 0
+        points: 0,
+        createdAt: "20/08/2023"
     }
 ]
 
@@ -342,3 +345,15 @@ const movies = [
         updatedAt: "05/08/2023"
     },
 ]
+
+export {
+    loopCinema,
+    genres,
+    casts,
+    directors,
+    ratings,
+    offers,
+    locations,
+    users,
+    movies
+}

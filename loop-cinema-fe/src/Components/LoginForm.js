@@ -2,13 +2,19 @@ import '../css/components/LoginForm.css'
 import logo from "../Images/logo.png"
 import useLockScroll from '../CustomHooks/useLockScroll'
 
-const LoginForm = () => {
-    useLockScroll();
+const LoginForm = (props) => {
+
+    // const closeLoginModal = (event) => {
+    //     props.toggleModal()
+    // }
+    // useLockScroll();
     return (
         <>
-        <dialog className='login-dialog' open>
+        <dialog className='login-dialog' id='login-dialog'>
             <article>
-                <a href="#close" aria-label="Close" class="close"/>
+                <a href="#close" aria-label="Close" class="close" />
+                {/* <a href="#close" aria-label="Close" class="close" onClick={closeLoginModal}/> */}
+
                 <div className="login-dialog-logo">
                     <img className="login-dialog-logo-img" src={logo} alt="loop cinema logo"/>
                 </div>

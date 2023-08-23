@@ -55,7 +55,8 @@ CHECKOUT: Why gradient isn't showing up?
 /* Enabled if forced with data-theme="dark" */
 [data-theme="dark"] {
     --primary: #757575;
-    --primary-hover: #ff5722;
+    /* --primary-hover: #ff5722; */
+    --primary-hover: #cd242c;
     /* --primary-focus: rgba(117, 117, 117, 0.25); */
     --primary-focus: none;
     --primary-inverse: #FFF;

@@ -1,0 +1,97 @@
+.login-dialog {
+    justify-content: right;
+    padding: 0;
+    background-color: rgba(0,0,0,.7);
+}
+
+.login-dialog article {
+    min-height: 100%;
+    width: 488px;
+    margin: 0;
+    background-color: #121212;
+}
+
+.login-dialog-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-dialog-logo-img {
+    max-width: 120px;
+}
+
+.login-dialog-content {
+    margin-top: 20px;
+}
+
+.login-dialog-content-title {
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.login-dialog-content-form {
+    margin-top: 24px;
+}
+
+.login-dialog-content-form form label {
+    font-size: 16px;
+}
+
+.login-dialog-content-form form input:not([type=checkbox],[type=radio],[type=range]) {
+    height: 50px
+}
+
+.login-dialog-content-form form input {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    background-color: #353535;
+}
+
+.login-dialog-content-form form button {
+    background-color: #cd242c;
+    margin-top: 10px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.login-dialog-content-note {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-dialog-content-note-text {
+    font-size: 16px;
+    color: #999;
+}
+
+.login-dialog-content-note-buttons {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+    width: 70%
+}
+
+.login-dialog-content-note-buttons .header-profile-button {
+    /* height: auto; */
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+.login-dialog-content-note-buttons button .header-profile-button-text {
+    display: inline;
+    color: #cd242c;
+    transition: color .4s;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    /* width: 120px */
+}
+
+.login-dialog-content-note-buttons button span:hover {
+    color: #fff
+}

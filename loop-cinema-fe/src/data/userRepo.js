@@ -1,4 +1,4 @@
-import users from "./database-brief.js"
+import { users } from "./database-brief.js"
 import moment from 'moment'
 
 const USER_LIST_KEY = "user_list"; // array of user objects
@@ -81,7 +81,7 @@ const removeCurrentUserId = () => {
 const verifyUserLogin = (loginUserObject) => {
     const userList = getUserList();
 
-    if (userList == null || userList == []) {
+    if (userList == null || userList === []) {
         return false;
     } else {
         userList.map((user) => {
@@ -89,8 +89,8 @@ const verifyUserLogin = (loginUserObject) => {
                 setCurrentUserId(user.user_id)
                 return true;
             }
-        })
-        return false;
+            return false;
+        })  
     }
 
 }
@@ -116,4 +116,17 @@ const createNewUser = (registerUserObject) => {
     } else {
         return false;
     }
+}
+
+export {
+    initUserList,
+    getUserList,
+    setUserList,
+    addUserToList,
+    removeUserList,
+    setCurrentUserId,
+    getCurrentUserId,
+    removeCurrentUserId,
+    verifyUserLogin,
+    createNewUser
 }

@@ -3,7 +3,7 @@ import HeaderNav from "./HeaderNav";
 import Home from "../Pages/Home";
 import "../css/components/MainContent.css"
 import MyAccount from "../Pages/MyAccount"
-import LoginForm from "./LoginForm";
+import Test from "./Test";
 
 const MainContent = () => {
     return (
@@ -16,7 +16,7 @@ const MainContent = () => {
                     <Route path="/account" element={<MyAccount />} />
 
                     {/* test component routes */}
-                    <Route path="/login" element={<LoginForm />} />
+                    <Route path="/test" element={<Test />} />
                 </Routes>
             </div>     
         </>

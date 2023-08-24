@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { closeModal } from '../Components/Ultilities/OpenModal';
 
 const useForm = (callback, validate) => {
 

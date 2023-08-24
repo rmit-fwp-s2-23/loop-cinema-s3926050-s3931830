@@ -88,5 +88,6 @@ const isScrollbarVisible = () => {
 };
 
 export {
-    toggleModal
+    toggleModal,
+    closeModal
 };

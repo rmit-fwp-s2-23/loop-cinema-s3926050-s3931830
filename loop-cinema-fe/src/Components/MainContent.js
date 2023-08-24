@@ -4,8 +4,11 @@ import Home from "../Pages/Home";
 import "../css/components/MainContent.css"
 import MyAccount from "../Pages/MyAccount"
 import Test from "./Test";
+import { getCurrentUserId } from "../data/userRepo";
+import { useState } from "react";
 
 const MainContent = () => {
+
     return (
         <>
             <div className="main-content">

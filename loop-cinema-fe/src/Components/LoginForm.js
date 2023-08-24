@@ -2,11 +2,22 @@ import '../css/components/LoginForm.css'
 import logo from "../Images/logo.png"
 import useForm from '../CustomHooks/useForm'
 import LoginValidate from '../Validations/LoginValidate'
+import { getCurrentUserId } from '../data/userRepo';
+import { useNavigate } from 'react-router-dom';
+import { toggleModal } from './Ultilities/OpenModal';
 
 const LoginForm = (props) => {
-    // test login done
-    const login = () => {
-        console.log("Logged in");
+    const navigate = useNavigate()
+
+    // may use this to display a loading icon
+    const loadingIcon = () => {
+        if (getCurrentUserId() !== null) {
+            window.location.reload()
+            navigate("/account")
+            props.setIsLoggedIn(true)
+        } else {
+            props.setIsLoggedIn(false)
+        }
     }
 
     const {
@@ -14,7 +25,7 @@ const LoginForm = (props) => {
         errors,
         handleChange,
         handleSubmit,
-    } = useForm(login, LoginValidate);
+    } = useForm(loadingIcon, LoginValidate);
 
     return (
         <>
@@ -22,7 +33,7 @@ const LoginForm = (props) => {
             <article>
                 <a href="#close" aria-label="Close" class="close" data-target="login-dialog" onClick={props.toggleModal}/>
 
-                <div className="login-dialog-logo">
+                <div className="login-dialog-logo" id='login-dialog-logo'>
                     <img className="login-dialog-logo-img" src={logo} alt="loop cinema logo"/>
                 </div>
                 <div className='login-dialog-content'>
@@ -38,8 +49,9 @@ const LoginForm = (props) => {
                                 )
                             }
 
+                            {/* need to do the view / unview css js */}
                             <label for="password">Password</label>
-                            <input autoComplete="off" type="email" id="password" name="password" placeholder="Password" required 
+                            <input autoComplete="off" type="password" id="password" name="password" placeholder="Password" required 
                             aria-invalid={`${errors.password && 'true'}`} onChange={handleChange} value={values.password || ''} />
                             {
                                 errors.password && (

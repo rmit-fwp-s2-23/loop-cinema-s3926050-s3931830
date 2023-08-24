@@ -54,6 +54,18 @@ const removeUserList = () => {
     localStorage.removeItem(USER_LIST_KEY);
 }
 
+// return an user object by user id
+const getUserByUserId = (searchUserId) => {
+    const userList = getUserList()
+    if (userList !== null) {
+        userList.map((user) => {
+            if (searchUserId === user.user_id) return user
+        })
+
+        return null
+    }
+    return null
+}
 
 /* 
 

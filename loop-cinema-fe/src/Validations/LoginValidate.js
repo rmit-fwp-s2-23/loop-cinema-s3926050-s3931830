@@ -1,5 +1,5 @@
 // need to update to validate unique
-export default function LoginValidate (values) {
+export default function LoginValidate(values) {
     let loginErrors = {};
     /*  username (email)
         password

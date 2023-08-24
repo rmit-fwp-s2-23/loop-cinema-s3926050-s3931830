@@ -1,5 +1,6 @@
 import { useLayoutEffect } from "react";
 
+// not currently used
 const useLockScroll = () => {
 
     // use this effect when need to measure DOM

@@ -37,6 +37,7 @@ const HeaderNav = (props) => {
                     {props.isLoggedIn 
                     ? (
                         <>
+                            {/* https://picocss.com/docs/dropdowns.html consider this option for hover */}
                             <button className="header-profile-button" data-target="login-dialog" 
                             onClick={openAccountMenu}>
                                 {/* <img/> */}

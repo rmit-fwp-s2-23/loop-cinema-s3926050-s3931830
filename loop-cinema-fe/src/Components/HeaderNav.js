@@ -5,31 +5,10 @@ import LoginForm from "./LoginForm";
 import { toggleModal } from "./Ultilities/OpenModal";
 import { getCurrentUserId } from "../data/userRepo";
 import { useEffect, useState } from "react";
+import RegisterForm from "./RegisterForm";
 
-const HeaderNav = () => {
+const HeaderNav = (props) => {
     const navigate = useNavigate()
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-    // everytime component mount -> set to true -> not good as the message will reappeared
-    const [isTemporary, setIsTemporary] = useState(false);
-
-    useEffect(() => {
-        const userId = getCurrentUserId()
-        if (userId === null) { 
-            setIsLoggedIn(false)
-        } else {
-            setIsLoggedIn(true)
-            setIsTemporary(true)
-        }
-    }, [isLoggedIn])
-
-    useEffect(() => {
-        if (isTemporary) {
-            setTimeout(() => {
-                setIsTemporary(false)
-            }, 2000)
-        }
-    }, [isTemporary])
 
     const navigateMyAccount = () => {
         navigate("/account")
@@ -50,27 +29,34 @@ const HeaderNav = () => {
                     <input className="header-search-input" type="search" id="search" name="search" placeholder="Search movies..."/>
                 </div>
                 <div className="header-profile">
-                    {isLoggedIn ? (
+                    {props.isLoggedIn ? (
                         <button className="header-profile-button" data-target="login-dialog" onClick={navigateMyAccount}>
                             {/* <img/> */}
                             <span className="header-profile-button-text">My Account</span>
                         </button>
                     ) : (    
-                        <button className="header-profile-button" data-target="login-dialog" onClick={toggleModal}>
-                            {/* <img/> */}
-                            <span className="header-profile-button-text">Log In</span>
-                        </button>
+                        <>
+                            <button className="header-profile-button" data-target="login-dialog" onClick={toggleModal}>
+                                {/* <img/> */}
+                                <span className="header-profile-button-text">Log In</span>
+                            </button>
+                            <button className="header-profile-button" data-target="register-dialog" onClick={toggleModal}>
+                                {/* <img/> */}
+                                <span className="header-profile-button-text">Register</span>
+                            </button>
+                        </>
                     )}
                 </div>
                 {
-                    isTemporary && (
+                    props.isTemporaryMessage && (
                         <div className="header-alert-message">
                             <span>Login successfully</span>
                         </div>
                     )
                 }
             </header>
-            <LoginForm toggleModal={toggleModal} setIsLoggedIn={setIsLoggedIn} setIsTemporary={setIsTemporary} />
+            <LoginForm toggleModal={toggleModal} setIsLoggedIn={props.setIsLoggedIn} />
+            <RegisterForm  toggleModal={toggleModal} />
         </>
     )
 }

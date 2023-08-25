@@ -49,11 +49,18 @@
     background-color: #353535;
 }
 
-dialog article form .input-error {
-    color: #cd242c;
-    font-size: 15px;
+dialog article form .input-text-help {
+    font-size: 10px;
     margin-left: 22px;
     margin: 0;
+}
+
+dialog article form .input-error {
+    color: #cd242c; 
+}
+
+dialog article form .input-guide{
+    color: hsl(210, 2%, 50%); 
 }
 
 .login-dialog-content-form form button {

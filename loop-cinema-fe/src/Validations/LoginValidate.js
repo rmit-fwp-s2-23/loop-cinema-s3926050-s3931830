@@ -11,9 +11,13 @@ export default function LoginValidate(values) {
     // required -> if fields empty then disable button and not allow submit
     if (!values.username) {
         loginErrors.username = 'Username is required.';
-    } else if (!values.password) {
+    } 
+    
+    if (!values.password) {
         loginErrors.password = 'Password is required.';
-    } else {
+    } 
+    
+    if (loginErrors === {}) {
         if (userList !== null) {
             const userListLength = userList.length;
             let isValid = false;

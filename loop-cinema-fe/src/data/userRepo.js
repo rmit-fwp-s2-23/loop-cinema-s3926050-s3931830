@@ -42,11 +42,7 @@ const addUserToList = (newUser) => {
     const newUserList = [...currentUserList];
     newUserList.push(newUser);
     
-    if (setUserList(newUserList)) {
-        return true;
-    } else {
-        return false;
-    }
+    setUserList(newUserList)
 }
 
 // remove user_list from localStorage
@@ -58,10 +54,13 @@ const removeUserList = () => {
 const getUserByUserId = (searchUserId) => {
     const userList = getUserList()
     if (userList !== null) {
-        userList.map((user) => {
-            if (searchUserId === user.user_id) return user
-        })
-
+        const userListLength = userList.length;
+        for (let index = 0; index < userListLength; index++) {
+            const user = userList[index];
+            if (searchUserId === JSON.stringify(user.user_id)) {
+                return user
+            }
+        }
         return null
     }
     return null
@@ -81,7 +80,7 @@ const setCurrentUserId = (userId) => {
 // get current_user_id localStorage 
 const getCurrentUserId = () => {
     const currentUserId = localStorage.getItem(CURRENT_USER_ID_KEY);
-    return JSON.parse(currentUserId)
+    return currentUserId
 }
 
 // remove current_user_id from localStorage
@@ -123,11 +122,8 @@ const createNewUser = (registerUserObject) => {
         createdAt: moment().format('DD/MM/YYYY')
     }
 
-    if (addUserToList(newUser)) {
-        return true
-    } else {
-        return false;
-    }
+    addUserToList(newUser)
+    setCurrentUserId(newUser.user_id)
 }
 
 export {
@@ -140,5 +136,6 @@ export {
     getCurrentUserId,
     removeCurrentUserId,
     verifyUserLogin,
-    createNewUser
+    createNewUser,
+    getUserByUserId
 }

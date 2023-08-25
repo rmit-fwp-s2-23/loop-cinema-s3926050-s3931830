@@ -8,29 +8,16 @@ import { useState } from 'react';
 
 const LoginForm = (props) => {
     const navigate = useNavigate()
-    const [isRegistering, setIsRegistering] = useState(false)
-    const [isLogging, setIsLogging] = useState(true)
 
     // may use this to display a loading icon
     const loadingIcon = () => {
         if (getCurrentUserId() !== null) {
-            window.location.reload()
-            navigate("/account")
+            navigate("/account");
             props.setIsLoggedIn(true)
+            window.location.reload();          
         } else {
             props.setIsLoggedIn(false)
         }
-    }
-
-    const changeToRegister = (event) => {
-        event.preventDefault()
-        setIsRegistering(true)
-        setIsLogging(false)
-    }
-
-    const changeToLogin = () => {
-        setIsLogging(true)
-        setIsRegistering(false)
     }
 
     const {
@@ -74,8 +61,6 @@ const LoginForm = (props) => {
                             <button type="submit">Login</button>
                         </form>
                     </div>
-                </div>
-                {/* {isLogging && (
                     <div className='login-dialog-content-note'>
                         <span className='login-dialog-content-note-text'>Having trouble logging in?</span>
                         <div className="login-dialog-content-note-buttons">
@@ -83,39 +68,12 @@ const LoginForm = (props) => {
                                 <span className="header-profile-button-text">Reset Password</span>
                             </button>
                             <span className='login-dialog-content-note-text'>or</span>
-                            <button className="header-profile-button" onClick={changeToRegister}>
+                            <button className="header-profile-button">
                                 <span className="header-profile-button-text">Register Looper</span>
                             </button>
                         </div>
                     </div>
-                )} */}
-                {/* {isRegistering && (
-                    <div className='login-dialog-content-note'>
-                    <span className='login-dialog-content-note-text'>Already have an account?</span>
-                    <div className="login-dialog-content-note-buttons">
-                        <button className="header-profile-button" onClick={changeToLogin}>
-                            <span className="header-profile-button-text">Login to Looper</span>
-                        </button>
-                    </div>
                 </div>
-                )} */}
-                
-                {/* {isRegistering && (
-                    <>
-                    <button className="header-profile-button" data-target="logging" onClick={changeToLogin}>Change to logging</button>
-                    </>
-                )}
-                {isLogging && (
-                    <button className="header-profile-button" data-target="registering" onClick={changeToRegister}>Change to register</button>
-                )}
-                {isRegistering && (
-                    <>
-                    <p data-target="registering">This is registering</p>
-                    </>
-                )}
-                {isLogging && (
-                    <p data-target="logging">This is logging</p>
-                )} */}
             </article>
         </dialog>
         </>

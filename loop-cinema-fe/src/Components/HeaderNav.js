@@ -9,9 +9,14 @@ import RegisterForm from "./RegisterForm";
 
 const HeaderNav = (props) => {
     const navigate = useNavigate()
+    const [isOpenMenu, setIsOpenMenu] = useState(false)
 
     const navigateMyAccount = () => {
         navigate("/account")
+    }
+
+    const openAccountMenu = () => {
+        setIsOpenMenu(prev => !prev)
     }
 
     return (
@@ -29,19 +34,40 @@ const HeaderNav = (props) => {
                     <input className="header-search-input" type="search" id="search" name="search" placeholder="Search movies..."/>
                 </div>
                 <div className="header-profile">
-                    {props.isLoggedIn ? (
-                        <button className="header-profile-button" data-target="login-dialog" onClick={navigateMyAccount}>
-                            {/* <img/> */}
-                            <span className="header-profile-button-text">My Account</span>
-                        </button>
+                    {props.isLoggedIn 
+                    ? (
+                        <>
+                            <button className="header-profile-button" data-target="login-dialog" 
+                            onClick={openAccountMenu}>
+                                {/* <img/> */}
+                                <span className="header-profile-button-text">My Account</span>
+                            </button>
+                            <div id="header-profile-button-hover-block" 
+                            className={isOpenMenu ? 'header-profile-button-hover-block-open' 
+                            : 'header-profile-button-hover-block-close'}>
+                                <div className="header-profile-button-hover-block-item">
+                                    <button className="">
+                                        <span className="header-profile-button-text">My Dashboard</span>
+                                    </button>
+                                </div>
+                                <div className="header-profile-button-hover-block-item">
+                                    <button className="">
+                                        <span className="header-profile-button-text">My Profile</span>
+                                    </button>
+                                </div>
+                                <div className="header-profile-button-hover-block-item">
+                                    <button className="" onClick={props.signOut}>
+                                        <span className="header-profile-button-text">Sign Out</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </>
                     ) : (    
                         <>
                             <button className="header-profile-button" data-target="login-dialog" onClick={toggleModal}>
-                                {/* <img/> */}
                                 <span className="header-profile-button-text">Log In</span>
                             </button>
                             <button className="header-profile-button" data-target="register-dialog" onClick={toggleModal}>
-                                {/* <img/> */}
                                 <span className="header-profile-button-text">Register</span>
                             </button>
                         </>
@@ -50,13 +76,13 @@ const HeaderNav = (props) => {
                 {
                     props.isTemporaryMessage && (
                         <div className="header-alert-message">
-                            <span>Login successfully</span>
+                            <span>Login successfully!</span>
                         </div>
                     )
                 }
             </header>
             <LoginForm toggleModal={toggleModal} setIsLoggedIn={props.setIsLoggedIn} />
-            <RegisterForm  toggleModal={toggleModal} />
+            <RegisterForm  toggleModal={toggleModal} setIsLoggedIn={props.setIsLoggedIn} />
         </>
     )
 }

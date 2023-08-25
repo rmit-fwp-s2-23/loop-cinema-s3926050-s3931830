@@ -1,3 +1,5 @@
+import { addUserToList, createNewUser, setCurrentUserId } from "../data/userRepo";
+
 // need to update to validate unique
 export default function RegisterValidate (values) {
     let registerErrors = {};
@@ -45,9 +47,9 @@ export default function RegisterValidate (values) {
 
     if (!values.password) {
       registerErrors.password = 'Password is required.';
-    } else if (!/^[\S](?=.{7,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[@#$%^&+=]).*$/.test(values.password)) {
+    } else if (!/^[\S](?=.{7,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&+=]).*$/.test(values.password)) {
       // validate: (no start with space) + minimum 7 char + at least 1 lowercase, 1 uppercase, 1 special
-      registerErrors.password = 'Password should be at least 8 characters with 1 uppercase, lowercase, special character, and 1 number.'
+      registerErrors.password = 'Password should be at least 8 characters with 2 uppercase, lowercase, special character, and 1 number.'
     } 
 
     if (!values.confirmPassword) {
@@ -60,6 +62,11 @@ export default function RegisterValidate (values) {
     // if (!/^[\S][a-zA-Z0-9\s,.'-]{0,19}$/.test(values.firstName)) {
     //   registerErrors.firstName = 'Invalid first name'
     // }
+
+    if (JSON.stringify(registerErrors) === JSON.stringify({})) {
+      const userValue = {...values}
+      createNewUser(userValue)
+    }
 
     return registerErrors;
   };

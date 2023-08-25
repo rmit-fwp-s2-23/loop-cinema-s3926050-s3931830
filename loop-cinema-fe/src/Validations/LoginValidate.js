@@ -17,7 +17,8 @@ export default function LoginValidate(values) {
         loginErrors.password = 'Password is required.';
     } 
     
-    if (loginErrors === {}) {
+    if (JSON.stringify(loginErrors) === JSON.stringify({})) {
+        // console.log(loginErrors);
         if (userList !== null) {
             const userListLength = userList.length;
             let isValid = false;

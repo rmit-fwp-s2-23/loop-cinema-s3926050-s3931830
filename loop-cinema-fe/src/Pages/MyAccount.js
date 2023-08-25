@@ -1,26 +1,24 @@
 import { useEffect, useState } from "react";
 import "../css/pages/MyAccount.css"
-import { getCurrentUserId } from "../data/userRepo";
+import { getCurrentUserId, getUserByUserId } from "../data/userRepo";
 import { useNavigate } from "react-router-dom";
 
 // need to perform validation letting users to access this url
-const MyAccount = () => {
-    // const navigate = useNavigate()
-    // const [isLoggedIn, setIsLoggedIn] = useState(false);
+const MyAccount = (props) => {
+    const navigate = useNavigate()
+    if (!props.isLoggedIn) navigate("/")
     
+    const userId = getCurrentUserId()
+    console.log(userId === null);
+    if (userId === null) {
+        console.log("ok");
+        navigate("/home")
+    }
 
-    // useEffect(() => {
-    //     const userId = getCurrentUserId()
-    //     console.log(userId);
-    //     if (userId === null) {
-    //         navigate("/")
-    //     } else {
-            
-    //     }
-    // }, [isLoggedIn])
+    const [currentUser, setCurrentUser] = useState(getUserByUserId(userId))
 
     return (
-        <h1 className="myaccount-test">This is my account</h1>
+        <p>{JSON.stringify(currentUser)}</p>
     )
 }
 

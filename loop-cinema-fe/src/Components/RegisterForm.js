@@ -1,10 +1,20 @@
 import useForm from "../CustomHooks/useForm";
 import RegisterValidate from "../Validations/RegisterValidate";
 import logo from "../Images/logo.png"
+import { getCurrentUserId } from "../data/userRepo";
+import { useNavigate } from "react-router-dom";
 
 const RegisterForm = (props) => {
+    const navigate = useNavigate()
+
     const registerSuccess = () => {
-        console.log(values);
+        if (getCurrentUserId() !== null) {
+            navigate("/account");
+            props.setIsLoggedIn(true)
+            window.location.reload();          
+        } else {
+            props.setIsLoggedIn(false)
+        }
     }
 
     const {

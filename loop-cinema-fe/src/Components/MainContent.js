@@ -7,8 +7,8 @@ import Test from "./Test";
 import { deleteUserByUserId, getCurrentUserId, removeCurrentUserId, updateUserByUserId } from "../data/userRepo";
 import { useState, useEffect } from "react";
 import MyAccountCardItem from "./Fragments/MyAccountCardItem";
+import Movie from "../Pages/Movie"
 import MyAccountProfile from '../Pages/MyAccountProfile'
-
 const MainContent = () => {
     const navigate = useNavigate()
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -92,8 +92,9 @@ const MainContent = () => {
                 isTemporaryMessageDeleteUser={isTemporaryMessageDeleteUser} 
                 isTemporaryMessageUpdateUser={isTemporaryMessageUpdateUser} />
                 <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/home" element={<Home />} />
+                    <Route path="/" element={<Home isLoggedIn={isLoggedIn}/>} />
+                    <Route path="/home" element={<Home isLoggedIn={isLoggedIn}/>} />
+                    <Route path="/Movie/:id" element={<Movie/>}/>
                     <Route path="/account" element={<MyAccount isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} 
                     navigateMyAccountProfile={navigateMyAccountProfile} navigateMyAccount={navigateMyAccount} />} />
                     <Route path="/account/profile" element={<MyAccountProfile isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} 

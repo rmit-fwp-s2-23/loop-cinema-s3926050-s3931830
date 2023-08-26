@@ -2,9 +2,11 @@
     display: flex;
     flex-direction: column;
     align-items:baseline;
+    gap: 5vh;
 }
 .home_slider{
     width: 70%;
+    height: 50vh;
     box-shadow: 0 0 8px #0a0a0a;
 }
 

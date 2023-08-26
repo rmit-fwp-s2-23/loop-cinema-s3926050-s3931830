@@ -8,13 +8,16 @@ import '../css/pages/MyAccountProfile.css'
 const MyAccountProfile = (props) => {
     const navigate = useNavigate()
     const userId = getCurrentUserId()
+    const [updating, setUpdating] = useState(false)
+    const [passwordType, setPasswordType] = useState("password");
+    const [confirmPasswordType, setConfirmPasswordType] = useState("password")
 
     useEffect(() => {
         if (userId === null) navigate("/home")
     }, [userId])
 
-    const registerSuccess = () => {
-        console.log("ok");
+    const updateSuccess = () => {
+        setUpdating(true)
     }
 
     const [currentUser, setCurrentUser] = useState(getUserByUserId(userId))
@@ -23,7 +26,23 @@ const MyAccountProfile = (props) => {
         errors,
         handleChange,
         handleSubmit,
-    } = useForm(registerSuccess, RegisterValidate);
+        isSubmitting
+    } = useForm(updateSuccess, RegisterValidate);
+
+    useEffect(() => {
+        console.log('ok');
+        // if (JSON.stringify(errors) === JSON.stringify({}) && isSubmitting) {
+        //     const userValue = {...values}
+        //     createNewUser(userValue)
+        //     if (getCurrentUserId() !== null) {
+        //         navigate("/account");
+        //         props.setIsLoggedIn(true)
+        //         window.location.reload();          
+        //     } else {
+        //         props.setIsLoggedIn(false)
+        //     }
+        // }
+    }, [updating])
 
     const confirmDeleteUser = () => {
         const element = document.getElementById("my-account-profile-confirm-delete");
@@ -46,6 +65,22 @@ const MyAccountProfile = (props) => {
         }, 1000)
         
         props.deleteUser()
+    }
+
+    const togglePassword = () => {
+        if (passwordType === "password") {
+            setPasswordType("text")
+            return;
+        }
+        setPasswordType("password")
+        }
+
+    const toggleConfirmPassword = () => {
+        if (confirmPasswordType === "password") {
+            setConfirmPasswordType("text")
+            return;
+        }
+        setConfirmPasswordType("password")
     }
 
     return (
@@ -117,6 +152,51 @@ const MyAccountProfile = (props) => {
                                 <p className="input-text-help input-error">{errors.email}</p>
                             )
                         }
+
+                        <label for="password">
+                            Password *
+                            <input autoComplete="off" type={passwordType} id="password" name="password" placeholder="Password" required 
+                            aria-invalid={`${errors.password && 'true'}`} onChange={handleChange} value={values.password || ''} />
+                            {
+                                passwordType === "password" 
+                                ? (
+                                    <i class="far fa-eye-slash eye-toggle-update" onClick={togglePassword}></i>
+                                )
+                                : (
+                                    <i class="far fa-eye eye-toggle-update" onClick={togglePassword}></i>
+                                )
+                            }
+                            {
+                                errors.password 
+                                ? (
+                                    <p className="input-text-help input-error">{errors.password}</p>
+                                )
+                                : (
+                                    <p className='input-text-help input-guide'>Password should be at least 8 characters with 1 uppercase, lowercase, special character, and 1 number.</p>
+                                )
+                            }
+                        </label>
+
+                        <label for="confirmPassword">
+                            Confirm password *
+                            <input autoComplete="off" type={confirmPasswordType} id="confirmPassword" name="confirmPassword" 
+                            placeholder="Password confirm" required aria-invalid={`${errors.confirmPassword && 'true'}`} 
+                            onChange={handleChange} value={values.confirmPassword || ''} />
+                            {
+                                confirmPasswordType === "password" 
+                                ? (
+                                    <i class="far fa-eye-slash eye-toggle-update" onClick={toggleConfirmPassword}></i>
+                                )
+                                : (
+                                    <i class="far fa-eye eye-toggle-update" onClick={toggleConfirmPassword}></i>
+                                )
+                            }
+                            {
+                                errors.confirmPassword && (
+                                    <p className="input-text-help input-error">{errors.confirmPassword}</p>
+                                )
+                            }
+                        </label>
 
                         <div class="grid">
                             <label for="phone">

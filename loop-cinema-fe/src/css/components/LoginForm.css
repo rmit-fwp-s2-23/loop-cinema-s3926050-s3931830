@@ -110,3 +110,11 @@
 .login-dialog-content-note-buttons button span:hover {
     color: #fff
 }
+
+.eye-toggle-update {
+    position: relative;
+    float: right;
+    margin-top: -32px;
+    margin-right: 15px;
+    cursor: pointer;
+}

@@ -1,4 +1,4 @@
-import { useStatusThemeUpdate } from "./StatusThemeProvider";
+import { useStatusThemeUpdate } from "../CustomHooks/StatusThemeProvider";
 
 function UpcomingScreeningButtons(){
     const statusUpdater = useStatusThemeUpdate();
@@ -12,7 +12,7 @@ function UpcomingScreeningButtons(){
     }
     
     return(
-        <div className="show_button">
+        <div className=" grid show_button">
                 <button  className="nowScreeing_button" onClick={statusFalse}>Now Streaming</button>
                 <button  className="upcoming_button" onClick={statusTrue} >Coming Soon</button>
         </div>

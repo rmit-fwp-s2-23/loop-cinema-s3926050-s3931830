@@ -40,6 +40,10 @@
     margin-top: 24px;
 }
 
+.sidebar-nav-list-item:hover .sidebar-nav-list-item-link .sidebar-nav-list-item-text {
+    display: inline;
+}
+
 .sidebar-nav-list-secondary .sidebar-nav-list-item {
     margin-top: 12px;
 }
@@ -49,7 +53,7 @@
 }
 
 .sidebar-nav-list-item-text {
-    transition: color .4s;
+    /* transition: color .4s; */
 }
 
 @media (min-width: 1241px) {

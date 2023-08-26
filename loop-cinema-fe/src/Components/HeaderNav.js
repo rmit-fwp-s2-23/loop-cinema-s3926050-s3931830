@@ -40,28 +40,41 @@ const HeaderNav = (props) => {
                             {/* https://picocss.com/docs/dropdowns.html consider this option for hover */}
                             <button className="header-profile-button" data-target="login-dialog" 
                             onClick={openAccountMenu}>
-                                {/* <img/> */}
                                 <span className="header-profile-button-text">My Account</span>
                             </button>
                             <div id="header-profile-button-hover-block" 
                             className={isOpenMenu ? 'header-profile-button-hover-block-open' 
                             : 'header-profile-button-hover-block-close'}>
                                 <div className="header-profile-button-hover-block-item">
-                                    <button className="">
-                                        <span className="header-profile-button-text">My Dashboard</span>
+                                    <button className="header-profile-button-hover-block-item-button" onClick={navigateMyAccount}>
+                                        <span className="header-profile-button-hover-block-item-text">My Dashboard</span>
                                     </button>
                                 </div>
                                 <div className="header-profile-button-hover-block-item">
-                                    <button className="">
-                                        <span className="header-profile-button-text">My Profile</span>
+                                    <button className="header-profile-button-hover-block-item-button">
+                                        <span className="header-profile-button-hover-block-item-text">My Profile</span>
                                     </button>
                                 </div>
                                 <div className="header-profile-button-hover-block-item">
-                                    <button className="" onClick={props.signOut}>
-                                        <span className="header-profile-button-text">Sign Out</span>
+                                    <button className="header-profile-button-hover-block-item-button" onClick={props.signOut}>
+                                        <span className="header-profile-button-hover-block-item-text">Sign Out</span>
                                     </button>
                                 </div>
                             </div>
+                            <div id="triangle-up" className={isOpenMenu ? 'header-profile-button-hover-block-open' 
+                            : 'header-profile-button-hover-block-close'}></div>
+                            {/* <details role="list">
+                                <summary aria-haspopup="listbox" role="button">
+                                    My Account
+                                </summary>
+                                <li role="list" dir="rtl">
+                                    <ul role="listbox">
+                                        <li><a>Action</a></li>
+                                        <li><a>Another action</a></li>
+                                        <li><a>Something else here</a></li>
+                                    </ul>
+                                </li>
+                            </details> */}
                         </>
                     ) : (    
                         <>

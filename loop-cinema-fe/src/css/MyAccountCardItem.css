@@ -1,0 +1,37 @@
+.my-account-tabs-item {
+    padding: 8px;
+}
+
+.my-account-tabs-item-button {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+
+    height: 100%;
+    border: 1px solid #2e2e2e;
+    border-radius: 4px;
+    box-sizing: border-box;
+    text-decoration: none;
+    background-color: #222;
+    transition: background-color .4s;
+}
+
+.my-account-tabs-item-button:hover {
+    background-color: #303030;
+}
+
+.my-account-tabs-item-button-title {
+    margin-bottom: 10px;
+    transition: color .4s;
+}
+
+.my-account-tabs-item-button-desc {
+    font-size: 16px;
+    color: #999;
+}
+
+.my-account-tabs-item-button:hover .my-account-tabs-item-button-title {
+    /* color: #cd242c; */
+    /* font-weight: 600; */
+}

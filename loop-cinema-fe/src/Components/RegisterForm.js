@@ -138,7 +138,7 @@ const RegisterForm = (props) => {
                                     I would like to receive offers from Looper.
                                 </label> */}
                                 <label for="term_privacy">
-                                    <input type="checkbox" id="terms_sharing" name="terms_sharing" disabled checked />
+                                    <input type="checkbox" id="term_privacy" name="term_privacy" disabled checked />
                                     I have read and agree to the Terms & Conditions.
                                 </label>
                             </fieldset>

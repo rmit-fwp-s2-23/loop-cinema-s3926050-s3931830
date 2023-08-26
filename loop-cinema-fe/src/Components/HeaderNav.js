@@ -12,10 +12,11 @@ const HeaderNav = (props) => {
     const [isOpenMenu, setIsOpenMenu] = useState(false)
 
     const navigateMyAccount = () => {
+        toggleAccountMenu()
         navigate("/account")
     }
 
-    const openAccountMenu = () => {
+    const toggleAccountMenu = () => {
         setIsOpenMenu(prev => !prev)
     }
 
@@ -39,8 +40,10 @@ const HeaderNav = (props) => {
                         <>
                             {/* https://picocss.com/docs/dropdowns.html consider this option for hover */}
                             <button className="header-profile-button" data-target="login-dialog" 
-                            onClick={openAccountMenu}>
-                                <span className="header-profile-button-text">My Account</span>
+                            onClick={toggleAccountMenu}>
+                                {/* <span className="header-profile-button-text"> */}
+                                    <img src={process.env.PUBLIC_URL + '/Images/profile.png'} className="header-profile-button-icon"/>
+                                {/* </span> */}
                             </button>
                             <div id="header-profile-button-hover-block" 
                             className={isOpenMenu ? 'header-profile-button-hover-block-open' 
@@ -53,6 +56,11 @@ const HeaderNav = (props) => {
                                 <div className="header-profile-button-hover-block-item">
                                     <button className="header-profile-button-hover-block-item-button">
                                         <span className="header-profile-button-hover-block-item-text">My Profile</span>
+                                    </button>
+                                </div>
+                                <div className="header-profile-button-hover-block-item">
+                                    <button className="header-profile-button-hover-block-item-button">
+                                        <span className="header-profile-button-hover-block-item-text">My Activity</span>
                                     </button>
                                 </div>
                                 <div className="header-profile-button-hover-block-item">

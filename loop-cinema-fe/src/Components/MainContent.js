@@ -6,6 +6,7 @@ import MyAccount from "../Pages/MyAccount"
 import Test from "./Test";
 import { getCurrentUserId, removeCurrentUserId } from "../data/userRepo";
 import { useState, useEffect } from "react";
+import MyAccountCardItem from "./Fragments/MyAccountCardItem";
 
 const MainContent = () => {
     const navigate = useNavigate()
@@ -59,7 +60,7 @@ const MainContent = () => {
                     <Route path="/account" element={<MyAccount isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
 
                     {/* test component routes */}
-                    <Route path="/test" element={<Test />} />
+                    <Route path="/test" element={<MyAccountCardItem />} />
                 </Routes>
             </div>     
         </>

@@ -68,6 +68,10 @@ header {
     height: 40px;
 }
 
+.header-profile-button-icon {
+    width: 40px;
+}
+
 #header-profile-button-hover-block {
     position: absolute;
     top: 90px;

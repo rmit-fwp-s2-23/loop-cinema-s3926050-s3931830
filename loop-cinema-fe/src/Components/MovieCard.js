@@ -2,16 +2,26 @@ import "../css/components/MovieCard.css"
 
 function MovieCard({image, title, rated, runtime, stars}) {
 
-    function printStars(numStars, symbolName) {
+    function printStars(numStars) {
+        const wholeNumberPart = Math.floor(numStars);
+        const decimalPart = numStars - wholeNumberPart;
+
         const starElements = [];
-        for (let i = 0; i <= numStars; i++) {
+        for (let i = 0; i < wholeNumberPart; i++) {
           starElements.push(
             <span key={i} className="material-symbols-outlined">
-              {symbolName}
+              star
             </span>
           );
         }
-        console.log(starElements);
+
+        if(decimalPart > 0){
+            starElements.push(
+            <span key={wholeNumberPart} className="material-symbols-outlined">
+                star_half
+            </span>
+            );
+        }
         return starElements;
       }
 
@@ -24,10 +34,8 @@ function MovieCard({image, title, rated, runtime, stars}) {
                 <div className="card_title">{title}</div>
                 <div className="card_stars">
                 {   
-                    printStars(stars, "star")
+                    printStars(stars)
                 }
-                <span class="material-symbols-outlined">star</span>
-                <span class="material-symbols-outlined">star_half</span>
                 </div>
                 <div className="card_detail">
                     <div className="card_rated">{rated}</div>

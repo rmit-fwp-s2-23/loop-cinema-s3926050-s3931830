@@ -63,18 +63,6 @@ const HeaderNav = (props) => {
                             </div>
                             <div id="triangle-up" className={isOpenMenu ? 'header-profile-button-hover-block-open' 
                             : 'header-profile-button-hover-block-close'}></div>
-                            {/* <details role="list">
-                                <summary aria-haspopup="listbox" role="button">
-                                    My Account
-                                </summary>
-                                <li role="list" dir="rtl">
-                                    <ul role="listbox">
-                                        <li><a>Action</a></li>
-                                        <li><a>Another action</a></li>
-                                        <li><a>Something else here</a></li>
-                                    </ul>
-                                </li>
-                            </details> */}
                         </>
                     ) : (    
                         <>
@@ -94,8 +82,15 @@ const HeaderNav = (props) => {
                         </div>
                     )
                 }
+                {
+                    props.isTemporaryMessageLogOut && (
+                        <div className="header-alert-message">
+                            <span>Sign out successfully!</span>
+                        </div>
+                    )
+                }
             </header>
-            <LoginForm toggleModal={toggleModal} setIsLoggedIn={props.setIsLoggedIn} />
+            <LoginForm toggleModal={toggleModal} setIsLoggedIn={props.setIsLoggedIn} isLoggedIn={props.isLoggedIn} />
             <RegisterForm  toggleModal={toggleModal} setIsLoggedIn={props.setIsLoggedIn} />
         </>
     )

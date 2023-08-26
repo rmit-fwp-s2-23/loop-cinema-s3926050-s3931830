@@ -12,9 +12,10 @@ const LoginForm = (props) => {
     // may use this to display a loading icon
     const loadingIcon = () => {
         if (getCurrentUserId() !== null) {
-            navigate("/account");
             props.setIsLoggedIn(true)
-            window.location.reload();          
+            navigate("/account");
+            window.location.reload(); 
+                     
         } else {
             props.setIsLoggedIn(false)
         }

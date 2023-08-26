@@ -13,6 +13,7 @@ const MainContent = () => {
 
     // reload page got the login successfully message
     const [isTemporaryMessage, setIsTemporaryMessage] = useState(false);
+    const [isTemporaryMessageLogOut, setIsTemporaryMessageLogOut] = useState(false)
 
     useEffect(() => {
         const userId = getCurrentUserId()
@@ -36,6 +37,12 @@ const MainContent = () => {
         if (isLoggedIn) {
             removeCurrentUserId()
             setIsLoggedIn(false)
+
+            setIsTemporaryMessageLogOut(true)
+            setTimeout(() => {
+                setIsTemporaryMessageLogOut(false)
+            }, 2000)
+
             navigate("/")
         }
     }
@@ -44,7 +51,8 @@ const MainContent = () => {
         <>
             <div className="main-content">
                 <HeaderNav setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} 
-                setIsTemporaryMessage={setIsTemporaryMessage} isTemporaryMessage={isTemporaryMessage} signOut={signOut} />
+                setIsTemporaryMessage={setIsTemporaryMessage} isTemporaryMessage={isTemporaryMessage} signOut={signOut} 
+                isTemporaryMessageLogOut={isTemporaryMessageLogOut} />
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/home" element={<Home />} />

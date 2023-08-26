@@ -1,3 +1,6 @@
+.movielist_container{
+    width: 90%;
+}
 .movielist_ul{
     display: flex;
     flex-flow: row wrap;

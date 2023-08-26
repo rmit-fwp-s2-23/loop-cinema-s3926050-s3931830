@@ -7,6 +7,7 @@ import Test from "./Test";
 import { getCurrentUserId, removeCurrentUserId } from "../data/userRepo";
 import { useState, useEffect } from "react";
 import MyAccountCardItem from "./Fragments/MyAccountCardItem";
+import Movie from "../Pages/Movie"
 
 const MainContent = () => {
     const navigate = useNavigate()
@@ -55,8 +56,9 @@ const MainContent = () => {
                 setIsTemporaryMessage={setIsTemporaryMessage} isTemporaryMessage={isTemporaryMessage} signOut={signOut} 
                 isTemporaryMessageLogOut={isTemporaryMessageLogOut} />
                 <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/home" element={<Home />} />
+                    <Route path="/" element={<Home isLoggedIn={isLoggedIn}/>} />
+                    <Route path="/home" element={<Home isLoggedIn={isLoggedIn}/>} />
+                    <Route path="/Movie/:id" element={<Movie/>}/>
                     <Route path="/account" element={<MyAccount isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
 
                     {/* test component routes */}

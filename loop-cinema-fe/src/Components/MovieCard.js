@@ -1,6 +1,6 @@
 import "../css/components/MovieCard.css"
 
-function MovieCard({image, title, rated, runtime, stars}) {
+function MovieCard({key, image, title, rated, runtime, stars}) {
 
     function printStars(numStars) {
         const wholeNumberPart = Math.floor(numStars);

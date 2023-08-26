@@ -46,10 +46,6 @@ function App() {
       <main class="container-fluid">
         <SideBarNav />
         <MainContent />
-        {/* <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/home" element={<Home />} />
-        </Routes> */}
       </main>
       <Footer />
     </div>

@@ -25,15 +25,13 @@ function Slider() {
   return (
     <div className = "slider_body">
       <div className="carousel">
-        {/* <button class="carousel-button prev">&#60;</button>
-        <button class="carousel-button next">&#62;</button> */}
         <div className="left_arrow" onClick={goToPrevious}>&#8249;</div>
         <div className="right_arrow" onClick={goToNext}>&#8250;</div>
-        <Link className="movie_slide_link" to={"/Movie/" + slides[currentIndex].Title} state={{movieData: slides[currentIndex]}}>
-          <div className="movie_slide" style={{backgroundImage: `url(${slides[currentIndex].Images[0]})`}}>
+        <Link className="movie_slide_link" to={"/Movie/" + slides[currentIndex].title} state={{movieData: slides[currentIndex]}}>
+          <div className="movie_slide" style={{backgroundImage: `url(${slides[currentIndex].banner})`}}>
             <hgroup className="movie_slide_detail">
-              <h1>{slides[currentIndex].Title}</h1>
-              <p>{slides[currentIndex].Plot}</p>
+              <h1>{slides[currentIndex].title}</h1>
+              <p>{slides[currentIndex].apercu}</p>
             </hgroup>
           </div>
         </Link>

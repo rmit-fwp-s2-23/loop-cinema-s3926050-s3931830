@@ -10,18 +10,18 @@ function Movie(){
 
     return(
         <div>
-            <div id="movie_header" style={{backgroundImage: `url(${movieObj.Images[0]})`, backgroundSize: `cover`, backgroundPosition: `center`}}>
+            <div id="movie_header" style={{backgroundImage: `url(${movieObj.banner})`, backgroundSize: `cover`, backgroundPosition: `center`}}>
                 <div id="movie_container">
                     <div className="movie_foreground">
-                        <img className="movie_poster" src={movieObj.Images[1]}/>
+                        <img className="movie_poster" src={movieObj.poster}/>
                         <div className="movie_wrapper">
-                            <h1 className="movie_heading">{movieObj.Title}</h1>
+                            <h1 className="movie_heading">{movieObj.title}</h1>
                             <div className="movie_details">
-                                <span className="movie_rating">{movieObj.Rated}</span>
+                                <span className="movie_rating">{movieObj.rating}</span>
                                 <span clasName="movie_pipe">|</span>
-                                <span className="movie_duration">{movieObj.Runtime}</span>
+                                <span className="movie_duration">{movieObj.runtTime + " min"}</span>
                                 <span clasName="movie_pipe">|</span>
-                                <span className="movie_release-date">{movieObj.Released}</span>
+                                <span className="movie_release-date">{movieObj.releaseDate}</span>
                             </div>
                         </div>
                     </div>
@@ -33,16 +33,16 @@ function Movie(){
                 <article>
                     <hgroup>
                         <h1>Plot</h1>
-                        <p>{movieObj.Plot}</p>
+                        <p>{movieObj.synopsis}</p>
                     </hgroup>
                 </article>
                 <article>
                     <hgroup>
                         <h1>Cast</h1>
                         <h4>Actors</h4>
-                        <p>{movieObj.Actors}</p>
+                        <p>{movieObj.casts}</p>
                         <h4>Director</h4>
-                        <p>{movieObj.Director}</p>
+                        <p>{movieObj.directors}</p>
                     </hgroup>
                 </article>
                 <article>

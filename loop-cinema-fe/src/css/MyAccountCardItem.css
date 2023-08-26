@@ -21,10 +21,15 @@
     background-color: #303030;
 }
 
+/* .my-account-tabs-item-button:hover .my-account-tabs-item-button-title {
+    color: #cd242c;
+} */
+
 .my-account-tabs-item-button-title {
     margin-bottom: 10px;
     transition: color .4s;
 }
+
 
 .my-account-tabs-item-button-desc {
     font-size: 16px;

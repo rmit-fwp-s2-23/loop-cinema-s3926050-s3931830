@@ -13,7 +13,12 @@ const HeaderNav = (props) => {
 
     const navigateMyAccount = () => {
         toggleAccountMenu()
-        navigate("/account")
+        props.navigateMyAccount()
+    }
+
+    const navigateMyAccountProfile = () => {
+        toggleAccountMenu()
+        props.navigateMyAccountProfile()
     }
 
     const toggleAccountMenu = () => {
@@ -54,7 +59,7 @@ const HeaderNav = (props) => {
                                     </button>
                                 </div>
                                 <div className="header-profile-button-hover-block-item">
-                                    <button className="header-profile-button-hover-block-item-button">
+                                    <button className="header-profile-button-hover-block-item-button" onClick={navigateMyAccountProfile}>
                                         <span className="header-profile-button-hover-block-item-text">My Profile</span>
                                     </button>
                                 </div>
@@ -94,6 +99,13 @@ const HeaderNav = (props) => {
                     props.isTemporaryMessageLogOut && (
                         <div className="header-alert-message">
                             <span>Sign out successfully!</span>
+                        </div>
+                    )
+                }
+                {
+                    props.isTemporaryMessageDeleteUser && (
+                        <div className="header-alert-message">
+                            <span>Delete user successfully!</span>
                         </div>
                     )
                 }

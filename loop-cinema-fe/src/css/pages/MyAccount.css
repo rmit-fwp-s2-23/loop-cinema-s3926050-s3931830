@@ -2,8 +2,32 @@
     padding-right: 20px;
 }
 
-.my-account-greeting {
+.my-account-greeting article{
+    display: flex;
+    flex-grow: 1;
+    width: 100%;
+    align-items: center;
+    gap: 10%
+}
 
+.my-account-greeting article h2 {
+    margin-bottom: 0;
+}
+
+.my-account-greeting-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.my-account-greeting-item span:first-child {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.my-account-greeting-item span:last-child {
+    font-size: 16px;
+    color: #999;
 }
 
 .my-account-tabs {

@@ -1,0 +1,63 @@
+.my-account-profile {
+    padding-right: 20px;
+}
+
+#my-account-profile-confirm-delete article {
+    width: 500px;
+}
+
+.my-account-profile-confirm-delete-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.my-account-profile-confirm-delete-buttons button {
+    margin-bottom: 0;
+    padding: 0.5rem;
+    width: 100px;
+}
+
+.my-account-profile-header {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+    align-items: center
+}
+
+.my-account-profile-header-delete {
+    z-index: 5;
+}
+
+.my-account-profile-header-delete button {
+    margin-bottom: 0;
+    padding: 0.5rem;
+}
+
+.my-account-profile-header-delete button:hover {
+    background-color: #cd242c;
+    border-color: #cd242c;
+}
+
+.my-account-profile-header-delete button:hover span {
+    color: #fff;
+}
+
+.my-account-profile-header-delete button span {
+    font-size: 18px
+}
+
+.my-account-profile .login-dialog-content-title {
+    text-align: left;
+}
+
+.my-account-profile-back-link {
+    text-decoration: none;
+    transform: color 0.4s;
+    color: #cd242c;
+}
+
+.my-account-profile-back-link:hover {
+    color: #999;
+}

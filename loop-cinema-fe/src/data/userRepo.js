@@ -66,6 +66,24 @@ const getUserByUserId = (searchUserId) => {
     return null
 }
 
+// delete a user by user id and update localStorage
+const deleteUserByUserId = (userId) => {
+    let userList = getUserList()
+    if (userList !== null) {
+        const userListLength = userList.length;
+        for (let index = 0; index < userListLength; index++) {
+            const user = userList[index];
+            if (userId === JSON.stringify(user.user_id)) {
+                userList.splice(index)
+                removeCurrentUserId()
+                const newUserList = [...userList]
+                console.log(newUserList);
+                setUserList(newUserList)
+            }
+        }
+    }
+}
+
 /* 
 
 ---- USER ----
@@ -137,5 +155,6 @@ export {
     removeCurrentUserId,
     verifyUserLogin,
     createNewUser,
-    getUserByUserId
+    getUserByUserId,
+    deleteUserByUserId
 }

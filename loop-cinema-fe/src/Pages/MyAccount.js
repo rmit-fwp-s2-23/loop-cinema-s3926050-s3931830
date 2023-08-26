@@ -20,13 +20,25 @@ const MyAccount = (props) => {
                 <div className="my-account-greeting">
                     <article>
                         <h2>Hi {currentUser.firstName}</h2>
+                        <div className="my-account-greeting-item">
+                            <span>Available Points</span>
+                            <span>{currentUser.points}</span>
+                        </div>
+                        <div className="my-account-greeting-item">
+                            <span>Account Created Date</span>
+                            <span>{currentUser.createdAt}</span>
+                        </div>
+                        <div className="my-account-greeting-item">
+                            <span>Member Status</span>
+                            <span>Active</span>
+                        </div>
                     </article>
                 </div>
                 <div className="my-account-tabs grid">
-                    <MyAccountCardItem title={"My Dashboard"} img={"dashboard"}
+                    <MyAccountCardItem title={"My Dashboard"} img={"dashboard"} navigateTo={props.navigateMyAccount}
                     desc={"View Looper points and manage activities along with profile information."} />
-                    <MyAccountCardItem title={"My Profile"} img={"profile"}
-                    desc={"Manage your personal details, Looper membership and preferences."} />
+                    <MyAccountCardItem title={"My Profile"} img={"profile"} navigateTo={props.navigateMyAccountProfile}
+                    desc={"Manage your personal details, Looper account and preferences."} />
                     <MyAccountCardItem title={"My Activity"} img={"activity"}
                     desc={"Track your past activities and comments on movies in Loop Cinema."} />
                 </div>

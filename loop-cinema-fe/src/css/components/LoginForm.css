@@ -49,17 +49,17 @@
     background-color: #353535;
 }
 
-dialog article form .input-text-help {
+.input-text-help {
     font-size: 10px;
     margin-left: 22px;
     margin: 0;
 }
 
-dialog article form .input-error {
+.input-error {
     color: #cd242c; 
 }
 
-dialog article form .input-guide{
+.input-guide{
     color: hsl(210, 2%, 50%); 
 }
 

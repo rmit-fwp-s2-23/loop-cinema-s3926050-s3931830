@@ -1,28 +1,39 @@
+import React, { useEffect, useState } from 'react';
 import useForm from "../CustomHooks/useForm";
 import RegisterValidate from "../Validations/RegisterValidate";
 import logo from "../Images/logo.png"
-import { getCurrentUserId } from "../data/userRepo";
+import { createNewUser, getCurrentUserId } from "../data/userRepo";
 import { useNavigate } from "react-router-dom";
 
 const RegisterForm = (props) => {
     const navigate = useNavigate()
+    const [registering, setRegistering] = useState(false)
 
     const registerSuccess = () => {
-        if (getCurrentUserId() !== null) {
-            navigate("/account");
-            props.setIsLoggedIn(true)
-            window.location.reload();          
-        } else {
-            props.setIsLoggedIn(false)
-        }
+        setRegistering(true)
     }
 
     const {
         values,
         errors,
+        isSubmitting,
         handleChange,
         handleSubmit,
     } = useForm(registerSuccess, RegisterValidate);
+
+    useEffect(() => {
+        if (JSON.stringify(errors) === JSON.stringify({}) && isSubmitting) {
+            const userValue = {...values}
+            createNewUser(userValue)
+            if (getCurrentUserId() !== null) {
+                navigate("/account");
+                props.setIsLoggedIn(true)
+                window.location.reload();          
+            } else {
+                props.setIsLoggedIn(false)
+            }
+        }
+    }, [registering])
 
     return (
         <dialog className='login-dialog' id='register-dialog'>
@@ -45,29 +56,32 @@ const RegisterForm = (props) => {
                                 )
                             }
 
-                            {/* need to do the view / unview css js */}
-                            <label for="password">Password *</label>
-                            <input autoComplete="off" type="password" id="password" name="password" placeholder="Password" required 
-                            aria-invalid={`${errors.password && 'true'}`} onChange={handleChange} value={values.password || ''} />
-                            {
-                                errors.password 
-                                ? (
-                                    <p className="input-text-help input-error">{errors.password}</p>
-                                )
-                                : (
-                                    <p className='input-text-help input-guide'>Password should be at least 8 characters with 1 uppercase, lowercase, special character, and 1 number.</p>
-                                )
-                            }
+                            <label for="password">
+                                Password *
+                                <input autoComplete="off" type="password" id="password" name="password" placeholder="Password" required 
+                                aria-invalid={`${errors.password && 'true'}`} onChange={handleChange} value={values.password || ''} />
+                                {
+                                    errors.password 
+                                    ? (
+                                        <p className="input-text-help input-error">{errors.password}</p>
+                                    )
+                                    : (
+                                        <p className='input-text-help input-guide'>Password should be at least 8 characters with 1 uppercase, lowercase, special character, and 1 number.</p>
+                                    )
+                                }
+                            </label>
 
-                            <label for="confirmPassword">Confirm password *</label>
-                            <input autoComplete="off" type="password" id="confirmPassword" name="confirmPassword" 
-                            placeholder="Password confirm" required aria-invalid={`${errors.confirmPassword && 'true'}`} 
-                            onChange={handleChange} value={values.confirmPassword || ''} />
-                            {
-                                errors.confirmPassword && (
-                                    <p className="input-text-help input-error">{errors.confirmPassword}</p>
-                                )
-                            }
+                            <label for="confirmPassword">
+                                Confirm password *
+                                <input autoComplete="off" type="password" id="confirmPassword" name="confirmPassword" 
+                                placeholder="Password confirm" required aria-invalid={`${errors.confirmPassword && 'true'}`} 
+                                onChange={handleChange} value={values.confirmPassword || ''} />
+                                {
+                                    errors.confirmPassword && (
+                                        <p className="input-text-help input-error">{errors.confirmPassword}</p>
+                                    )
+                                }
+                            </label>
 
                             <div class="grid">
                                 <label for="firstName">

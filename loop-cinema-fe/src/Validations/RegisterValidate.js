@@ -63,10 +63,10 @@ export default function RegisterValidate (values) {
     //   registerErrors.firstName = 'Invalid first name'
     // }
 
-    if (JSON.stringify(registerErrors) === JSON.stringify({})) {
-      const userValue = {...values}
-      createNewUser(userValue)
-    }
+    // if (JSON.stringify(registerErrors) === JSON.stringify({})) {
+    //   const userValue = {...values}
+    //   createNewUser(userValue)
+    // }
 
     return registerErrors;
   };

@@ -26,6 +26,7 @@ const LoginForm = (props) => {
         errors,
         handleChange,
         handleSubmit,
+        isSubmitting
     } = useForm(loadingIcon, LoginValidate);
 
     return (

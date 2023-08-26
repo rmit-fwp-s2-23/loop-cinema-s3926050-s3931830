@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 import MyAccountCardItem from "./Fragments/MyAccountCardItem";
 import Movie from "../Pages/Movie"
 import MyAccountProfile from '../Pages/MyAccountProfile'
+
 const MainContent = () => {
     const navigate = useNavigate()
     const [isLoggedIn, setIsLoggedIn] = useState(false);

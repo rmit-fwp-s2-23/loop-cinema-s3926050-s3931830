@@ -4,7 +4,7 @@ import Home from "../Pages/Home";
 import "../css/components/MainContent.css"
 import MyAccount from "../Pages/MyAccount"
 import Test from "./Test";
-import { deleteUserByUserId, getCurrentUserId, removeCurrentUserId } from "../data/userRepo";
+import { deleteUserByUserId, getCurrentUserId, removeCurrentUserId, updateUserByUserId } from "../data/userRepo";
 import { useState, useEffect } from "react";
 import MyAccountCardItem from "./Fragments/MyAccountCardItem";
 import MyAccountProfile from '../Pages/MyAccountProfile'
@@ -17,6 +17,7 @@ const MainContent = () => {
     const [isTemporaryMessage, setIsTemporaryMessage] = useState(false);
     const [isTemporaryMessageLogOut, setIsTemporaryMessageLogOut] = useState(false)
     const [isTemporaryMessageDeleteUser, setIsTemporaryMessageDeleteUser] = useState(false)
+    const [isTemporaryMessageUpdateUser, setIsTemporaryMessageUpdateUser] = useState(false)
 
     useEffect(() => {
         const userId = getCurrentUserId()
@@ -58,9 +59,19 @@ const MainContent = () => {
         setIsLoggedIn(false)
 
         setIsTemporaryMessageDeleteUser(true)
-            setTimeout(() => {
-                setIsTemporaryMessageDeleteUser(false)
-            }, 2000)
+        setTimeout(() => {
+            setIsTemporaryMessageDeleteUser(false)
+        }, 2000)
+    }
+
+    const updateUser = (values) => {
+        updateUserByUserId(values)
+        window.location.reload()
+        
+        setIsTemporaryMessageUpdateUser(true)
+        setTimeout(() => {
+            setIsTemporaryMessageUpdateUser(false)
+        }, 2000)
     }
 
     const navigateMyAccount = () => {
@@ -78,14 +89,15 @@ const MainContent = () => {
                 setIsTemporaryMessage={setIsTemporaryMessage} isTemporaryMessage={isTemporaryMessage} signOut={signOut} 
                 isTemporaryMessageLogOut={isTemporaryMessageLogOut} 
                 navigateMyAccount={navigateMyAccount} navigateMyAccountProfile={navigateMyAccountProfile} 
-                isTemporaryMessageDeleteUser={isTemporaryMessageDeleteUser} />
+                isTemporaryMessageDeleteUser={isTemporaryMessageDeleteUser} 
+                isTemporaryMessageUpdateUser={isTemporaryMessageUpdateUser} />
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/home" element={<Home />} />
                     <Route path="/account" element={<MyAccount isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} 
                     navigateMyAccountProfile={navigateMyAccountProfile} navigateMyAccount={navigateMyAccount} />} />
                     <Route path="/account/profile" element={<MyAccountProfile isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} 
-                    deleteUser={deleteUser} />} />
+                    deleteUser={deleteUser} updateUser={updateUser}/>} />
 
                     {/* test component routes */}
                     <Route path="/test" element={<MyAccountCardItem />} />

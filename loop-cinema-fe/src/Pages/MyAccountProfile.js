@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { deleteUserByUserId, getCurrentUserId, getUserByUserId } from "../data/userRepo";
+import { deleteUserByUserId, getCurrentUserId, getUserByUserId, updateUserByUserId } from "../data/userRepo";
 import { useEffect, useState } from "react";
 import useForm from "../CustomHooks/useForm";
 import RegisterValidate from "../Validations/RegisterValidate";
@@ -8,7 +8,11 @@ import '../css/pages/MyAccountProfile.css'
 const MyAccountProfile = (props) => {
     const navigate = useNavigate()
     const userId = getCurrentUserId()
+
+    // set updating state for user when updating
     const [updating, setUpdating] = useState(false)
+    
+    // toggle eye icon
     const [passwordType, setPasswordType] = useState("password");
     const [confirmPasswordType, setConfirmPasswordType] = useState("password")
 
@@ -21,34 +25,34 @@ const MyAccountProfile = (props) => {
     }
 
     const [currentUser, setCurrentUser] = useState(getUserByUserId(userId))
+
     const {
         values,
         errors,
         handleChange,
         handleSubmit,
+        setValues,
         isSubmitting
     } = useForm(updateSuccess, RegisterValidate);
 
+    // initialize first time values from localStorage
     useEffect(() => {
-        console.log('ok');
-        // if (JSON.stringify(errors) === JSON.stringify({}) && isSubmitting) {
-        //     const userValue = {...values}
-        //     createNewUser(userValue)
-        //     if (getCurrentUserId() !== null) {
-        //         navigate("/account");
-        //         props.setIsLoggedIn(true)
-        //         window.location.reload();          
-        //     } else {
-        //         props.setIsLoggedIn(false)
-        //     }
-        // }
+        setValues({...currentUser})
+    }, [])
+
+    useEffect(() => {
+        if (JSON.stringify(errors) === JSON.stringify({}) && isSubmitting) {
+            props.updateUser(values)   
+        }
     }, [updating])
 
+    // confirm message
     const confirmDeleteUser = () => {
         const element = document.getElementById("my-account-profile-confirm-delete");
         element.setAttribute("open", true)
     }
 
+    // cancel the request for delete user
     const cancelDeleteUser = () => {
         const element = document.getElementById("my-account-profile-confirm-delete");
         element.removeAttribute("open")
@@ -67,6 +71,7 @@ const MyAccountProfile = (props) => {
         props.deleteUser()
     }
 
+    // toggle eye icon
     const togglePassword = () => {
         if (passwordType === "password") {
             setPasswordType("text")

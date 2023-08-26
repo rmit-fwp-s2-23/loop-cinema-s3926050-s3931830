@@ -77,11 +77,30 @@ const deleteUserByUserId = (userId) => {
                 userList.splice(index)
                 removeCurrentUserId()
                 const newUserList = [...userList]
-                console.log(newUserList);
                 setUserList(newUserList)
             }
         }
     }
+}
+
+// update a user and update localStorage
+const updateUserByUserId = (values) => {
+    const newUserObject = {...values}
+
+    let userList = getUserList()
+    if (userList !== null) {
+        const userListLength = userList.length;
+        for (let index = 0; index < userListLength; index++) {
+            const user = userList[index];
+            if (newUserObject.user_id === user.user_id) {
+                userList.splice(index)
+                userList.push(newUserObject)
+                const newUserList = [...userList]   
+                setUserList(newUserList)
+            }
+        }
+    }
+
 }
 
 /* 
@@ -156,5 +175,6 @@ export {
     verifyUserLogin,
     createNewUser,
     getUserByUserId,
-    deleteUserByUserId
+    deleteUserByUserId,
+    updateUserByUserId
 }

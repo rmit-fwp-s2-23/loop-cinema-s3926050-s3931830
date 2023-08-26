@@ -27,6 +27,7 @@ const useForm = (callback, validate) => {
   return {
     handleChange,
     handleSubmit,
+    setValues,
     values,
     errors,
     isSubmitting

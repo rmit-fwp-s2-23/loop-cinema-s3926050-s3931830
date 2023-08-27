@@ -49,12 +49,13 @@ function Movie(props) {
             const reviewValue = {...values}
             props.addNewReview(reviewValue, userId, movieObj.movie_id)         
         }
+        setCurrentMovieAudienceReviewList(getAudienceReviewListByMovieId(movieObj.movie_id))
     }, [reviewing])
 
     // initialize from local storage to state
-    useEffect(() => {
-        setCurrentMovieAudienceReviewList(getAudienceReviewListByMovieId(movieObj.movie_id))
-    }, [currentMovieAudienceReviewList])
+    // useEffect(() => {
+        
+    // }, [reviewing])
 
     /* 
         TOGGLE MODAL
@@ -91,14 +92,13 @@ function Movie(props) {
         <div>
             <dialog id="audience-review-dialog">
                 <article>
-                    <h2>Posting review for {movieObj.title}</h2>
-                    
+                    <h2>Posting review for {movieObj.title}</h2>          
                     <div className='login-dialog-content-form'>
                         <form onSubmit={handleSubmit} noValidate id="audience-review-dialog-form">
                             <fieldset>
                                 Rating *
                                 <label for="1" className="audience-review-dialog-form-label-checkbox">
-                                    <input type="radio" id="1" name="score" value="1" onChange={handleChange}/>
+                                    <input type="radio" id="1" name="score" value="1" onChange={handleChange} autoComplete="off"/>
                                     <div className="card_stars">
                                         {   
                                             printStars(1)
@@ -106,7 +106,7 @@ function Movie(props) {
                                     </div>
                                 </label>
                                 <label for="2" className="audience-review-dialog-form-label-checkbox">
-                                    <input type="radio" id="2" name="score" value="2" onChange={handleChange}/>
+                                    <input type="radio" id="2" name="score" value="2" onChange={handleChange} autoComplete="off"/>
                                     <div className="card_stars">
                                         {   
                                             printStars(2)
@@ -114,7 +114,7 @@ function Movie(props) {
                                     </div>
                                 </label>
                                 <label for="3" className="audience-review-dialog-form-label-checkbox">
-                                    <input type="radio" id="3" name="score" value="3" onChange={handleChange}/>
+                                    <input type="radio" id="3" name="score" value="3" onChange={handleChange} autoComplete="off"/>
                                     <div className="card_stars">
                                         {   
                                             printStars(3)
@@ -122,7 +122,7 @@ function Movie(props) {
                                     </div>
                                 </label>
                                 <label for="4" className="audience-review-dialog-form-label-checkbox">
-                                    <input type="radio" id="4" name="score" value="4" onChange={handleChange}/>
+                                    <input type="radio" id="4" name="score" value="4" onChange={handleChange} autoComplete="off"/>
                                     <div className="card_stars">
                                         {   
                                             printStars(4)
@@ -130,7 +130,7 @@ function Movie(props) {
                                     </div>
                                 </label>
                                 <label for="5" className="audience-review-dialog-form-label-checkbox">
-                                    <input type="radio" id="5" name="score" value="5" onChange={handleChange}/>
+                                    <input type="radio" id="5" name="score" value="5" onChange={handleChange} autoComplete="off"/>
                                     <div className="card_stars">
                                         {   
                                             printStars(5)
@@ -165,8 +165,6 @@ function Movie(props) {
                             </div>
                         </form>
                     </div>
-
-                    
                 </article>
             </dialog>
             <div id="movie_header" style={{backgroundImage: `url(${movieObj.banner})`, backgroundSize: `cover`, backgroundPosition: `center`}}>

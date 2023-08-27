@@ -57,7 +57,7 @@ const getUserByUserId = (searchUserId) => {
         const userListLength = userList.length;
         for (let index = 0; index < userListLength; index++) {
             const user = userList[index];
-            if (searchUserId === JSON.stringify(user.user_id)) {
+            if (searchUserId === user.user_id) {
                 return user
             }
         }
@@ -92,11 +92,12 @@ const deleteUserByUserId = (userId) => {
         const userListLength = userList.length;
         for (let index = 0; index < userListLength; index++) {
             const user = userList[index];
-            if (userId === JSON.stringify(user.user_id)) {
-                userList.splice(index)
+            if (JSON.parse(userId) === user.user_id) {
+                userList.splice(index, 1)
                 removeCurrentUserId()
                 const newUserList = [...userList]
                 setUserList(newUserList)
+                break;
             }
         }
     }
@@ -112,7 +113,7 @@ const updateUserByUserId = (values) => {
         for (let index = 0; index < userListLength; index++) {
             const user = userList[index];
             if (newUserObject.user_id === user.user_id) {
-                userList.splice(index)
+                userList.splice(index, 1)
                 userList.push(newUserObject)
                 const newUserList = [...userList]   
                 setUserList(newUserList)

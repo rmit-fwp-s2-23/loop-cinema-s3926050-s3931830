@@ -21,6 +21,11 @@ const HeaderNav = (props) => {
         props.navigateMyAccountProfile()
     }
 
+    const navigateMyAccountActivity = () => {
+        toggleAccountMenu()
+        props.navigateMyAccountActivity()
+    }
+
     const toggleAccountMenu = () => {
         setIsOpenMenu(prev => !prev)
     }
@@ -64,7 +69,7 @@ const HeaderNav = (props) => {
                                     </button>
                                 </div>
                                 <div className="header-profile-button-hover-block-item">
-                                    <button className="header-profile-button-hover-block-item-button">
+                                    <button className="header-profile-button-hover-block-item-button" onClick={navigateMyAccountActivity}>
                                         <span className="header-profile-button-hover-block-item-text">My Activity</span>
                                     </button>
                                 </div>
@@ -120,6 +125,13 @@ const HeaderNav = (props) => {
                     props.isTemporaryMessageNewReview && (
                         <div className="header-alert-message">
                             <span>Post new comment successfully!</span>
+                        </div>
+                    )
+                }
+                {
+                    props.isTemporaryMessageDeleteReview && (
+                        <div className="header-alert-message">
+                            <span>Delete comment successfully!</span>
                         </div>
                     )
                 }

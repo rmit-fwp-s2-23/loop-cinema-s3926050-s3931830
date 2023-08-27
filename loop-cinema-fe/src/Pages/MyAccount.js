@@ -6,13 +6,17 @@ import MyAccountCardItem from "../Components/Fragments/MyAccountCardItem";
 
 const MyAccount = (props) => {
     const navigate = useNavigate()
-    const userId = getCurrentUserId()
+    const userId = JSON.parse(getCurrentUserId())
 
     useEffect(() => {
         if (userId === null) navigate("/home")
     }, [userId])
 
-    const [currentUser, setCurrentUser] = useState(getUserByUserId(userId))
+    const [currentUser, setCurrentUser] = useState({})
+
+    useEffect(() => {
+        setCurrentUser(getUserByUserId(userId))
+    }, [])
 
     return (
         <>
@@ -39,7 +43,7 @@ const MyAccount = (props) => {
                     desc={"View Looper points and manage activities along with profile information."} />
                     <MyAccountCardItem title={"My Profile"} img={"profile"} navigateTo={props.navigateMyAccountProfile}
                     desc={"Manage your personal details, Looper account and preferences."} />
-                    <MyAccountCardItem title={"My Activity"} img={"activity"}
+                    <MyAccountCardItem title={"My Activity"} img={"activity"} navigateTo={props.navigateMyAccountActivity}
                     desc={"Track your past activities and comments on movies in Loop Cinema."} />
                 </div>
             </div>

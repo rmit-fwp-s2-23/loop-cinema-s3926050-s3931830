@@ -11,6 +11,29 @@ const initMovieList = () => {
     }
 }
 
+const getMovieList = () => {
+    const response = localStorage.getItem(MOVIE_DATA);
+    return JSON.parse(response);  
+}
+
+// return movie title
+const getMovieTitleByMovieId = (searchMovieId) => {
+    const movieList = getMovieList()
+
+    if (movieList !== null) {
+        const movieListLength = movieList.length;
+        for (let index = 0; index < movieListLength; index++) {
+            const movie = movieList[index];
+            if (searchMovieId === movie.movie_id) {
+                return movie.title
+            }
+        }
+        return null
+    }
+    return null
+}
+
 export {
-    initMovieList
+    initMovieList,
+    getMovieTitleByMovieId
 }

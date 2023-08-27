@@ -9,7 +9,8 @@ import { useState, useEffect } from "react";
 import MyAccountCardItem from "./Fragments/MyAccountCardItem";
 import Movie from "../Pages/Movie"
 import MyAccountProfile from '../Pages/MyAccountProfile'
-import { createNewAudienceReview } from "../data/reviewRepo";
+import { createNewAudienceReview, deleteAudienceReviewByUserId, deleteReviewByReviewId } from "../data/reviewRepo";
+import MyAccountActivity from "../Pages/MyAccountActivity";
 
 const MainContent = () => {
     const navigate = useNavigate()
@@ -21,6 +22,7 @@ const MainContent = () => {
     const [isTemporaryMessageDeleteUser, setIsTemporaryMessageDeleteUser] = useState(false)
     const [isTemporaryMessageUpdateUser, setIsTemporaryMessageUpdateUser] = useState(false)
     const [isTemporaryMessageNewReview, setIsTemporaryMessageNewReview] = useState(false)
+    const [isTemporaryMessageDeleteReview, setIsTemporaryMessageDeleteReview] = useState(false)
 
     useEffect(() => {
         const userId = getCurrentUserId()
@@ -58,7 +60,8 @@ const MainContent = () => {
     }
 
     const deleteUser = () => {
-        deleteUserByUserId(getCurrentUserId())
+        deleteAudienceReviewByUserId(getCurrentUserId())
+        deleteUserByUserId(getCurrentUserId())     
         setIsLoggedIn(false)
 
         setIsTemporaryMessageDeleteUser(true)
@@ -79,6 +82,7 @@ const MainContent = () => {
 
     const addNewReview = (reviewValue, userId, movieId) => {
         createNewAudienceReview(reviewValue, userId, movieId)
+        window.location.reload()
 
         setTimeout(() => {
             setIsTemporaryMessageNewReview(true)
@@ -86,6 +90,15 @@ const MainContent = () => {
 
         setTimeout(() => {
             setIsTemporaryMessageNewReview(false)
+        }, 2000)
+    }
+
+    const deleteReview = (reviewId) => {
+        deleteReviewByReviewId(reviewId)
+
+        setIsTemporaryMessageDeleteReview(true)
+        setTimeout(() => {
+            setIsTemporaryMessageDeleteReview(false)
         }, 2000)
     }
 
@@ -97,6 +110,10 @@ const MainContent = () => {
         navigate("/account/profile")
     }
 
+    const navigateMyAccountActivity = () => {
+        navigate("/account/activity")
+    }
+
     return (
         <>
             <div className="main-content">
@@ -104,17 +121,22 @@ const MainContent = () => {
                 setIsTemporaryMessage={setIsTemporaryMessage} isTemporaryMessage={isTemporaryMessage} signOut={signOut} 
                 isTemporaryMessageLogOut={isTemporaryMessageLogOut} 
                 navigateMyAccount={navigateMyAccount} navigateMyAccountProfile={navigateMyAccountProfile} 
+                navigateMyAccountActivity={navigateMyAccountActivity}
                 isTemporaryMessageDeleteUser={isTemporaryMessageDeleteUser} 
                 isTemporaryMessageUpdateUser={isTemporaryMessageUpdateUser} 
-                isTemporaryMessageNewReview={isTemporaryMessageNewReview} />
+                isTemporaryMessageNewReview={isTemporaryMessageNewReview} 
+                isTemporaryMessageDeleteReview={isTemporaryMessageDeleteReview}/>
                 <Routes>
                     <Route path="/" element={<Home isLoggedIn={isLoggedIn}/>} />
                     <Route path="/home" element={<Home isLoggedIn={isLoggedIn}/>} />
                     <Route path="/Movie/:id" element={<Movie isLoggedIn={isLoggedIn} addNewReview={addNewReview} />}/>
                     <Route path="/account" element={<MyAccount isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} 
-                    navigateMyAccountProfile={navigateMyAccountProfile} navigateMyAccount={navigateMyAccount} />} />
+                    navigateMyAccountProfile={navigateMyAccountProfile} navigateMyAccount={navigateMyAccount} 
+                    navigateMyAccountActivity={navigateMyAccountActivity} />} />
                     <Route path="/account/profile" element={<MyAccountProfile isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} 
                     deleteUser={deleteUser} updateUser={updateUser}/>} />
+                    <Route path="/account/activity" element={<MyAccountActivity isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} 
+                    deleteReview={deleteReview} />} />
 
                     {/* test component routes */}
                     <Route path="/test" element={<MyAccountCardItem />} />

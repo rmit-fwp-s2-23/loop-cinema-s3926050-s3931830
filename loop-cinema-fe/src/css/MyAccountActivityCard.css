@@ -1,0 +1,10 @@
+.my-account-activity-list-item {
+    width: 100%;
+    /* max-width: 1500px; */
+    margin-right: 20px;
+}
+
+.my-account-activity-list-item .card_stars {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}

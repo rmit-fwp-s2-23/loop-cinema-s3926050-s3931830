@@ -75,19 +75,21 @@ const getAudienceReviewById = (searchAudienceReviewId) => {
     return null
 }
 
-const deleteAudienceReviewById = (searchAudienceReviewId, searchAudienceReviewUserId) => {
+const deleteAudienceReviewByUserId = (searchAudienceReviewUserId) => {
     let audienceReviewList = getAudienceReviewList()
+    let newAudienceReviewList = [...audienceReviewList]
+
     if (audienceReviewList !== null) {
         const audienceReviewListLength = audienceReviewList.length;
         for (let index = 0; index < audienceReviewListLength; index++) {
             const audienceReview = audienceReviewList[index];
-            if (searchAudienceReviewId === JSON.stringify(audienceReview.audience_review_id) && 
-            searchAudienceReviewUserId === JSON.stringify(audienceReview.user_id)) {
-                audienceReviewList.splice(index)
-                const newAudienceReviewList = [...audienceReviewList]
-                setAudienceReviewList(newAudienceReviewList)
+            console.log("ok1");
+            if (JSON.parse(searchAudienceReviewUserId) === audienceReview.user_id) {
+                console.log("ok2");
+                newAudienceReviewList.splice(index, 1)
             }
         }
+        setAudienceReviewList(newAudienceReviewList)
     }
 }
 
@@ -117,14 +119,33 @@ const createNewAudienceReview = (addingAudienceReviewObject, userId, movieId) =>
     addAudienceReviewToList(newAudienceReview)
 }
 
+// delete a review by review id and update localStorage
+const deleteReviewByReviewId = (reviewId) => {
+    let reviewList = getAudienceReviewList()
+
+    if (reviewList !== null) {
+        const reviewListLength = reviewList.length;
+        for (let index = 0; index < reviewListLength; index++) {
+            const review = reviewList[index];
+            if (reviewId === review.audience_review_id) {
+                reviewList.splice(index, 1)
+                break;
+            }
+        }
+        const newReviewList = [...reviewList]
+        setAudienceReviewList(newReviewList)
+    }
+}
+
 export {
     initAudienceReviewList,
     setAudienceReviewList,
     getAudienceReviewList,
     getAudienceReviewById,
-    deleteAudienceReviewById,
+    deleteAudienceReviewByUserId,
     removeAudienceReviewList,
     getAudienceReviewListByUserId,
     getAudienceReviewListByMovieId,
-    createNewAudienceReview
+    createNewAudienceReview,
+    deleteReviewByReviewId
 }

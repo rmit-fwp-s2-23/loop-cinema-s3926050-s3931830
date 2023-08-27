@@ -8,7 +8,7 @@ import '../css/pages/MyAccountProfile.css'
 
 const MyAccountProfile = (props) => {
     const navigate = useNavigate()
-    const userId = getCurrentUserId()
+    const userId = JSON.parse(getCurrentUserId())
 
     // set updating state for user when updating
     const [updating, setUpdating] = useState(false)

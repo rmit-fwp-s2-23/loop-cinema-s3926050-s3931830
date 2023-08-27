@@ -2,17 +2,28 @@ import {useLocation} from "react-router-dom"
 import "../css/pages/Movie.css"
 import { useState } from "react";
 import { getAudienceReviewListByMovieId } from '../data/reviewRepo'
-import { getUserInfoByUserId } from "../data/userRepo";
+import { getCurrentUserId, getUserByUserId, getUserInfoByUserId } from "../data/userRepo";
 import AudienceReviewCardItem from "../Components/Fragments/AudienceReviewCardItem";
 
-function Movie(){
+function Movie(props) {
     /**This will be a complete section for a single movie with all its details and stuff.*/
 
     //Movie Detail
     const location = useLocation();
+    const userId = getCurrentUserId()
     const movieObj = location.state.movieData;
 
     const [currentMovieAudienceReviewList, setCurrentMovieAudienceReviewList] = useState(getAudienceReviewListByMovieId(movieObj.movie_id))
+
+    const openReviewModal = () => {
+        // const element = document.getElementById("my-account-profile-confirm-delete");
+        // element.setAttribute("open", true)
+    }
+
+    const closeReviewModal = () => {
+        // const element = document.getElementById("my-account-profile-confirm-delete");
+        // element.removeAttribute("open")
+    }
 
     return(
         <div>
@@ -52,7 +63,19 @@ function Movie(){
                     </hgroup>
                 </article>
                 <article className="audience-review">
-                    <h2 className="audience-review-title">Reviews</h2>
+                    <div className="my-account-profile-header">
+                        <h2 className="audience-review-title">Reviews</h2>
+                        {
+                            props.isLoggedIn && (
+                                <div className="my-account-profile-header-delete">
+                                    <button onClick={openReviewModal}>
+                                        <span>Add Review</span>
+                                    </button>
+                                </div>
+                            )
+                        }
+                    </div>
+                    
                     <div className="audience-review-list">
                     {
                         currentMovieAudienceReviewList.map((currentMovieAudienceReview) => (

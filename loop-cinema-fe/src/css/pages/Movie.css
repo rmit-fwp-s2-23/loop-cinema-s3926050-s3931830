@@ -164,6 +164,17 @@
     z-index: 1;
 }
 
-.audience-review-title {
-    
+.audience-review .my-account-profile-header {
+    align-items: flex-start;
+}
+
+.audience-review .my-account-profile-header-delete button {
+    border: none;
+    background-color: #cd242c;
+}
+
+.audience-review .my-account-profile-header-delete button span {
+    /* font-size: 0.75rem; */
+    font-weight: 600;
+    text-transform: uppercase;
 }

@@ -95,7 +95,7 @@ const MainContent = () => {
                 <Routes>
                     <Route path="/" element={<Home isLoggedIn={isLoggedIn}/>} />
                     <Route path="/home" element={<Home isLoggedIn={isLoggedIn}/>} />
-                    <Route path="/Movie/:id" element={<Movie/>}/>
+                    <Route path="/Movie/:id" element={<Movie isLoggedIn={isLoggedIn} />}/>
                     <Route path="/account" element={<MyAccount isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} 
                     navigateMyAccountProfile={navigateMyAccountProfile} navigateMyAccount={navigateMyAccount} />} />
                     <Route path="/account/profile" element={<MyAccountProfile isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} 

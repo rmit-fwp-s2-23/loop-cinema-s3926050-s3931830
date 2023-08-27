@@ -3,15 +3,23 @@ import {Link} from "react-router-dom"
 import MovieCard from "../Components/MovieCard"
 import "../css/components/MovieList.css"
 
-function MovieList() {
+function MovieList({sortRatingStatus}) {
     const storedData = localStorage.getItem('movie_data')
     const parsedData = JSON.parse(storedData)
     
+    //Sorts in Descending Order
+    const compareRating = (a, b)=>{
+        return -(a.averageAudienceReviewScore - b.averageAudienceReviewScore)
+    }
+
+    const finalData = sortRatingStatus ? [...parsedData].sort(compareRating) : parsedData;
+
+    console.log("MOVIELIST" + finalData[1].averageAudienceReviewScore);
     return(
         <div className="movielist_container">
             <ul className="movielist_ul" style={{listStyle: `none`}}>      
                 { 
-                    parsedData.map((obj)=>(
+                    finalData.map((obj)=>(
                         <li classNaem="movie_card" style={{listStyleType: `none`}}>
                             <Link className="cardLink" to={"/Movie/" + obj.title} state={{movieData: obj}}>
                                 <MovieCard 

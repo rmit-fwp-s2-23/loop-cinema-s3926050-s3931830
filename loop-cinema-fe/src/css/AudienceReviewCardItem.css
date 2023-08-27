@@ -1,0 +1,46 @@
+.audience-review-list-item {
+    max-width: 1300px;
+    padding-bottom: 50px;
+    margin-bottom: 30px;
+    border-bottom: 0.2px solid var(--primary);
+}
+
+.audience-review-list-item-user {
+    margin-bottom: 0;
+    
+}
+
+.audience-review-list-item-small {
+
+}
+
+.audience-review-list-item-small-email {
+    color: var(--primary);
+    font-size: 16px;
+    margin-right: 15px;
+}
+
+.audience-review-list-item-small-dot {
+    width: 5px;
+    height: 5px;
+    margin-right: 15px;
+}
+
+.audience-review-list-item .card_stars {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    color: #cd242c;
+}
+
+.audience-review-list-item .card_stars .material-symbols-outlined {
+    font-size: 30px;
+}
+
+.audience-review-list-item-comment {
+
+}
+
+.audience-review-list-item-comment-span {
+    color: #9d9c9c;
+    font-size: 18px;
+}

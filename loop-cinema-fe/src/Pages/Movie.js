@@ -3,6 +3,7 @@ import "../css/pages/Movie.css"
 import { useState } from "react";
 import { getAudienceReviewListByMovieId } from '../data/reviewRepo'
 import { getUserInfoByUserId } from "../data/userRepo";
+import AudienceReviewCardItem from "../Components/Fragments/AudienceReviewCardItem";
 
 function Movie(){
     /**This will be a complete section for a single movie with all its details and stuff.*/
@@ -50,15 +51,16 @@ function Movie(){
                         <p>{movieObj.directors}</p>
                     </hgroup>
                 </article>
-                <article>
+                <article className="audience-review">
+                    <h2 className="audience-review-title">Reviews</h2>
+                    <div className="audience-review-list">
                     {
                         currentMovieAudienceReviewList.map((currentMovieAudienceReview) => (
-                            <div>
-                                <p>{JSON.stringify(currentMovieAudienceReview)}</p>
-                                <p>{JSON.stringify(getUserInfoByUserId(currentMovieAudienceReview.user_id))}</p>
-                            </div>
+                            <AudienceReviewCardItem review={currentMovieAudienceReview} 
+                            user={getUserInfoByUserId(currentMovieAudienceReview.user_id)} />
                         ))
                     }
+                    </div>
                 </article>
             </div>
         </div>

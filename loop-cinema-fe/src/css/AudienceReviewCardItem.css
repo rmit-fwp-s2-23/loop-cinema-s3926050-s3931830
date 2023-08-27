@@ -29,7 +29,11 @@
 .audience-review-list-item .card_stars {
     margin-top: 15px;
     margin-bottom: 15px;
+}
+
+.card_stars {
     color: #cd242c;
+
 }
 
 .audience-review-list-item .card_stars .material-symbols-outlined {

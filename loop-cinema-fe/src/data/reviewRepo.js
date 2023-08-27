@@ -125,5 +125,6 @@ export {
     deleteAudienceReviewById,
     removeAudienceReviewList,
     getAudienceReviewListByUserId,
-    getAudienceReviewListByMovieId
+    getAudienceReviewListByMovieId,
+    createNewAudienceReview
 }

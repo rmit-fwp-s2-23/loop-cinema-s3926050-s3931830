@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { deleteUserByUserId, getCurrentUserId, getUserByUserId, updateUserByUserId } from "../data/userRepo";
 import { useEffect, useState } from "react";
 import useForm from "../CustomHooks/useForm";
+import useLockScroll from "../CustomHooks/useLockScroll";
 import RegisterValidate from "../Validations/RegisterValidate";
 import '../css/pages/MyAccountProfile.css'
 
@@ -48,12 +49,14 @@ const MyAccountProfile = (props) => {
 
     // confirm message
     const confirmDeleteUser = () => {
+        document.body.style.overflow = "hidden"
         const element = document.getElementById("my-account-profile-confirm-delete");
         element.setAttribute("open", true)
     }
 
     // cancel the request for delete user
     const cancelDeleteUser = () => {
+        document.body.style.overflow = "auto"
         const element = document.getElementById("my-account-profile-confirm-delete");
         element.removeAttribute("open")
     }

@@ -178,3 +178,43 @@
     font-weight: 600;
     text-transform: uppercase;
 }
+
+#audience-review-dialog article {
+    width: 700px;
+    padding-top: 40px;
+}
+
+#audience-review-dialog article h2 {
+    margin-bottom: 20px;
+}
+
+#audience-review-dialog-form input {
+    background-color: #11191f;
+}
+
+#audience-review-dialog-form-cancel-post {
+    background-color: transparent;
+}
+
+#audience-review-dialog-form-confirm-post {
+    background-color: var(--contrast);
+}
+
+#audience-review-dialog-form-confirm-post:hover {
+    background-color: #cd242c;
+}
+
+#audience-review-dialog-form fieldset {
+    font-size: 16px;
+    margin-bottom: 0px;
+}
+
+.audience-review-dialog-form-label-checkbox {
+    display: flex;
+    align-items: center;
+}
+
+#audience-review-dialog-form textarea {
+    font-size: 0.9rem;
+    margin-bottom: 0;
+}

@@ -1,32 +1,174 @@
 import {useLocation} from "react-router-dom"
 import "../css/pages/Movie.css"
-import { useState } from "react";
-import { getAudienceReviewListByMovieId } from '../data/reviewRepo'
+import { useEffect, useState } from "react";
+import { createNewAudienceReview, getAudienceReviewListByMovieId } from '../data/reviewRepo'
 import { getCurrentUserId, getUserByUserId, getUserInfoByUserId } from "../data/userRepo";
 import AudienceReviewCardItem from "../Components/Fragments/AudienceReviewCardItem";
+import useForm from "../CustomHooks/useForm";
+import ReviewValidate from '../Validations/ReviewValidate'
 
 function Movie(props) {
     /**This will be a complete section for a single movie with all its details and stuff.*/
 
     //Movie Detail
     const location = useLocation();
-    const userId = getCurrentUserId()
+    const userId = JSON.parse(getCurrentUserId())
+    // console.log(JSON.parse(userId));
     const movieObj = location.state.movieData;
 
-    const [currentMovieAudienceReviewList, setCurrentMovieAudienceReviewList] = useState(getAudienceReviewListByMovieId(movieObj.movie_id))
+    const [currentMovieAudienceReviewList, setCurrentMovieAudienceReviewList] = useState([])
+    const [reviewing, setReviewing] = useState(false)
 
+    // callback
+    const reviewSuccess = () => {
+        const elementBig = document.getElementById("audience-review-dialog");
+        const elementButton = document.getElementById("audience-review-dialog-form-confirm-post");
+
+        elementButton.setAttribute("aria-busy", true)
+        setTimeout(() => {
+            elementButton.removeAttribute("aria-busy")
+            elementBig.removeAttribute("open")
+            document.body.style.overflow = "auto"
+        }, 1000)
+
+        setReviewing(true)
+    }
+
+    const {
+        values,
+        errors,
+        handleChange,
+        handleSubmit,
+        setValues,
+        isSubmitting
+    } = useForm(reviewSuccess, ReviewValidate);
+
+    // whenever callback is good -> add new review
+    useEffect(() => {
+        if (JSON.stringify(errors) === JSON.stringify({}) && isSubmitting) {
+            const reviewValue = {...values}
+            props.addNewReview(reviewValue, userId, movieObj.movie_id)         
+        }
+    }, [reviewing])
+
+    // initialize from local storage to state
+    useEffect(() => {
+        setCurrentMovieAudienceReviewList(getAudienceReviewListByMovieId(movieObj.movie_id))
+    }, [currentMovieAudienceReviewList])
+
+    /* 
+        TOGGLE MODAL
+    */
     const openReviewModal = () => {
-        // const element = document.getElementById("my-account-profile-confirm-delete");
-        // element.setAttribute("open", true)
+        document.body.style.overflow = "hidden"
+        const element = document.getElementById("audience-review-dialog");
+        element.setAttribute("open", true)
     }
 
     const closeReviewModal = () => {
-        // const element = document.getElementById("my-account-profile-confirm-delete");
-        // element.removeAttribute("open")
+        document.body.style.overflow = "auto"
+        const element = document.getElementById("audience-review-dialog");
+        element.removeAttribute("open")
+    }
+
+    // print stars
+    function printStars(numStars) {
+        const wholeNumberPart = Math.floor(numStars);
+
+        const starElements = [];
+        for (let i = 0; i < wholeNumberPart; i++) {
+            starElements.push(
+            <span key={i} className="material-symbols-outlined">
+                star
+            </span>
+            );
+        }
+
+        return starElements;
     }
 
     return(
         <div>
+            <dialog id="audience-review-dialog">
+                <article>
+                    <h2>Posting review for {movieObj.title}</h2>
+                    
+                    <div className='login-dialog-content-form'>
+                        <form onSubmit={handleSubmit} noValidate id="audience-review-dialog-form">
+                            <fieldset>
+                                Rating *
+                                <label for="1" className="audience-review-dialog-form-label-checkbox">
+                                    <input type="radio" id="1" name="score" value="1" onChange={handleChange}/>
+                                    <div className="card_stars">
+                                        {   
+                                            printStars(1)
+                                        }
+                                    </div>
+                                </label>
+                                <label for="2" className="audience-review-dialog-form-label-checkbox">
+                                    <input type="radio" id="2" name="score" value="2" onChange={handleChange}/>
+                                    <div className="card_stars">
+                                        {   
+                                            printStars(2)
+                                        }
+                                    </div>
+                                </label>
+                                <label for="3" className="audience-review-dialog-form-label-checkbox">
+                                    <input type="radio" id="3" name="score" value="3" onChange={handleChange}/>
+                                    <div className="card_stars">
+                                        {   
+                                            printStars(3)
+                                        }
+                                    </div>
+                                </label>
+                                <label for="4" className="audience-review-dialog-form-label-checkbox">
+                                    <input type="radio" id="4" name="score" value="4" onChange={handleChange}/>
+                                    <div className="card_stars">
+                                        {   
+                                            printStars(4)
+                                        }
+                                    </div>
+                                </label>
+                                <label for="5" className="audience-review-dialog-form-label-checkbox">
+                                    <input type="radio" id="5" name="score" value="5" onChange={handleChange}/>
+                                    <div className="card_stars">
+                                        {   
+                                            printStars(5)
+                                        }
+                                    </div>
+                                </label>
+                            </fieldset>
+                            {
+                                errors.score && (
+                                    <p className="input-text-help input-error">{errors.score}</p>
+                                )
+                            }
+                            <label for="comment">
+                                Comment *
+                                <textarea autoComplete="off" id="comment" name="comment" placeholder="Enter your comment..." 
+                                value={values.comment || ''} onChange={handleChange} required rows="3"
+                                aria-invalid={`${errors.username && 'true'}`}/>
+                                {
+                                    errors.comment && (
+                                        <p className="input-text-help input-error">{errors.comment}</p>
+                                    )
+                                }
+                            </label>
+                            <div className="my-account-profile-confirm-delete-buttons my-account-profile-header-delete">
+                                <button class="secondary outline" id="audience-review-dialog-form-cancel-post" 
+                                onClick={closeReviewModal}>
+                                    <span>Cancel</span>
+                                </button>
+                                <button type="submit" class="contrast" id="audience-review-dialog-form-confirm-post">
+                                    <span>Post</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    
+                </article>
+            </dialog>
             <div id="movie_header" style={{backgroundImage: `url(${movieObj.banner})`, backgroundSize: `cover`, backgroundPosition: `center`}}>
                 <div id="movie_container">
                     <div className="movie_foreground">

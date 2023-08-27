@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 import MyAccountCardItem from "./Fragments/MyAccountCardItem";
 import Movie from "../Pages/Movie"
 import MyAccountProfile from '../Pages/MyAccountProfile'
+import { createNewAudienceReview } from "../data/reviewRepo";
 
 const MainContent = () => {
     const navigate = useNavigate()
@@ -19,6 +20,7 @@ const MainContent = () => {
     const [isTemporaryMessageLogOut, setIsTemporaryMessageLogOut] = useState(false)
     const [isTemporaryMessageDeleteUser, setIsTemporaryMessageDeleteUser] = useState(false)
     const [isTemporaryMessageUpdateUser, setIsTemporaryMessageUpdateUser] = useState(false)
+    const [isTemporaryMessageNewReview, setIsTemporaryMessageNewReview] = useState(false)
 
     useEffect(() => {
         const userId = getCurrentUserId()
@@ -75,6 +77,18 @@ const MainContent = () => {
         }, 2000)
     }
 
+    const addNewReview = (reviewValue, userId, movieId) => {
+        createNewAudienceReview(reviewValue, userId, movieId)
+
+        setTimeout(() => {
+            setIsTemporaryMessageNewReview(true)
+        }, 1000)
+
+        setTimeout(() => {
+            setIsTemporaryMessageNewReview(false)
+        }, 2000)
+    }
+
     const navigateMyAccount = () => {
         navigate("/account")
     }
@@ -91,11 +105,12 @@ const MainContent = () => {
                 isTemporaryMessageLogOut={isTemporaryMessageLogOut} 
                 navigateMyAccount={navigateMyAccount} navigateMyAccountProfile={navigateMyAccountProfile} 
                 isTemporaryMessageDeleteUser={isTemporaryMessageDeleteUser} 
-                isTemporaryMessageUpdateUser={isTemporaryMessageUpdateUser} />
+                isTemporaryMessageUpdateUser={isTemporaryMessageUpdateUser} 
+                isTemporaryMessageNewReview={isTemporaryMessageNewReview} />
                 <Routes>
                     <Route path="/" element={<Home isLoggedIn={isLoggedIn}/>} />
                     <Route path="/home" element={<Home isLoggedIn={isLoggedIn}/>} />
-                    <Route path="/Movie/:id" element={<Movie isLoggedIn={isLoggedIn} />}/>
+                    <Route path="/Movie/:id" element={<Movie isLoggedIn={isLoggedIn} addNewReview={addNewReview} />}/>
                     <Route path="/account" element={<MyAccount isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} 
                     navigateMyAccountProfile={navigateMyAccountProfile} navigateMyAccount={navigateMyAccount} />} />
                     <Route path="/account/profile" element={<MyAccountProfile isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} 

@@ -17,3 +17,21 @@
     appearance: none;
 
 }
+
+.sort_button{
+    width: 10%;
+    border: none;
+}   
+
+.sort_button:hover{
+    background-color: #CD242C !important;
+}
+
+.sort_buttons{
+    display: flex;
+    gap: 2%;
+}
+
+#sort_label h1{
+    margin-bottom: 0px;
+}

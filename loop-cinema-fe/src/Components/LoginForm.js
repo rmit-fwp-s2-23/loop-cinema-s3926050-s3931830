@@ -63,7 +63,7 @@ const LoginForm = (props) => {
                             <button type="submit">Login</button>
                         </form>
                     </div>
-                    <div className='login-dialog-content-note'>
+                    {/* <div className='login-dialog-content-note'>
                         <span className='login-dialog-content-note-text'>Having trouble logging in?</span>
                         <div className="login-dialog-content-note-buttons">
                             <button className="header-profile-button">
@@ -74,7 +74,7 @@ const LoginForm = (props) => {
                                 <span className="header-profile-button-text">Register Looper</span>
                             </button>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </article>
         </dialog>

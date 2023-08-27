@@ -66,6 +66,25 @@ const getUserByUserId = (searchUserId) => {
     return null
 }
 
+// return an user object with firstName, lastName, email
+const getUserInfoByUserId = (searchUserId) => {
+    const userList = getUserList()
+    let userInfoList = {}
+    if (userList !== null) {
+        const userListLength = userList.length;
+        for (let index = 0; index < userListLength; index++) {
+            const user = userList[index];
+            if (searchUserId === user.user_id) {
+                userInfoList.firstName = user.firstName;
+                userInfoList.lastName = user.lastName;
+                userInfoList.email = user.email
+            }
+        }
+        return userInfoList
+    }
+    return null
+}
+
 // delete a user by user id and update localStorage
 const deleteUserByUserId = (userId) => {
     let userList = getUserList()
@@ -176,5 +195,6 @@ export {
     createNewUser,
     getUserByUserId,
     deleteUserByUserId,
-    updateUserByUserId
+    updateUserByUserId,
+    getUserInfoByUserId
 }

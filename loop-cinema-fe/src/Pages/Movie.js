@@ -1,5 +1,8 @@
 import {useLocation} from "react-router-dom"
 import "../css/pages/Movie.css"
+import { useState } from "react";
+import { getAudienceReviewListByMovieId } from '../data/reviewRepo'
+import { getUserInfoByUserId } from "../data/userRepo";
 
 function Movie(){
     /**This will be a complete section for a single movie with all its details and stuff.*/
@@ -7,6 +10,8 @@ function Movie(){
     //Movie Detail
     const location = useLocation();
     const movieObj = location.state.movieData;
+
+    const [currentMovieAudienceReviewList, setCurrentMovieAudienceReviewList] = useState(getAudienceReviewListByMovieId(movieObj.movie_id))
 
     return(
         <div>
@@ -19,7 +24,7 @@ function Movie(){
                             <div className="movie_details">
                                 <span className="movie_rating">{movieObj.rating}</span>
                                 <span clasName="movie_pipe">|</span>
-                                <span className="movie_duration">{movieObj.runtTime + " min"}</span>
+                                <span className="movie_duration">{movieObj.runTime + " min"}</span>
                                 <span clasName="movie_pipe">|</span>
                                 <span className="movie_release-date">{movieObj.releaseDate}</span>
                             </div>
@@ -46,10 +51,14 @@ function Movie(){
                     </hgroup>
                 </article>
                 <article>
-                    <hgroup>
-                        <h1>Reviews</h1>
-                        <p>To be Built...</p>
-                    </hgroup>
+                    {
+                        currentMovieAudienceReviewList.map((currentMovieAudienceReview) => (
+                            <div>
+                                <p>{JSON.stringify(currentMovieAudienceReview)}</p>
+                                <p>{JSON.stringify(getUserInfoByUserId(currentMovieAudienceReview.user_id))}</p>
+                            </div>
+                        ))
+                    }
                 </article>
             </div>
         </div>

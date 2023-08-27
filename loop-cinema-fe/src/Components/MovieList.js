@@ -20,7 +20,7 @@ function MovieList() {
                                 title={obj.title} 
                                 rated={obj.rating} 
                                 runtime={obj.runTime}
-                                stars = {obj.audienceScore.averageScore}
+                                stars = {obj.averageAudienceReviewScore}
                                 />
                             </Link>
 

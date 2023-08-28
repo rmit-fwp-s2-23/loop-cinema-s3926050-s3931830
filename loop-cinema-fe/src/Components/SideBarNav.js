@@ -45,7 +45,7 @@ const SideBarNav = () => {
                     </ul>
                     <ul className="sidebar-nav-list sidebar-nav-list-secondary">
                         <li className="sidebar-nav-list-item">
-                            <Link className="sidebar-nav-list-item-link" to={`/`}>
+                            <Link className="sidebar-nav-list-item-link" to={`/AboutUs`}>
                                 <span className="sidebar-nav-list-item-text sidebar-nav-list-item-text-secondary">About us</span>
                             </Link>
                         </li>

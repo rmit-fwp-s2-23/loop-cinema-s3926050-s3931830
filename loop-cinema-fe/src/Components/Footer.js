@@ -16,21 +16,21 @@ const Footer = () => {
           </Link> 
         </div>
         <div className="footer-column">
-          <Link to={`/`} style={{textDecoration: 'none'}}>
-            <h2>Recipes</h2>
+          <Link to={`/AboutUs`} style={{textDecoration: 'none'}}>
+            <h2>Events</h2>
           </Link> 
           <Link to={`/recipes?mealType=appetizer`}>
-            Appetizer
+            Community Events
           </Link> 
           <Link to={`/recipes?category=grains`}>
-            Grains
+            Art Shows
           </Link> 
           <Link to={`/recipes?mealType=dessert`}>
-            Dessert
+            Theater
           </Link> 
         </div>
         <div className="footer-column">
-          <Link to={`/policy`} style={{textDecoration: 'none'}}>
+          <Link to={`/AboutUs`} style={{textDecoration: 'none'}}>
             <h2>About</h2>
           </Link> 
           <Link to='/policy' >Privacy</Link>

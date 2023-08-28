@@ -70,9 +70,10 @@ const offers = [
 const locations = [
     {
         location_id: "L001",
-        name: "Loop Cinema Bankstown",
+        name: "Loop Cinema, Bankstown",
         address: "63 The Mall, Bankstown, NSW 2200",
         phone: "0290033800",
+        image: "https://cdn.broadsheet.com.au/cache/2c/5f/2c5f0f82b01888628a20ff53550c6b94.jpg",
         offers: [
             "O001",
             "O004",
@@ -81,9 +82,10 @@ const locations = [
     },
     {
         location_id: "L002",
-        name: "Loop Cinema District Dockland",
+        name: "Loop Cinema, District Dockland",
         address: "440 Docklands Drive, Docklands, VIC 3008",
         phone: "0390271540",
+        image: "https://media.timeout.com/images/103085905/750/562/image.jpg",
         offers: [
             "O001",
             "O002",
@@ -92,9 +94,10 @@ const locations = [
     },
     {
         location_id: "L002",
-        name: "Loop Cinema Melbounre Central",
+        name: "Loop Cinema, Melbounre Central",
         address: "Cnr Swanston & Latrobe Street, Melbourne, VIC 3000",
         phone: "1300357357",
+        image: "https://headbox-media.imgix.net/spaces/22571/photos/aa639165-6939-4cb1-a599-749d5024484b_Rydges%20Sydney%20Central%20-%20Cinema%20HR.jpg?auto=format&ar=3%3A2&fit=crop&q=60&ixlib=react-9.5.4",
         offers: [
             "O001",
             "O002",

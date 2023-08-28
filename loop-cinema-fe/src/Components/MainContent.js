@@ -10,6 +10,7 @@ import MyAccountProfile from '../Pages/MyAccountProfile'
 import { createNewAudienceReview, deleteAudienceReviewByUserId, deleteReviewByReviewId, updateReviewByReviewId } from "../data/reviewRepo";
 import MyAccountActivity from "../Pages/MyAccountActivity";
 import { updateAverageAudienceReviewScoreOfMovie, updateMovieAverageScoreBulk } from "../data/movieRepo";
+import { AboutUs } from "../Pages/AboutUs";
 
 const MainContent = () => {
     const navigate = useNavigate()
@@ -137,6 +138,7 @@ const MainContent = () => {
                     <Route path="/" element={<Home isLoggedIn={isLoggedIn}/>} />
                     <Route path="/home" element={<Home isLoggedIn={isLoggedIn}/>} />
                     <Route path="/Movie/:id" element={<Movie isLoggedIn={isLoggedIn} addNewReview={addNewReview} />}/>
+                    <Route path="/AboutUs" element={<AboutUs/>}/>
                     <Route path="/account" element={<MyAccount isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} 
                     navigateMyAccountProfile={navigateMyAccountProfile} navigateMyAccount={navigateMyAccount} 
                     navigateMyAccountActivity={navigateMyAccountActivity} />} />

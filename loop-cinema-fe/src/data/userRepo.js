@@ -46,7 +46,7 @@ const setUserList = (newUserList) => {
  * @param {*} newUser : new user object
  */
 const addUserToList = (newUser) => {
-    const currentUserList = getUserList();
+    let currentUserList = getUserList();
 
     // if no key was found -> set new user_list to empty array
     if (currentUserList == null) currentUserList = [];
@@ -134,6 +134,7 @@ const deleteUserByUserId = (userId) => {
 /**
  * update current user object with new values
  * @param {*} values : new values
+ * @description : values already contain user id
  */
 const updateUserByUserId = (values) => {
     const newUserObject = {...values}
@@ -144,14 +145,12 @@ const updateUserByUserId = (values) => {
         for (let index = 0; index < userListLength; index++) {
             const user = userList[index];
             if (newUserObject.user_id === user.user_id) {
-                userList.splice(index, 1)
-                userList.push(newUserObject)
+                userList.splice(index, 1, newUserObject)
                 const newUserList = [...userList]   
                 setUserList(newUserList)
             }
         }
     }
-
 }
 
 /* 

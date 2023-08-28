@@ -153,7 +153,7 @@ const audienceReviews = [
     comment: "The momentum the film generates due to the chronological cross-cutting becomes relentless, and that runaway feeling is beautifully harmonious with the film’s broader interest in Oppenheimer’s legacy.",
     score: 5,
     createdAt: "05/08/2023",
-    updatedAt: ""
+    updatedAt: "05/08/2023"
   },
   {
     movie_id: "M123",
@@ -162,7 +162,7 @@ const audienceReviews = [
     comment: "I haven't watched it yet!",
     score: 1,
     createdAt: "04/08/2023",
-    updatedAt: ""
+    updatedAt: "05/08/2023"
   },
   {
     movie_id: "M123",
@@ -171,7 +171,7 @@ const audienceReviews = [
     comment: "Rarely have I left a movie feeling smarter than when I went in, but “Oppenheimer” is just such a film and it elevated my thinking, especially in regards to the science of politics and the politics of science.",
     score: 3,
     createdAt: "04/08/2023",
-    updatedAt: ""
+    updatedAt: "05/08/2023"
   },
   {
     movie_id: "M124",
@@ -180,7 +180,7 @@ const audienceReviews = [
     comment: "Inception is a masterpiece that challenges the audience's perception of reality.",
     score: 5,
     createdAt: "10/08/2023",
-    updatedAt: ""
+    updatedAt: "11/08/2023"
   },
   {
     movie_id: "M124",
@@ -189,7 +189,7 @@ const audienceReviews = [
     comment: "The layers of dreams and the intricate storytelling left me amazed.",
     score: 4,
     createdAt: "09/08/2023",
-    updatedAt: ""
+    updatedAt: "10/08/2023"
   },
   {
     movie_id: "M125",
@@ -198,7 +198,7 @@ const audienceReviews = [
     comment: "The Shawshank Redemption is an emotionally gripping tale of friendship and survival.",
     score: 5,
     createdAt: "15/08/2023",
-    updatedAt: ""
+    updatedAt: "15/08/2023"
   },
   {
     movie_id: "M125",
@@ -207,7 +207,7 @@ const audienceReviews = [
     comment: "This film's message of hope and perseverance resonates deeply with me.",
     score: 5,
     createdAt: "14/08/2023",
-    updatedAt: ""
+    updatedAt: "14/08/2023"
   },
   {
     movie_id: "M126",
@@ -215,8 +215,8 @@ const audienceReviews = [
     user_id: "U005",
     comment: "The Fellowship of the Ring transports viewers to a magical world of adventure.",
     score: 5,
-    createdAt: "20/08/2023",
-    updatedAt: ""
+    createdAt: "14/08/2023",
+    updatedAt: "14/08/2023"
   },
   {
     movie_id: "M126",
@@ -225,7 +225,7 @@ const audienceReviews = [
     comment: "This film's visuals and storytelling are simply breathtaking.",
     score: 4,
     createdAt: "19/08/2023",
-    updatedAt: ""
+    updatedAt: "19/08/2023"
   },
   {
     movie_id: "M127",
@@ -234,7 +234,7 @@ const audienceReviews = [
     comment: "Black Panther is a landmark film that celebrates African culture.",
     score: 5,
     createdAt: "25/08/2023",
-    updatedAt: ""
+    updatedAt: "25/08/2023"
   },
   {
     movie_id: "M127",
@@ -243,7 +243,7 @@ const audienceReviews = [
     comment: "The film's portrayal of Wakanda is mesmerizing and empowering.",
     score: 4,
     createdAt: "24/08/2023",
-    updatedAt: ""
+    updatedAt: "24/08/2023"
   },
   {
     movie_id: "M128",
@@ -251,8 +251,8 @@ const audienceReviews = [
     user_id: "U006",
     comment: "Jurassic Park ignited my fascination with dinosaurs and adventure.",
     score: 5,
-    createdAt: "30/08/2023",
-    updatedAt: ""
+    createdAt: "21/08/2023",
+    updatedAt: "21/08/2023"
   },
   {
     movie_id: "M128",
@@ -260,8 +260,8 @@ const audienceReviews = [
     user_id: "U004",
     comment: "The suspense and dinosaur encounters kept me on the edge of my seat.",
     score: 4,
-    createdAt: "29/08/2023",
-    updatedAt: ""
+    createdAt: "20/08/2023",
+    updatedAt: "21/08/2023"
   },
   {
     movie_id: "M129",
@@ -269,8 +269,8 @@ const audienceReviews = [
     user_id: "U005",
     comment: "Avatar transported me to a mesmerizing alien world.",
     score: 5,
-    createdAt: "05/09/2023",
-    updatedAt: ""
+    createdAt: "21/08/2023",
+    updatedAt: "21/08/2023"
   },
   {
     movie_id: "M129",
@@ -278,8 +278,8 @@ const audienceReviews = [
     user_id: "U006",
     comment: "The film's visuals and message are both awe-inspiring.",
     score: 4,
-    createdAt: "04/09/2023",
-    updatedAt: ""
+    createdAt: "21/08/2023",
+    updatedAt: "21/08/2023"
   },
   {
     movie_id: "M130",
@@ -287,8 +287,8 @@ const audienceReviews = [
     user_id: "U004",
     comment: "Toy Story sparked nostalgia and captivated audiences of all ages.",
     score: 5,
-    createdAt: "10/09/2023",
-    updatedAt: ""
+    createdAt: "11/08/2023",
+    updatedAt: "28/08/2023"
   },
   {
     movie_id: "M130",
@@ -296,8 +296,8 @@ const audienceReviews = [
     user_id: "U005",
     comment: "The film's charm and creativity remain unmatched in animation.",
     score: 4,
-    createdAt: "09/09/2023",
-    updatedAt: ""
+    createdAt: "14/08/2023",
+    updatedAt: "18/08/2023"
   },
   {
     movie_id: "M131",
@@ -305,8 +305,8 @@ const audienceReviews = [
     user_id: "U006",
     comment: "Pulp Fiction's narrative complexity and memorable moments are captivating.",
     score: 5,
-    createdAt: "15/09/2023",
-    updatedAt: ""
+    createdAt: "14/08/2023",
+    updatedAt: "16/08/2023"
   },
   {
     movie_id: "M131",
@@ -314,8 +314,8 @@ const audienceReviews = [
     user_id: "U004",
     comment: "The film's unique structure and sharp dialogue make it a timeless classic.",
     score: 4,
-    createdAt: "14/09/2023",
-    updatedAt: ""
+    createdAt: "14/08/2023",
+    updatedAt: "19/08/2023"
   },
   {
     movie_id: "M132",
@@ -323,8 +323,8 @@ const audienceReviews = [
     user_id: "U005",
     comment: "The Lion King's emotional depth and memorable songs make it a timeless favorite.",
     score: 5,
-    createdAt: "20/09/2023",
-    updatedAt: ""
+    createdAt: "14/08/2023",
+    updatedAt: "27/08/2023"
   },
   {
     movie_id: "M132",
@@ -332,8 +332,8 @@ const audienceReviews = [
     user_id: "U006",
     comment: "The film's themes of responsibility and courage resonate with audiences of all ages.",
     score: 5,
-    createdAt: "19/09/2023",
-    updatedAt: ""
+    createdAt: "14/08/2023",
+    updatedAt: "28/08/2023"
   }
 ]
 

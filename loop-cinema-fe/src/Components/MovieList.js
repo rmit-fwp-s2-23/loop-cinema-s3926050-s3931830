@@ -14,7 +14,7 @@ function MovieList({sortRatingStatus}) {
 
     const finalData = sortRatingStatus ? [...parsedData].sort(compareRating) : parsedData;
 
-    console.log("MOVIELIST" + finalData[1].averageAudienceReviewScore);
+    // console.log("MOVIELIST" + finalData[1].averageAudienceReviewScore);
     return(
         <div className="movielist_container">
             <ul className="movielist_ul" style={{listStyle: `none`}}>      

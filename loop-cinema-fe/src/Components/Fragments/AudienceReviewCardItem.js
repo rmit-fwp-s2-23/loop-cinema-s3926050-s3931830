@@ -34,7 +34,7 @@ const AudienceReviewCardItem = (props) => {
                 <div className="audience-review-list-item-small">
                     <span className='audience-review-list-item-small-email'>{props.user.email}</span>
                     <img src={process.env.PUBLIC_URL + '/Images/black-circle.png'} className='audience-review-list-item-small-dot' />
-                    <span className='audience-review-list-item-small-email'>{props.review.createdAt}</span>
+                    <span className='audience-review-list-item-small-email'>{props.review.updatedAt}</span>
                 </div>
                 <div className="card_stars">
                 {   

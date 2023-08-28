@@ -86,6 +86,24 @@ const getAudienceReviewListByMovieId = (searchAudienceReviewMovieId) => {
 }
 
 /**
+ * get the list of movie id from audience review list
+ * @returns an array of movie id
+ */
+const getMovieIdFromAudienceReviewList = () => {
+    const audienceReviewList = getAudienceReviewList()
+    let movieIdList = []
+
+    if (audienceReviewList !== null) {
+        const audienceReviewListLength = audienceReviewList.length;
+        for (let index = 0; index < audienceReviewListLength; index++) {
+            const audienceReview = audienceReviewList[index];
+            movieIdList.push(audienceReview.movie_id)
+        }
+        return movieIdList
+    }
+}
+
+/**
  * get audience review by review id
  * @param {*} searchAudienceReviewId :review id
  * @returns a review object if found - null if not
@@ -135,7 +153,7 @@ const deleteAudienceReviewByUserId = (searchAudienceReviewUserId) => {
  * @param {*} newAudienceReview : review object
  */
 const addAudienceReviewToList = (newAudienceReview) => {
-    const currentAudienceReviewList = getAudienceReviewList();
+    let currentAudienceReviewList = getAudienceReviewList();
 
     // if no key was found -> set new user_list to empty array
     if (currentAudienceReviewList == null) currentAudienceReviewList = [];
@@ -160,7 +178,7 @@ const createNewAudienceReview = (addingAudienceReviewObject, userId, movieId) =>
         comment: addingAudienceReviewObject.comment,
         score: addingAudienceReviewObject.score,
         createdAt: moment().format('DD/MM/YYYY'),
-        updatedAt: ""
+        updatedAt: moment().format('DD/MM/YYYY')
     }
 
     addAudienceReviewToList(newAudienceReview)
@@ -188,6 +206,31 @@ const deleteReviewByReviewId = (reviewId) => {
     }
 }
 
+/**
+ * update current review object with new values
+ * @param {*} values : new values
+ * @description : values already contain review id
+ */
+const updateReviewByReviewId = (values) => {
+    let newReviewObject = {...values}
+    newReviewObject.updatedAt = moment().format('DD/MM/YYYY')
+
+    let reviewList = getAudienceReviewList()
+    if (reviewList !== null) {
+        const reviewListLength = reviewList.length;
+        for (let index = 0; index < reviewListLength; index++) {
+            const review = reviewList[index];
+            if (newReviewObject.audience_review_id === review.audience_review_id) {
+                reviewList.splice(index, 1, newReviewObject)
+                // reviewList.push(newReviewObject)
+                const newReviewList = [...reviewList]   
+                setAudienceReviewList(newReviewList)
+            }
+        }
+    }
+}
+
+
 export {
     initAudienceReviewList,
     setAudienceReviewList,
@@ -198,5 +241,7 @@ export {
     getAudienceReviewListByUserId,
     getAudienceReviewListByMovieId,
     createNewAudienceReview,
-    deleteReviewByReviewId
+    deleteReviewByReviewId,
+    updateReviewByReviewId,
+    getMovieIdFromAudienceReviewList
 }

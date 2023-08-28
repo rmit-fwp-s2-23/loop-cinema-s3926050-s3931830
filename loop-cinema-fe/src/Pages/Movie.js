@@ -155,11 +155,12 @@ function Movie(props) {
                                 }
                             </label>
                             <div className="my-account-profile-confirm-delete-buttons my-account-profile-header-delete">
-                                <button class="secondary outline" id="audience-review-dialog-form-cancel-post" 
+                                <button type="button" class="secondary outline" className="dialog-form-cancel" 
                                 onClick={closeReviewModal}>
                                     <span>Cancel</span>
                                 </button>
-                                <button type="submit" class="contrast" id="audience-review-dialog-form-confirm-post">
+                                <button type="submit" class="contrast" id="audience-review-dialog-form-confirm-post" 
+                                className="dialog-form-submit">
                                     <span>Post</span>
                                 </button>
                             </div>

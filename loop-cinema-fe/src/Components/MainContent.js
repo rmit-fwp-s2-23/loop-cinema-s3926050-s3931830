@@ -7,8 +7,9 @@ import { deleteUserByUserId, getCurrentUserId, removeCurrentUserId, updateUserBy
 import { useState, useEffect } from "react";
 import Movie from "../Pages/Movie"
 import MyAccountProfile from '../Pages/MyAccountProfile'
-import { createNewAudienceReview, deleteAudienceReviewByUserId, deleteReviewByReviewId } from "../data/reviewRepo";
+import { createNewAudienceReview, deleteAudienceReviewByUserId, deleteReviewByReviewId, updateReviewByReviewId } from "../data/reviewRepo";
 import MyAccountActivity from "../Pages/MyAccountActivity";
+import { updateAverageAudienceReviewScoreOfMovie, updateMovieAverageScoreBulk } from "../data/movieRepo";
 
 const MainContent = () => {
     const navigate = useNavigate()
@@ -21,6 +22,7 @@ const MainContent = () => {
     const [isTemporaryMessageUpdateUser, setIsTemporaryMessageUpdateUser] = useState(false)
     const [isTemporaryMessageNewReview, setIsTemporaryMessageNewReview] = useState(false)
     const [isTemporaryMessageDeleteReview, setIsTemporaryMessageDeleteReview] = useState(false)
+    const [isTemporaryMessageUpdateReview, setIsTemporaryMessageUpdateReview] = useState(false)
 
     useEffect(() => {
         const userId = getCurrentUserId()
@@ -51,6 +53,7 @@ const MainContent = () => {
 
     const deleteUser = () => {
         deleteAudienceReviewByUserId(getCurrentUserId())
+        updateMovieAverageScoreBulk()
         deleteUserByUserId(getCurrentUserId())     
         setIsLoggedIn(false)
 
@@ -62,16 +65,18 @@ const MainContent = () => {
 
     const updateUser = (values) => {
         updateUserByUserId(values)
-        window.location.reload()
         
         setIsTemporaryMessageUpdateUser(true)
         setTimeout(() => {
             setIsTemporaryMessageUpdateUser(false)
         }, 2000)
+
+        window.location.reload()
     }
 
     const addNewReview = (reviewValue, userId, movieId) => {
         createNewAudienceReview(reviewValue, userId, movieId)
+        updateAverageAudienceReviewScoreOfMovie(movieId)
         window.location.reload()
 
         setTimeout(() => {
@@ -83,12 +88,23 @@ const MainContent = () => {
         }, 2000)
     }
 
-    const deleteReview = (reviewId) => {
+    const deleteReview = (reviewId, movieId) => {
         deleteReviewByReviewId(reviewId)
+        updateAverageAudienceReviewScoreOfMovie(movieId)
 
         setIsTemporaryMessageDeleteReview(true)
         setTimeout(() => {
             setIsTemporaryMessageDeleteReview(false)
+        }, 2000)
+    }
+
+    const updateReview = (values) => {
+        updateReviewByReviewId(values)
+        updateAverageAudienceReviewScoreOfMovie(values.movie_id)
+
+        setIsTemporaryMessageUpdateReview(true)
+        setTimeout(() => {
+            setIsTemporaryMessageUpdateReview(false)
         }, 2000)
     }
 
@@ -115,7 +131,8 @@ const MainContent = () => {
                 isTemporaryMessageDeleteUser={isTemporaryMessageDeleteUser} 
                 isTemporaryMessageUpdateUser={isTemporaryMessageUpdateUser} 
                 isTemporaryMessageNewReview={isTemporaryMessageNewReview} 
-                isTemporaryMessageDeleteReview={isTemporaryMessageDeleteReview}/>
+                isTemporaryMessageDeleteReview={isTemporaryMessageDeleteReview}
+                isTemporaryMessageUpdateReview={isTemporaryMessageUpdateReview} />
                 <Routes>
                     <Route path="/" element={<Home isLoggedIn={isLoggedIn}/>} />
                     <Route path="/home" element={<Home isLoggedIn={isLoggedIn}/>} />
@@ -126,7 +143,7 @@ const MainContent = () => {
                     <Route path="/account/profile" element={<MyAccountProfile isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} 
                     deleteUser={deleteUser} updateUser={updateUser}/>} />
                     <Route path="/account/activity" element={<MyAccountActivity isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} 
-                    deleteReview={deleteReview} />} />
+                    deleteReview={deleteReview} updateReview={updateReview} />} />
 
                     {/* catch all wrong route */}
                     <Route

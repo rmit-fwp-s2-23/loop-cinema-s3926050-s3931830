@@ -134,6 +134,13 @@ const HeaderNav = (props) => {
                         </div>
                     )
                 }
+                {
+                    props.isTemporaryMessageUpdateReview && (
+                        <div className="header-alert-message">
+                            <span>Update comment successfully!</span>
+                        </div>
+                    )
+                }
             </header>
             <LoginForm toggleModal={toggleModal} setIsLoggedIn={props.setIsLoggedIn} isLoggedIn={props.isLoggedIn} />
             <RegisterForm  toggleModal={toggleModal} setIsLoggedIn={props.setIsLoggedIn} />

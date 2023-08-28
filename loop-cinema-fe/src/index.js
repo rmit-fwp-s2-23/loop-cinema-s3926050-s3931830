@@ -7,12 +7,15 @@ import ScrollToTop from "./Components/Ultilities/ScrollToTop";
 import { initMovieList } from './data/movieRepo.js';
 import { initAudienceReviewList } from './data/reviewRepo.js';
 import { initLocationList } from './data/locationRepo.js';
+import { initFakeReviewCount, initFakeReviewTime } from './data/fakeReviewRepo.js';
 
 // init localStorage for first time user
 initUserList();
 initMovieList();
 initAudienceReviewList();
 initLocationList();
+initFakeReviewCount();
+initFakeReviewTime()
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

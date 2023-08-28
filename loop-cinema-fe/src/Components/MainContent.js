@@ -52,6 +52,7 @@ const MainContent = () => {
         }
     }
 
+    // delete user + update movie rating
     const deleteUser = () => {
         deleteAudienceReviewByUserId(getCurrentUserId())
         updateMovieAverageScoreBulk()
@@ -75,6 +76,7 @@ const MainContent = () => {
         window.location.reload()
     }
 
+    // add new review + update movie rating
     const addNewReview = (reviewValue, userId, movieId) => {
         createNewAudienceReview(reviewValue, userId, movieId)
         updateAverageAudienceReviewScoreOfMovie(movieId)
@@ -89,6 +91,7 @@ const MainContent = () => {
         }, 2000)
     }
 
+    // delete review + update movie rating
     const deleteReview = (reviewId, movieId) => {
         deleteReviewByReviewId(reviewId)
         updateAverageAudienceReviewScoreOfMovie(movieId)
@@ -99,6 +102,7 @@ const MainContent = () => {
         }, 2000)
     }
 
+    // update review + update movie rating
     const updateReview = (values) => {
         updateReviewByReviewId(values)
         updateAverageAudienceReviewScoreOfMovie(values.movie_id)

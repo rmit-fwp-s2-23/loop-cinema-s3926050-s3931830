@@ -1,6 +1,14 @@
 import { getUserList, setCurrentUserId } from "../data/userRepo";
 
-// need to update to validate unique
+/**
+ * validate login values
+ * @param {*} values : login values
+ * @returns errors from login values
+ * @description : included localStorage validation and modification -> not good
+ * 
+ * may need to update to use verify function from userRepo
+ * do not have unique email check
+ */
 export default function LoginValidate(values) {
     let loginErrors = {};
     const userList = getUserList();
@@ -8,7 +16,7 @@ export default function LoginValidate(values) {
         password
     */
 
-    // required -> if fields empty then disable button and not allow submit
+    // required
     if (!values.username) {
         loginErrors.username = 'Username is required.';
     } 
@@ -17,8 +25,8 @@ export default function LoginValidate(values) {
         loginErrors.password = 'Password is required.';
     } 
     
+    // if login errors are not empty -> check localStorage
     if (JSON.stringify(loginErrors) === JSON.stringify({})) {
-        // console.log(loginErrors);
         if (userList !== null) {
             const userListLength = userList.length;
             let isValid = false;

@@ -69,6 +69,7 @@ const MyAccountProfile = (props) => {
         setTimeout(() => {
             elementButton.removeAttribute("aria-busy")
             elementBig.removeAttribute("open")
+            document.body.style.overflow = "auto"
         }, 1000)
         
         props.deleteUser()

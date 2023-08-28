@@ -1,23 +1,30 @@
 import '../../css/MyAccountActivityCard.css'
-import { deleteReviewByReviewId } from '../../data/reviewRepo';
 
+/**
+ * review card item in my account activity page
+ */
 const MyAccountActivityCard = (props) => {
     const CONFIRM_DELETE_DIALOG_ID = `my-account-activity-confirm-delete-comment-` + props.review.audience_review_id;
 
-    // confirm message
+    // open confirm delete comment message
     const confirmDeleteComment = () => {
         document.body.style.overflow = "hidden"
         const element = document.getElementById(CONFIRM_DELETE_DIALOG_ID);
         element.setAttribute("open", true)
     }
 
-    // cancel the request for delete user
+    // cancel the request for delete comment
     const cancelDeleteComment = () => {
         document.body.style.overflow = "auto"
         const element = document.getElementById(CONFIRM_DELETE_DIALOG_ID);
         element.removeAttribute("open")
     }
 
+    /**
+     * delete set button to busy for 1000ms
+     * then close modal + allow scroll
+     * then delete comment with the id
+     */
     const deleteComment = () => {
         const elementBig = document.getElementById(CONFIRM_DELETE_DIALOG_ID);
         const elementButton = document.getElementById(CONFIRM_DELETE_DIALOG_ID);

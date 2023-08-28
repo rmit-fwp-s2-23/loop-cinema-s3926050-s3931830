@@ -5,7 +5,10 @@ const CLOSING = "modal-is-closing";
 const ANIMATION_DURATION = 400; // ms
 let visibleModal = null;
 
-// Toggle modal
+/**
+ * get element which has the same id (modal id) as data-target attribute of the event element (a or button tag)
+ * @param {*} event 
+ */
 const toggleModal = (event) => {
   event.preventDefault();
   const modal = document.getElementById(event.currentTarget.getAttribute("data-target"));
@@ -15,12 +18,24 @@ const toggleModal = (event) => {
     : openModal(modal);
 };
 
-// Is modal open
+/**
+ * check if modal is already open
+ * @param {*} modal : element
+ * @returns true if is opened
+ */
 const isModalOpen = (modal) => {
   return modal.hasAttribute("open") && modal.getAttribute("open") != "false" ? true : false;
 };
 
-// Open modal
+/**
+ * open modal
+ * @param {*} modal : element
+ * @description 
+ * if having scroll bar -> disabled
+ * add class to modal (open and is opening)
+ * set animation time for opening 
+ * set attribute to element to open
+ */
 const openModal = (modal) => {
   if (isScrollbarVisible()) {
     document.documentElement.style.setProperty("--scrollbar-width", `${getScrollbarWidth()}px`);
@@ -33,7 +48,16 @@ const openModal = (modal) => {
   modal.setAttribute("open", true);
 };
 
-// Close modal
+/**
+ * close modal
+ * @param {*} modal : element
+ * @description
+ * add class closing
+ * set animation duration
+ * remove open and closing class 
+ * remove lock scroll bar
+ * remove open attribute
+ */
 const closeModal = (modal) => {
   visibleModal = null;
   document.documentElement.classList.add(CLOSING);
@@ -50,13 +74,6 @@ document.addEventListener("click", (event) => {
     const modalContent = visibleModal.querySelector("article");
     const isClickInside = modalContent.contains(event.target);
     !isClickInside && closeModal(visibleModal);
-  }
-});
-
-// Close with Esc key
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && visibleModal != null) {
-    closeModal(visibleModal);
   }
 });
 

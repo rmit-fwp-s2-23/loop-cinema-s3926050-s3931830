@@ -2,6 +2,10 @@ import {movies} from "./database-brief.js";
 
 const MOVIE_DATA = "movie_data"
 
+/**
+ * init movie list to localStorage first time
+ * @returns none
+ */
 const initMovieList = () => {
     // check if object is already initialized
     if (localStorage.getItem(MOVIE_DATA) !== null) {
@@ -11,12 +15,20 @@ const initMovieList = () => {
     }
 }
 
+/**
+ * get movie list from localStorage
+ * @returns a list of movies (array)
+ */
 const getMovieList = () => {
     const response = localStorage.getItem(MOVIE_DATA);
     return JSON.parse(response);  
 }
 
-// return movie title
+/**
+ * get movie title by movie id
+ * @param {*} searchMovieId: movie id 
+ * @returns movie title (string)
+ */
 const getMovieTitleByMovieId = (searchMovieId) => {
     const movieList = getMovieList()
 

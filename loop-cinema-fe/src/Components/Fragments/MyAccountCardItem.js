@@ -1,5 +1,8 @@
 import '../../css/MyAccountCardItem.css'
 
+/**
+ * my account dashboard card item link
+ */
 const MyAccountCardItem = (props) => {
     return (
         <>

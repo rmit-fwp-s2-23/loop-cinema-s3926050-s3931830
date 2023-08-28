@@ -1,6 +1,11 @@
-import { addUserToList, createNewUser, setCurrentUserId } from "../data/userRepo";
-
-// need to update to validate unique
+/**
+ * validate register value
+ * @param {*} values : register value
+ * @returns register value error
+ * @description : better practice compared to loginValidate as it do not messed with localStorage
+ * 
+ * do not have unique email check yet
+ */
 export default function RegisterValidate (values) {
     let registerErrors = {};
     /*  firstName
@@ -34,6 +39,7 @@ export default function RegisterValidate (values) {
 
     if (!values.postCode) {
       registerErrors.postCode = 'Post code is required.';
+      // digits with 1 - 10 characters
     } else if (!/^[\d]{1,10}$/.test(values.postCode)) {
       registerErrors.postCode = 'Invalid post code format.'
     } 

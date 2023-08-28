@@ -1,6 +1,8 @@
-import { addUserToList, createNewUser, setCurrentUserId } from "../data/userRepo";
-
-// need to update to validate unique
+/**
+ * validate review values
+ * @param {*} values : review values
+ * @returns review value errors
+ */
 export default function ReviewValidate (values) {
     let reviewErrors = {};
     /*  
@@ -15,7 +17,7 @@ export default function ReviewValidate (values) {
     if (!values.comment) {
         reviewErrors.comment = 'Comment is required.';
     } else if (!/^.{1,250}$/.test(values.comment)) {
-        reviewErrors.phone = 'Comment can only have upto 250 characters.'
+        reviewErrors.phone = 'Comment can only have up to 250 characters.'
     } 
     
     return reviewErrors;

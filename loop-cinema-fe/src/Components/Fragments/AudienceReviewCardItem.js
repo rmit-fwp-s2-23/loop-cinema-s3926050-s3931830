@@ -1,5 +1,8 @@
 import '../../css/AudienceReviewCardItem.css'
 
+/**
+ * review card item in movie page
+ */
 const AudienceReviewCardItem = (props) => {
     function printStars(numStars) {
         const wholeNumberPart = Math.floor(numStars);

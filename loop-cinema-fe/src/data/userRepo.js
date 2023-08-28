@@ -4,7 +4,10 @@ import moment from 'moment'
 const USER_LIST_KEY = "user_list"; // array of user objects
 const CURRENT_USER_ID_KEY = "current_user_id"; // user id key
 
-// set localStorage user_list from database
+/**
+ * init user list to localStorage first time
+ * @returns none
+ */
 const initUserList = () => {
     // check if object is already initialized
     if (localStorage.getItem(USER_LIST_KEY) !== null) {
@@ -20,19 +23,28 @@ const initUserList = () => {
 
 */
 
-// get user_list from localStorage and return an array of users
+/**
+ * get user list from localStorage
+ * @returns an array of users
+ */
 const getUserList = () => {
     const response = localStorage.getItem(USER_LIST_KEY);
     return JSON.parse(response);   
 }
 
-// set localStorage user_list to a new list
+/**
+ * remove current localStorage user list and replace with new user list
+ * @param {*} newUserList : new user list
+ */
 const setUserList = (newUserList) => {
     removeUserList();
     localStorage.setItem(USER_LIST_KEY, JSON.stringify(newUserList))
 }
 
-// add new user to user_list on localStorage
+/**
+ * add new user to user list and update on localStorage
+ * @param {*} newUser : new user object
+ */
 const addUserToList = (newUser) => {
     const currentUserList = getUserList();
 
@@ -45,12 +57,18 @@ const addUserToList = (newUser) => {
     setUserList(newUserList)
 }
 
-// remove user_list from localStorage
+/**
+ * remove user list from localStorage
+ */
 const removeUserList = () => {
     localStorage.removeItem(USER_LIST_KEY);
 }
 
-// return an user object by user id
+/**
+ * get user by user id
+ * @param {*} searchUserId : user id
+ * @returns user object if found - null if not
+ */
 const getUserByUserId = (searchUserId) => {
     const userList = getUserList()
     if (userList !== null) {
@@ -66,7 +84,13 @@ const getUserByUserId = (searchUserId) => {
     return null
 }
 
-// return an user object with firstName, lastName, email
+/**
+ * get user object with firstName, lastName, email by user id
+ * @param {*} searchUserId : user id
+ * @returns user object if found - null if not
+ * @description : use this function for displaying user info in movie pages 
+ * useful for security as it does not load full user info
+ */
 const getUserInfoByUserId = (searchUserId) => {
     const userList = getUserList()
     let userInfoList = {}
@@ -85,7 +109,11 @@ const getUserInfoByUserId = (searchUserId) => {
     return null
 }
 
-// delete a user by user id and update localStorage
+/**
+ * delete a user by user id
+ * @param {*} userId : user id
+ * @description : can use splice as there are only 1 user object with a user id
+ */
 const deleteUserByUserId = (userId) => {
     let userList = getUserList()
     if (userList !== null) {
@@ -103,7 +131,10 @@ const deleteUserByUserId = (userId) => {
     }
 }
 
-// update a user and update localStorage
+/**
+ * update current user object with new values
+ * @param {*} values : new values
+ */
 const updateUserByUserId = (values) => {
     const newUserObject = {...values}
 
@@ -129,23 +160,42 @@ const updateUserByUserId = (values) => {
 
 */
 
-// set current_user_id localStorage to a userId
+/**
+ * set current user id localStorage
+ * @param {*} userId : user id
+ */
 const setCurrentUserId = (userId) => {
     localStorage.setItem(CURRENT_USER_ID_KEY, JSON.stringify(userId))
 }
 
-// get current_user_id localStorage 
+/**
+ * get current user id localStorage
+ * @returns current user id 
+ * @description : this returns a JSON web (stringified) string 
+ * Using this string -> have to convert by JSON.parse
+ * 
+ * may need to update return to JSON.parse() and update all usage
+ */
 const getCurrentUserId = () => {
     const currentUserId = localStorage.getItem(CURRENT_USER_ID_KEY);
     return currentUserId
 }
 
-// remove current_user_id from localStorage
+/**
+ * remove current user id from localStorage
+ */
 const removeCurrentUserId = () => {
     localStorage.removeItem(CURRENT_USER_ID_KEY)
 }
 
-// verify login user - if correct then login 
+/**
+ * verify log in user - if correct then log in
+ * @param {*} loginUserObject : user object
+ * @returns true if logged in - false if not
+ * @description : do not use this function yet
+ * 
+ * may need to update to use this function - rather than validate in validations
+ */
 const verifyUserLogin = (loginUserObject) => {
     const userList = getUserList();
 
@@ -163,7 +213,10 @@ const verifyUserLogin = (loginUserObject) => {
 
 }
 
-// create new user and add user to list + update to localStorage
+/**
+ * create new user object, update localStorage and set current user id
+ * @param {*} registerUserObject : incomplete user object
+ */
 const createNewUser = (registerUserObject) => {
     const newUser = {
         user_id: "U" + moment().format('YYMMDDHHmmss'),

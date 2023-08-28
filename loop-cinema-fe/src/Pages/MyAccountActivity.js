@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import '../css/pages/MyAccountActivity.css'
 import { getCurrentUserId, getUserByUserId } from '../data/userRepo';
 import { useEffect, useState } from 'react';
-import { deleteReviewByReviewId, getAudienceReviewListByUserId } from '../data/reviewRepo';
+import { getAudienceReviewListByUserId } from '../data/reviewRepo';
 import { getMovieTitleByMovieId } from '../data/movieRepo';
 import MyAccountActivityCard from '../Components/Fragments/MyAccountActivityCard';
 
@@ -10,17 +10,12 @@ const MyAccountActivity = (props) => {
     const navigate = useNavigate()
     const userId = JSON.parse(getCurrentUserId())
 
+    // check if user is logged in by check localStorage current user id
     useEffect(() => {
         if (userId === null) navigate("/home")
     }, [userId])
 
-    const [currentUser, setCurrentUser] = useState({})
     const [currentMovieAudienceReviewList, setCurrentMovieAudienceReviewList] = useState(getAudienceReviewListByUserId(userId))
-    const [deletingReview, setDeletingReview] = useState(false)
-
-    useEffect(() => {
-        setCurrentUser(getUserByUserId(userId))
-    }, [])
 
     // initialize from local storage to state
     useEffect(() => {

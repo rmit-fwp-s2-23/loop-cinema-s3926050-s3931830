@@ -11,14 +11,14 @@ import MovieList from "../Components/MovieList"
 function Home(props){
     const [sortRatingStatus, ToggleSortRatingStatus] = useState(false);
 
-
     const sort_rating_style = {
         backgroundColor: sortRatingStatus ? "#CD242C" : "#757575"
     }
 
-    const toggleSortRating = ()=>{
+    const toggleSortRating = () => {
         ToggleSortRatingStatus((prev) => !prev);
     }
+
     return(
         <>
             <div className="home_page">

@@ -1,8 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
-import { deleteUserByUserId, getCurrentUserId, getUserByUserId, updateUserByUserId } from "../data/userRepo";
+import { getCurrentUserId, getUserByUserId, updateUserByUserId } from "../data/userRepo";
 import { useEffect, useState } from "react";
 import useForm from "../CustomHooks/useForm";
-import useLockScroll from "../CustomHooks/useLockScroll";
 import RegisterValidate from "../Validations/RegisterValidate";
 import '../css/pages/MyAccountProfile.css'
 
@@ -10,16 +9,17 @@ const MyAccountProfile = (props) => {
     const navigate = useNavigate()
     const userId = JSON.parse(getCurrentUserId())
 
+    // check if user is logged in by check localStorage current user id
+    useEffect(() => {
+        if (userId === null) navigate("/home")
+    }, [userId])
+
     // set updating state for user when updating
     const [updating, setUpdating] = useState(false)
     
     // toggle eye icon
     const [passwordType, setPasswordType] = useState("password");
     const [confirmPasswordType, setConfirmPasswordType] = useState("password")
-
-    useEffect(() => {
-        if (userId === null) navigate("/home")
-    }, [userId])
 
     const updateSuccess = () => {
         setUpdating(true)
@@ -47,14 +47,14 @@ const MyAccountProfile = (props) => {
         }
     }, [updating])
 
-    // confirm message
+    // open confirm delete user message
     const confirmDeleteUser = () => {
         document.body.style.overflow = "hidden"
         const element = document.getElementById("my-account-profile-confirm-delete");
         element.setAttribute("open", true)
     }
 
-    // cancel the request for delete user
+    // close confirm delete user message
     const cancelDeleteUser = () => {
         document.body.style.overflow = "auto"
         const element = document.getElementById("my-account-profile-confirm-delete");
@@ -75,7 +75,8 @@ const MyAccountProfile = (props) => {
         props.deleteUser()
     }
 
-    // toggle eye icon
+    // toggle eye icon for password fields
+    // may consider update login and register form with eye icon 
     const togglePassword = () => {
         if (passwordType === "password") {
             setPasswordType("text")

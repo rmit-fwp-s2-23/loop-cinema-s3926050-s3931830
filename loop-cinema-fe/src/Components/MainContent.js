@@ -3,10 +3,8 @@ import HeaderNav from "./HeaderNav";
 import Home from "../Pages/Home";
 import "../css/components/MainContent.css"
 import MyAccount from "../Pages/MyAccount"
-import Test from "./Test";
 import { deleteUserByUserId, getCurrentUserId, removeCurrentUserId, updateUserByUserId } from "../data/userRepo";
 import { useState, useEffect } from "react";
-import MyAccountCardItem from "./Fragments/MyAccountCardItem";
 import Movie from "../Pages/Movie"
 import MyAccountProfile from '../Pages/MyAccountProfile'
 import { createNewAudienceReview, deleteAudienceReviewByUserId, deleteReviewByReviewId } from "../data/reviewRepo";
@@ -36,14 +34,6 @@ const MainContent = () => {
             }, 2000)
         }
     }, [isLoggedIn])
-
-    // useEffect(() => {
-    //     if (isTemporaryMessage !== false) {
-    //         setTimeout(() => {
-    //             setIsTemporaryMessage(false)
-    //         }, 2000)
-    //     }
-    // }, [isTemporaryMessage])
     
     const signOut = () => {
         if (isLoggedIn) {
@@ -138,8 +128,11 @@ const MainContent = () => {
                     <Route path="/account/activity" element={<MyAccountActivity isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} 
                     deleteReview={deleteReview} />} />
 
-                    {/* test component routes */}
-                    <Route path="/test" element={<MyAccountCardItem />} />
+                    {/* catch all wrong route */}
+                    <Route
+                        path="*"
+                        element={<Navigate to="/" replace />}
+                    />
                 </Routes>
             </div>     
         </>

@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 
+/**
+ * validate forms
+ */
 const useForm = (callback, validate) => {
-
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);

@@ -1,14 +1,12 @@
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../css/components/HeaderNav.css"
 import logo from "../Images/logo.png"
 import LoginForm from "./LoginForm";
 import { toggleModal } from "./Ultilities/OpenModal";
-import { getCurrentUserId } from "../data/userRepo";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import RegisterForm from "./RegisterForm";
 
 const HeaderNav = (props) => {
-    const navigate = useNavigate()
     const [isOpenMenu, setIsOpenMenu] = useState(false)
 
     const navigateMyAccount = () => {
@@ -26,6 +24,7 @@ const HeaderNav = (props) => {
         props.navigateMyAccountActivity()
     }
 
+    // open or close my account menu
     const toggleAccountMenu = () => {
         setIsOpenMenu(prev => !prev)
     }

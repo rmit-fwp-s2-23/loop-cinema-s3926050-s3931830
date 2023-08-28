@@ -8,6 +8,7 @@ const MyAccount = (props) => {
     const navigate = useNavigate()
     const userId = JSON.parse(getCurrentUserId())
 
+    // check if user is logged in by check localStorage current user id
     useEffect(() => {
         if (userId === null) navigate("/home")
     }, [userId])

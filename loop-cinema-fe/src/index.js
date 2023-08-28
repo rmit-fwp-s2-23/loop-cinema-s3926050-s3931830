@@ -7,7 +7,7 @@ import ScrollToTop from "./Components/Ultilities/ScrollToTop";
 import { initMovieList } from './data/movieRepo.js';
 import { initAudienceReviewList } from './data/reviewRepo.js';
 
-// init first time user into the system
+// init localStorage for first time user
 initUserList();
 initMovieList();
 initAudienceReviewList();

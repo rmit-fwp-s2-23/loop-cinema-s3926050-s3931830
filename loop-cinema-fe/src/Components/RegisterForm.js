@@ -28,6 +28,8 @@ const RegisterForm = (props) => {
             if (getCurrentUserId() !== null) {
                 navigate("/account");
                 props.setIsLoggedIn(true)
+
+                // need reload to close modal - need to investigate further
                 window.location.reload();          
             } else {
                 props.setIsLoggedIn(false)

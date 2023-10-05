@@ -1,0 +1,11 @@
+{
+  "name": "loop-cinema-be",
+  "version": "1.0.0",
+  "description": "backend for loop-cinema",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "bao",
+  "license": "ISC"
+}

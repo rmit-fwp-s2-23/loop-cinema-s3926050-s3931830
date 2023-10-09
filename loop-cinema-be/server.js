@@ -2,6 +2,9 @@ require("dotenv").config();
 
 const express = require("express");
 const bodyParse = require("body-parser")
+const db = require("./database/db")
+
+db.sync()
 
 const app = express();
 app.use(bodyParse.json());
@@ -11,6 +14,9 @@ app.get("/", (req, res) => {
         message: "Loop cinema server is running!"
     });
 })
+
+// Add user routes
+require("./routes/user.routes.js")(express, app)
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${process.env.PORT}`);

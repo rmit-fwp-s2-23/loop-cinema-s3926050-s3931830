@@ -1,0 +1,10 @@
+{
+    "email": "usertest@gmail.com",
+    "password": "UserTest12!@",
+    "firstName": "User",
+    "lastName": "Test",
+    "phone": "0456775093",
+    "dob": "2003-12-",
+    "postCode": 3000,
+    "subscribe": true
+}

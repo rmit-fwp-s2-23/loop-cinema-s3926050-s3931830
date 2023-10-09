@@ -8,8 +8,11 @@ module.exports = (express, app) => {
     // get user by id
     router.get("/user/:userID", controller.getUserById);
 
-    // login
-    router.get("/login", controller.login);
+    // login user
+    router.get("/login", controller.loginUser);
+
+    // create user
+    router.post("/createUser", controller.createUser);
 
     // Add routes to server.
     app.use("/api/users", router);

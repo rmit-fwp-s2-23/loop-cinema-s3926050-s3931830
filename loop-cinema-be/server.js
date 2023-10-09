@@ -4,10 +4,10 @@ const express = require("express");
 const bodyParse = require("body-parser")
 const db = require("./database/db")
 
-db.sync()
-
 const app = express();
 app.use(bodyParse.json());
+
+db.sync()
 
 app.get("/", (req, res) => {
     res.status(200).json({

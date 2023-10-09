@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) =>
         }
     },
     userDOB: {
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: false,
         isDate: true
     },

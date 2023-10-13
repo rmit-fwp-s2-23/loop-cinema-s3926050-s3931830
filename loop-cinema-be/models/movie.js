@@ -35,6 +35,10 @@ module.exports = (db, DataTypes) =>
         movieAverageScore: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            defaultValue: 0
+            defaultValue: 0,
+            validate: {
+                min: 0,
+                max: 5
+            }
         },
     });

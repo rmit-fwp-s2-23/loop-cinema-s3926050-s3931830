@@ -4,6 +4,10 @@ module.exports = (db, DataTypes) =>
             type: DataTypes.STRING(32),
             primaryKey: true
         },
+        sessionTime: {
+            type: DataTypes.DATE,
+            allowNull: false
+        },
         sessionNumberOfSeat: {
             type: DataTypes.INTEGER,
             allowNull: false,

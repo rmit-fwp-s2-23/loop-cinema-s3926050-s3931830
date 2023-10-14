@@ -8,6 +8,9 @@ module.exports = (express, app) => {
     // get movie by id
     router.get("/movie/:movieID", controller.getMovieById);
 
+    // update average score of movie by id
+    router.patch("/movie/movieScore/:movieID", controller.updateAverageScoreById);
+
     // Add routes to server.
     app.use("/api/movies", router);
 }

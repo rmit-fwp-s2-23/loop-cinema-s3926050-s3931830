@@ -25,18 +25,25 @@ db.trailer = require("../models/trailer.js")(db, DataTypes);
 db.user = require("../models/user.js")(db, DataTypes);
 
 db.director.hasMany(db.movie, { foreignKey: { name: "directorID", allowNull: false } });
+db.movie.belongsTo(db.director, { foreignKey: { name: "directorID", allowNull: false } });
 db.rating_type.hasMany(db.movie, { foreignKey: { name: "ratingTypeID", allowNull: false } });
+db.movie.belongsTo(db.rating_type, { foreignKey: { name: "ratingTypeID", allowNull: false } });
 
 db.movie.hasMany(db.trailer, { foreignKey: { name: "movieID", allowNull: false } });
+db.trailer.belongsTo(db.movie, { foreignKey: { name: "movieID", allowNull: false } })
 
 db.movie.hasMany(db.session, { foreignKey: { name: "movieID", allowNull: false } });
+db.session.belongsTo(db.movie, { foreignKey: { name: "movieID", allowNull: false } })
 db.location.hasMany(db.session, { foreignKey: { name: "locationID", allowNull: false } });
+db.session.belongsTo(db.location, { foreignKey: { name: "locationID", allowNull: false } })
 
 db.movie.hasMany(db.audience_review, { foreignKey: { name: "movieID", allowNull: false } });
 db.user.hasMany(db.audience_review, { foreignKey: { name: "userID", allowNull: false } });
 
 db.user.hasMany(db.reservation, { foreignKey: { name: "userID", allowNull: false } });
+db.reservation.belongsTo(db.user, { foreignKey: { name: "userID", allowNull: false } });
 db.session.hasMany(db.reservation, { foreignKey: { name: "sessionID", allowNull: false } });
+db.reservation.belongsTo(db.session, { foreignKey: { name: "sessionID", allowNull: false } });
 
 db.movie_cast = require("../models/movie_cast.js")(db, DataTypes);
 db.movie.belongsToMany(db.cast, { through: db.movie_cast, as: "castIDs", foreignKey: "movieID" });
@@ -60,8 +67,11 @@ db.sync = async () => {
   await seedDataGenre();
   await seedDataRatingType();
   await seedDataLocation();
+
   await seedDataMovie();
+  await seedDataTrailer();
   await seedDataSession();
+  await seedDataAudienceReview();
 };
 
 async function seedDataUser() {
@@ -473,6 +483,27 @@ async function seedDataMovie() {
   ])
 }
 
+async function seedDataTrailer() {
+  const count = await db.trailer.count();
+
+  // Only seed data if necessary.
+  if (count > 0)
+      return;
+
+  await db.trailer.bulkCreate([
+    { trailerID: 'S001', trailerURL: "https://www.youtube.com/watch?v=lgm4IeSUJOw", movieID: "M123"},
+    { trailerID: 'S002', trailerURL: "https://www.youtube.com/watch?v=cJW0wjSx0GY", movieID: "M123"},
+    { trailerID: 'S003', trailerURL: "https://www.youtube.com/watch?v=YoHD9XEInc0", movieID: "M124"},
+    { trailerID: 'S004', trailerURL: "https://www.youtube.com/watch?v=Jvurpf91omw", movieID: "M124"},
+    { trailerID: 'S005', trailerURL: "https://www.youtube.com/watch?v=6hB3S9bIaco", movieID: "M125"},
+    { trailerID: 'S006', trailerURL: "https://www.youtube.com/watch?v=V75dMMIW2B4", movieID: "M126"},
+    { trailerID: 'S007', trailerURL: "https://www.youtube.com/watch?v=xjDjIWPwcPU", movieID: "M127"},
+    { trailerID: 'S008', trailerURL: "https://www.youtube.com/watch?v=lc0UehYemQA", movieID: "M128"},
+    { trailerID: 'S009', trailerURL: "https://www.youtube.com/watch?v=5PSNL1qE6VY", movieID: "M129"},
+    { trailerID: 'S010', trailerURL: "https://www.youtube.com/watch?v=KYz2wyBy3kc", movieID: "M130"},
+  ])
+}
+
 async function seedDataSession() {
   const count = await db.session.count();
 
@@ -493,5 +524,38 @@ async function seedDataSession() {
     { sessionID: 'S010', sessionTime: "2023-11-01 18:00:00", movieID: "M126", locationID: "L003"},
   ])
 }
+
+async function seedDataAudienceReview() {
+  const count = await db.audience_review.count();
+
+  // Only seed data if necessary.
+  if (count > 0)
+      return;
+
+  await db.audience_review.bulkCreate([
+    { 
+      audienceReviewID: 'AR001', 
+      audienceReviewComment: "The momentum the film generates due to the chronological cross-cutting becomes relentless, and that runaway feeling is beautifully harmonious with the film's broader interest in Oppenheimer's legacy.", 
+      audienceReviewScore: 5, 
+      movieID: "M123", 
+      userID: "U004"
+    },
+    { 
+      audienceReviewID: 'AR002', 
+      audienceReviewComment: "I haven't watched it yet!", 
+      audienceReviewScore: 1, 
+      movieID: "M123", 
+      userID: "U005"
+    },
+    { 
+      audienceReviewID: 'AR003', 
+      audienceReviewComment: "Rarely have I left a movie feeling smarter than when I went in, but “Oppenheimer” is just such a film and it elevated my thinking, especially in regards to the science of politics and the politics of science.", 
+      audienceReviewScore: 3, 
+      movieID: "M123", 
+      userID: "U006"
+    },
+  ])
+}
+
 
 module.exports = db;

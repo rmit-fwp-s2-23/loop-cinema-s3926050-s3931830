@@ -55,7 +55,7 @@ exports.getMovieById = async (req, res) => {
 
 // have to call this api whenever reviews or movies is being modified
 // ---> need to search more how to solve this (db logic ? seperate function ?)
-exports.updateAverageScoreById = async (req, res) => {
+exports.updateMovieAverageScoreById = async (req, res) => {
     const movieID = req.params.movieID;
 
     let movie = await db.movie.findByPk(movieID);

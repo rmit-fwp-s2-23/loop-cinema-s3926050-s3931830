@@ -39,9 +39,10 @@ exports.loginUser = async (req, res) => {
 
     if (user === null) {
         // cannot status other than 200 - that is a status for server - if not 200 -> cannot display on front end
-        res.status(200).json(null)
+        // can use catch to handle error with error.response when status code is not 2**
+        res.status(404).json(null)
     } else if (await argon2.verify(user.userPasswordHashed, password) === false) {
-        res.status(200).json(null)
+        res.status(403).json(null)
     } else {
         res.status(200).json(user.userID)
     }
@@ -55,7 +56,7 @@ exports.loginUser = async (req, res) => {
  */
 exports.createUser = async (req, res) => {
     const email = req.body.email;
-    console.log(email);
+
     const user = await db.user.findOne({where: {userEmail: email}})
 
     if (user === null) {

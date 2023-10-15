@@ -61,7 +61,7 @@ exports.updateMovieAverageScoreById = async (req, res) => {
     let movie = await db.movie.findByPk(movieID);
 
     if (movie === null) {
-        res.status(200).json(null)
+        res.status(404).json(null)
     } else {
         // const audience_review_count = await db.audience_review.count({col: 'audienceReviewScore', where: {movieID: movieID}})
         const audience_review = await db.audience_review.findAll({

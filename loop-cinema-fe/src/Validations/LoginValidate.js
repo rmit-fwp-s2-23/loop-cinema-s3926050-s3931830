@@ -34,15 +34,17 @@ export default async function LoginValidate(values) {
     
     // if login errors are not empty -> check localStorage
     if (JSON.stringify(loginErrors) === JSON.stringify({})) {
-        const response = await axios.get(API_HOST + "/login", {params: {username, password}})
-        const userID = response.data
-
-        if (userID === null) {
-            loginErrors.username = 'Invalid username or password!'
-            loginErrors.password = 'Invalid username or password!'
-        } else {
-            setCurrentUserId(response.data)
-        }
+        await axios.get(API_HOST + "/login", {params: {username, password}})
+        .then(response => {
+            const userID = response.data
+            setCurrentUserId(userID)
+        })
+        .catch(error => {
+            if (error.response) {
+                loginErrors.username = 'Invalid username or password!'
+                loginErrors.password = 'Invalid username or password!'
+            }
+        })
 
         // if (userList !== null) {
         //     const userListLength = userList.length;

@@ -38,11 +38,12 @@ exports.loginUser = async (req, res) => {
     const user = await db.user.findOne({where: {userEmail: username}})
 
     if (user === null) {
-        res.status(404).json(null)
+        // cannot status other than 200 - that is a status for server - if not 200 -> cannot display on front end
+        res.status(200).json(null)
     } else if (await argon2.verify(user.userPasswordHashed, password) === false) {
-        res.status(401).json(null)
+        res.status(200).json(null)
     } else {
-        res.status(200).json(user)
+        res.status(200).json(user.userID)
     }
 }
 

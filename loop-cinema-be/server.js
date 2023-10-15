@@ -1,11 +1,13 @@
 require("dotenv").config();
 
 const express = require("express");
+const cors = require("cors");
 const bodyParse = require("body-parser")
 const db = require("./database/db")
 
 const app = express();
 app.use(bodyParse.json());
+app.use(cors())
 
 db.sync()
 

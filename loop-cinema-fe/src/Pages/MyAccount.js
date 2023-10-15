@@ -3,6 +3,7 @@ import "../css/pages/MyAccount.css"
 import { getCurrentUserId, getUserByUserId } from "../data/userRepo";
 import { useNavigate } from "react-router-dom";
 import MyAccountCardItem from "../Components/Fragments/MyAccountCardItem";
+import axios from "axios";
 
 const MyAccount = (props) => {
     const navigate = useNavigate()
@@ -15,8 +16,18 @@ const MyAccount = (props) => {
 
     const [currentUser, setCurrentUser] = useState({})
 
+    // useEffect(() => {
+    //     setCurrentUser(getUserByUserId(userId))
+    // }, [])
+
     useEffect(() => {
-        setCurrentUser(getUserByUserId(userId))
+        axios.get(`http://localhost:3001/api/users/user/${userId}`)
+        .then(response => {
+            if (response.data !== null) {
+                response.data.createdAt = response.data.createdAt.slice(0,10)
+                setCurrentUser(response.data);
+            }  
+        })
     }, [])
 
     return (
@@ -24,10 +35,10 @@ const MyAccount = (props) => {
             <div className="my-account">
                 <div className="my-account-greeting">
                     <article>
-                        <h2>Hi {currentUser.firstName}</h2>
+                        <h2>Hi {currentUser.userFirstName}</h2>
                         <div className="my-account-greeting-item">
                             <span>Available Points</span>
-                            <span>{currentUser.points}</span>
+                            <span>{currentUser.userPoint}</span>
                         </div>
                         <div className="my-account-greeting-item">
                             <span>Account Created Date</span>

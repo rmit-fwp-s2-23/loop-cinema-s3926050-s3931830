@@ -198,7 +198,7 @@ const removeCurrentUserId = () => {
 const verifyUserLogin = (loginUserObject) => {
     const userList = getUserList();
 
-    if (userList == null || userList === []) {
+    if (userList == null || userList == []) {
         return false;
     } else {
         userList.map((user) => {

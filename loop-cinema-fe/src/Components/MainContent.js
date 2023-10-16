@@ -65,15 +65,14 @@ const MainContent = () => {
         }, 2000)
     }
 
-    const updateUser = (values) => {
-        updateUserByUserId(values)
-        
+    const updateUser = () => {
         setIsTemporaryMessageUpdateUser(true)
         setTimeout(() => {
             setIsTemporaryMessageUpdateUser(false)
         }, 2000)
 
-        window.location.reload()
+        // because data is fetch by api now -> does not need to reload for changes (in update user at least)
+        // window.location.reload()
     }
 
     // add new review + update movie rating

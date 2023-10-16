@@ -10,7 +10,17 @@ const RegisterForm = (props) => {
     const [registering, setRegistering] = useState(false)
 
     const registerSuccess = () => {
-        setRegistering(true)
+        // setRegistering(true)
+
+        if (getCurrentUserId() !== null) {
+            navigate("/account");
+            props.setIsLoggedIn(true)
+
+            // need reload to close modal - need to investigate further
+            window.location.reload();          
+        } else {
+            props.setIsLoggedIn(false)
+        }
     }
 
     const {
@@ -21,21 +31,21 @@ const RegisterForm = (props) => {
         handleSubmit,
     } = useForm(registerSuccess, RegisterValidate);
 
-    useEffect(() => {
-        if (JSON.stringify(errors) === JSON.stringify({}) && isSubmitting) {
-            const userValue = {...values}
-            createNewUser(userValue)
-            if (getCurrentUserId() !== null) {
-                navigate("/account");
-                props.setIsLoggedIn(true)
+    // useEffect(() => {
+    //     if (JSON.stringify(errors) === JSON.stringify({}) && isSubmitting) {
+    //         const userValue = {...values}
+    //         createNewUser(userValue)
+    //         if (getCurrentUserId() !== null) {
+    //             navigate("/account");
+    //             props.setIsLoggedIn(true)
 
-                // need reload to close modal - need to investigate further
-                window.location.reload();          
-            } else {
-                props.setIsLoggedIn(false)
-            }
-        }
-    }, [registering])
+    //             // need reload to close modal - need to investigate further
+    //             window.location.reload();          
+    //         } else {
+    //             props.setIsLoggedIn(false)
+    //         }
+    //     }
+    // }, [registering])
 
     return (
         <dialog className='login-dialog' id='register-dialog'>

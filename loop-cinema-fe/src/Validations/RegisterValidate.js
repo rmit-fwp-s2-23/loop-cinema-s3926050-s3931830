@@ -1,3 +1,6 @@
+import axios from "axios";
+import { setCurrentUserId } from "../data/userRepo";
+
 /**
  * validate register value
  * @param {*} values : register value
@@ -6,7 +9,8 @@
  * 
  * do not have unique email check yet
  */
-export default function RegisterValidate (values) {
+export default async function RegisterValidate (values) {
+    const API_HOST = "http://localhost:3001/api/users";
     let registerErrors = {};
     /*  firstName
         lastName
@@ -74,6 +78,19 @@ export default function RegisterValidate (values) {
     //   createNewUser(userValue)
     // }
 
+    if (JSON.stringify(registerErrors) === JSON.stringify({})) {
+      await axios.post(API_HOST + '/createUser', values)
+      .then(response => {
+        const user = response.data
+        setCurrentUserId(user.userID)
+      })
+      .catch(error => {
+        if (error.response) {
+          registerErrors.email = error.response.data.message
+        }
+      })
+    }
+
     return registerErrors;
-  };
+};
   

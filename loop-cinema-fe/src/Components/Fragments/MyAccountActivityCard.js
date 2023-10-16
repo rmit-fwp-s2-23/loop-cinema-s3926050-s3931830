@@ -227,15 +227,15 @@ const MyAccountActivityCard = (props) => {
             </dialog>
             <div className='my-account-activity-list-item'>
                 <article>
-                    <h4 className='my-account-activity-list-item-movie audience-review-list-item-user'>{props.movieTitle}</h4>
-                    <span className='my-account-activity-list-item-date audience-review-list-item-small-email'>{props.review.updatedAt}</span>
+                    <h4 className='my-account-activity-list-item-movie audience-review-list-item-user'>{props.review.movie.movieTitle}</h4>
+                    <span className='my-account-activity-list-item-date audience-review-list-item-small-email'>{props.review.updatedAt.slice(0,10)}</span>
                     <div className="card_stars">
                         {   
-                            printStars(props.review.score)
+                            printStars(props.review.audienceReviewScore)
                         }
                     </div>
                     <div className="audience-review-list-item-comment">
-                        <span className='audience-review-list-item-comment-span'>{props.review.comment}</span>
+                        <span className='audience-review-list-item-comment-span'>{props.review.audienceReviewComment}</span>
                     </div>
                     <div className="my-account-profile-confirm-delete-buttons my-account-profile-header-delete">
                         <button class="secondary outline" id="audience-review-dialog-form-cancel-post"

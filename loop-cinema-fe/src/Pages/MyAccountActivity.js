@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { getAudienceReviewListByUserId } from '../data/reviewRepo';
 import { getMovieTitleByMovieId } from '../data/movieRepo';
 import MyAccountActivityCard from '../Components/Fragments/MyAccountActivityCard';
+import axios from 'axios';
 
 const MyAccountActivity = (props) => {
     const navigate = useNavigate()
@@ -15,11 +16,20 @@ const MyAccountActivity = (props) => {
         if (userId === null) navigate("/home")
     }, [userId])
 
-    const [currentMovieAudienceReviewList, setCurrentMovieAudienceReviewList] = useState(getAudienceReviewListByUserId(userId))
+    // const [currentMovieAudienceReviewList, setCurrentMovieAudienceReviewList] = useState(getAudienceReviewListByUserId(userId))
+    const [currentMovieAudienceReviewList, setCurrentMovieAudienceReviewList] = useState([])
+
+    const fetchReviewsFromDatabase = async () => {
+        await axios.get(`http://localhost:3001/api/reviews/user/${userId}`)
+        .then(response => {
+            setCurrentMovieAudienceReviewList(response.data);
+        })
+    }
 
     // initialize from local storage to state
     useEffect(() => {
-        setCurrentMovieAudienceReviewList(getAudienceReviewListByUserId(userId))
+        // setCurrentMovieAudienceReviewList(getAudienceReviewListByUserId(userId))
+        fetchReviewsFromDatabase()
     }, [])
 
     const deleteReviewOne = (reviewId, movieId) => {
@@ -41,7 +51,8 @@ const MyAccountActivity = (props) => {
                     currentMovieAudienceReviewList.length > 0 ?
                     currentMovieAudienceReviewList.map((currentMovieAudienceReview) => (
                         <MyAccountActivityCard review={currentMovieAudienceReview} 
-                        movieTitle={getMovieTitleByMovieId(currentMovieAudienceReview.movie_id)} deleteReviewOne={deleteReviewOne} 
+                        // movieTitle={getMovieTitleByMovieId(currentMovieAudienceReview.movie_id)} 
+                        deleteReviewOne={deleteReviewOne} 
                         updateReviewOne={updateReviewOne} />
                     )) :
                     <p>You have not made any reviews!</p>

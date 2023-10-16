@@ -2,39 +2,51 @@ import {Link} from "react-router-dom"
 // import { useStatusTheme } from "../Components/StatusThemeProvider"
 import MovieCard from "../Components/MovieCard"
 import "../css/components/MovieList.css"
+import { getMovieList } from "../data/movieRepo"
+import { useState } from "react";
 
 function MovieList({sortRatingStatus}) {
-    const storedData = localStorage.getItem('movie_data')
-    const parsedData = JSON.parse(storedData)
+    const [movieList, setMovieList] = useState([]);
+    const [error, setError] = useState(null);
+    useState(async ()=>{
+        const response = await getMovieList()
+        setMovieList(response)
+    }, [movieList]);
+    
+    // const movieList = JSON.parse(storedData)
     
     //Sorts in Descending Order
     const compareRating = (a, b)=>{
-        return -(a.averageAudienceReviewScore - b.averageAudienceReviewScore)
+        return -(a.movieAverageScore - b.movieAverageScore)
     }
 
-    const finalData = sortRatingStatus ? [...parsedData].sort(compareRating) : parsedData;
+    const finalData = sortRatingStatus ? [...movieList].sort(compareRating) : movieList;
 
     // console.log("MOVIELIST" + finalData[1].averageAudienceReviewScore);
     return(
         <div className="movielist_container">
             <ul className="movielist_ul" style={{listStyle: `none`}}>      
-                { 
+                {finalData.length !== 0 ? (
                     finalData.map((obj)=>(
-                        <li classNaem="movie_card" style={{listStyleType: `none`}}>
-                            <Link className="cardLink" to={"/Movie/" + obj.title} state={{movieData: obj}}>
+                        <li className="movie_card" style={{listStyleType: `none`}}>
+                            <Link className="cardLink" to={"/Movie/" + obj.movieTitle} state={{movieData: obj}}>
                                 <MovieCard 
-                                key={obj.movie_id}
-                                image={obj.poster} 
-                                title={obj.title} 
-                                rated={obj.rating} 
-                                runtime={obj.runTime}
-                                stars = {obj.averageAudienceReviewScore}
+                                
+                                image={obj.moviePoster} 
+                                title={obj.movieTitle} 
+                                rated={obj.ratingTypeName} 
+                                runtime={obj.movieRuntime}
+                                stars = {obj.movieAverageScore}
                                 />
                             </Link>
 
                         </li>
                     ))
-                }
+                    ):(
+                        <div>
+                            Loading Movies List ...
+                        </div>
+                )}
             </ul>
         </div>
     )

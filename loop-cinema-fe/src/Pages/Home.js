@@ -38,7 +38,7 @@ function Home(props){
                         
                     </div>
                     <div className="home_latest_movies">
-                        <MovieList sortRatingStatus = {sortRatingStatus} />
+                        <MovieList sortRatingStatus = {sortRatingStatus} isLoggedIn={props.isLoggedIn}/>
                     </div>
 
                     {/* </StatusThemeProvider> */}

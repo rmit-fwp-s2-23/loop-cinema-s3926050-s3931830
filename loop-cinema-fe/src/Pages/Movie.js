@@ -6,15 +6,31 @@ import { getCurrentUserId, getUserByUserId, getUserInfoByUserId } from "../data/
 import AudienceReviewCardItem from "../Components/Fragments/AudienceReviewCardItem";
 import useForm from "../CustomHooks/useForm";
 import ReviewValidate from '../Validations/ReviewValidate'
+import { getMovieByMovieId, getMovieTitleByMovieId } from "../data/movieRepo";
 
 function Movie(props) {
     /**This will be a complete section for a single movie with all its details and stuff.*/
-
     //Movie Detail
     const location = useLocation();
     const userId = JSON.parse(getCurrentUserId())
     // console.log(JSON.parse(userId));
-    const movieObj = location.state.movieData;
+    const lessDataMovieObj = location.state.movieData;
+
+    //Fetching Movie Data
+    const [movieObj, setMovieObj] = useState(null);
+    const [movieNotFoundError, setMovieNotFoundError] = useState(null);
+    useEffect(()=>{
+        const getMovieById = async () =>{
+            try{
+                const response = await getMovieByMovieId(lessDataMovieObj.movieID);
+                setMovieObj(response);
+            }catch(e){
+                setMovieNotFoundError(e);
+                console.log(e);
+            }
+        }
+        getMovieById();
+    },[]);
 
     const [currentMovieAudienceReviewList, setCurrentMovieAudienceReviewList] = useState([])
     const [reviewing, setReviewing] = useState(false)
@@ -45,11 +61,13 @@ function Movie(props) {
 
     // whenever callback is good -> add new review
     useEffect(() => {
-        if (JSON.stringify(errors) === JSON.stringify({}) && isSubmitting) {
-            const reviewValue = {...values}
-            props.addNewReview(reviewValue, userId, movieObj.movie_id)         
+        if(movieObj != null){
+            if (JSON.stringify(errors) === JSON.stringify({}) && isSubmitting) {
+                const reviewValue = {...values}
+                props.addNewReview(reviewValue, userId, movieObj.movieID)         
+            }
+            setCurrentMovieAudienceReviewList(getAudienceReviewListByMovieId(movieObj.movieID))
         }
-        setCurrentMovieAudienceReviewList(getAudienceReviewListByMovieId(movieObj.movie_id))
     }, [reviewing])
 
     // initialize from local storage to state
@@ -89,10 +107,12 @@ function Movie(props) {
     }
 
     return(
+        <>
+        { movieObj ? (
         <div>
             <dialog id="audience-review-dialog">
                 <article>
-                    <h2>Posting review for {movieObj.title}</h2>          
+                    <h2>Posting review for {movieObj.movieTitle}</h2>          
                     <div className='login-dialog-content-form'>
                         <form onSubmit={handleSubmit} noValidate id="audience-review-dialog-form">
                             <fieldset>
@@ -168,66 +188,72 @@ function Movie(props) {
                     </div>
                 </article>
             </dialog>
-            <div id="movie_header" style={{backgroundImage: `url(${movieObj.banner})`, backgroundSize: `cover`, backgroundPosition: `center`}}>
-                <div id="movie_container">
-                    <div className="movie_foreground">
-                        <img className="movie_poster" src={movieObj.poster}/>
-                        <div className="movie_wrapper">
-                            <h1 className="movie_heading">{movieObj.title}</h1>
-                            <div className="movie_details">
-                                <span className="movie_rating">{movieObj.rating}</span>
-                                <span clasName="movie_pipe">|</span>
-                                <span className="movie_duration">{movieObj.runTime + " min"}</span>
-                                <span clasName="movie_pipe">|</span>
-                                <span className="movie_release-date">{movieObj.releaseDate}</span>
+                <>
+                <div id="movie_header" style={{backgroundImage: `url(${movieObj.movieBanner})`, backgroundSize: `cover`, backgroundPosition: `center`}}>
+                    <div id="movie_container">
+                        <div className="movie_foreground">
+                            <img className="movie_poster" src={movieObj.moviePoster}/>
+                            <div className="movie_wrapper">
+                                <h1 className="movie_heading">{movieObj.movieTitle}</h1>
+                                <div className="movie_details">
+                                    <span className="movie_rating">{movieObj.ratingTypeName}</span>
+                                    <span clasName="movie_pipe">|</span>
+                                    <span className="movie_duration">{movieObj.movieRuntime + " min"}</span>
+                                    <span className="movie_pipe">|</span>
+                                    <span className="movie_release-date">{movieObj.movieReleaseDate}</span>
+                                </div>
                             </div>
                         </div>
+                        <span className="movie_scrim"></span>
                     </div>
-                    <span className="movie_scrim"></span>
                 </div>
-            </div>
 
-            <div className="movie_body">
-                <article>
-                    <hgroup>
-                        <h1>Plot</h1>
-                        <p>{movieObj.synopsis}</p>
-                    </hgroup>
-                </article>
-                <article>
-                    <hgroup>
-                        <h1>Cast</h1>
-                        <h4>Actors</h4>
-                        <p>{movieObj.casts}</p>
-                        <h4>Director</h4>
-                        <p>{movieObj.directors}</p>
-                    </hgroup>
-                </article>
-                <article className="audience-review">
-                    <div className="my-account-profile-header">
-                        <h2 className="audience-review-title">Reviews</h2>
+                <div className="movie_body">
+                    <article>
+                        <hgroup>
+                            <h1>Plot</h1>
+                            <p>{movieObj.movieSynopsis}</p>
+                        </hgroup>
+                    </article>
+                    <article>
+                        <hgroup>
+                            <h1>Cast</h1>
+                            <h4>Actors</h4>
+                            <p>{movieObj.castIDs}</p>
+                            <h4>Director</h4>
+                            <p>{movieObj.directorName}</p>
+                        </hgroup>
+                    </article>
+                    <article className="audience-review">
+                        <div className="my-account-profile-header">
+                            <h2 className="audience-review-title">Reviews</h2>
+                            {
+                                props.isLoggedIn && (
+                                    <div className="my-account-profile-header-delete">
+                                        <button onClick={openReviewModal}>
+                                            <span>Add Review</span>
+                                        </button>
+                                    </div>
+                                )
+                            }
+                        </div>
+                        
+                        <div className="audience-review-list">
                         {
-                            props.isLoggedIn && (
-                                <div className="my-account-profile-header-delete">
-                                    <button onClick={openReviewModal}>
-                                        <span>Add Review</span>
-                                    </button>
-                                </div>
-                            )
+                            currentMovieAudienceReviewList.map((currentMovieAudienceReview) => (
+                                <AudienceReviewCardItem review={currentMovieAudienceReview} 
+                                user={getUserInfoByUserId(currentMovieAudienceReview.user_id)} />
+                            ))
                         }
-                    </div>
-                    
-                    <div className="audience-review-list">
-                    {
-                        currentMovieAudienceReviewList.map((currentMovieAudienceReview) => (
-                            <AudienceReviewCardItem review={currentMovieAudienceReview} 
-                            user={getUserInfoByUserId(currentMovieAudienceReview.user_id)} />
-                        ))
-                    }
-                    </div>
-                </article>
-            </div>
+                        </div>
+                    </article>
+                </div>
+                </>
         </div>
+        ):(
+            <div> Loading Movie Data....</div>
+        )}
+        </>
     )
 }
 export default Movie

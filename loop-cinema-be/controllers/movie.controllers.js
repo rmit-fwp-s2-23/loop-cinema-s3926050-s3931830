@@ -47,6 +47,21 @@ exports.getMovieById = async (req, res) => {
                 model: db.audience_review,
                 attributes: {exclude: ['movieID', 'createdAt']}
             },
+            {
+                model: db.genre,
+                as: "genreIDs", //specify alias
+                attributes: {exclude: ['createdAt', 'updatedAt']},
+                through: {attributes:[]}
+            },
+            {
+                model: db.cast,
+                as: "castIDs",
+                attributes: {exclude: ['createdAt', 'updatedAt']},
+                through:{attributes: []}
+            },
+            {
+                model: db.director
+            }
         ]
     });
 

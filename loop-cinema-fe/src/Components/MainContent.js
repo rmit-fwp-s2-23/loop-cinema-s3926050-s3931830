@@ -11,6 +11,7 @@ import { createNewAudienceReview, deleteAudienceReviewByUserId, deleteReviewByRe
 import MyAccountActivity from "../Pages/MyAccountActivity";
 import { updateAverageAudienceReviewScoreOfMovie, updateMovieAverageScoreBulk } from "../data/movieRepo";
 import { AboutUs } from "../Pages/AboutUs";
+import axios from "axios";
 
 const MainContent = () => {
     const navigate = useNavigate()
@@ -53,11 +54,21 @@ const MainContent = () => {
     }
 
     // delete user + update movie rating
-    const deleteUser = () => {
-        deleteAudienceReviewByUserId(getCurrentUserId())
-        updateMovieAverageScoreBulk()
-        deleteUserByUserId(getCurrentUserId())     
-        setIsLoggedIn(false)
+    const deleteUser = async () => {
+        // deleteAudienceReviewByUserId(getCurrentUserId())
+        // updateMovieAverageScoreBulk()
+        // deleteUserByUserId(getCurrentUserId())    
+        const userID = JSON.parse(getCurrentUserId())
+        await axios.delete(`http://localhost:3001/api/users/user/${userID}`)
+        .then(() => {
+            removeCurrentUserId()
+            setIsLoggedIn(false)
+        })
+        .catch(error => {
+            if (error.response) {
+                console.log(error.response.data.message);
+            }
+        })
 
         setIsTemporaryMessageDeleteUser(true)
         setTimeout(() => {

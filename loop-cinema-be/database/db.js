@@ -71,7 +71,7 @@ db.sync = async () => {
   await seedDataMovie();
   await seedDataTrailer();
   await seedDataSession();
-  await seedDataAudienceReview();
+  // await seedDataAudienceReview();
 };
 
 async function seedDataUser() {

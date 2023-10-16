@@ -93,12 +93,14 @@ exports.removeUserById = async (req, res) => {
 
     try {
         await db.user.destroy({where: {userID: userID}})
+        // status code 204 - no content -> no content being responsed
+        // use 200 if want to get a message
         res.status(204).json({
-            error: `Delete user with id ${userID} successfully!`
+            message: `Delete user with id ${userID} successfully!`
         })
     } catch (error) {
         res.status(403).json({
-            error: `Delete user unsuccessfully!`
+            message: `Delete user unsuccessfully!`
         })
     }
 }

@@ -78,11 +78,13 @@ exports.createUser = async (req, res) => {
             res.status(201).json(user)
         } catch (error) {
             res.status(403).json({
-                error: "Wrong format"
+                message: "Wrong format"
             })
         }
     } else {
-        res.status(403).json(null)
+        res.status(403).json({
+            message: "This email has already been registered with an account"
+        })
     }
 }
 
@@ -108,53 +110,60 @@ exports.updateUserById = async (req, res) => {
 
     if (user === null) {
         res.status(404).json({
-            error: `There are no user with the id ${userID}`
+            message: `There are no user with the id ${userID}`
         })
     } else if (req.body.point) {
         res.status(400).json({
-            error: `Cannot edit point`
+            message: `Cannot edit point`
+        })
+    } else if (req.body.password) {
+        res.status(400).json({
+            message: `Cannot edit password`
+        })
+    } else if (req.body.email) {
+        res.status(400).json({
+            message: `Cannot edit email`
         })
     } else {
         try {
-            if (req.body.email) {
-                await db.user.update({userEmail: req.body.userEmail}, {where: {userID: userID}})
+            // if (req.body.email) {
+            //     await db.user.update({userEmail: req.body.email}, {where: {userID: userID}})
+            // }
+
+            // if (req.body.password) {
+            //     const hash = await argon2.hash(req.body.password, { type: argon2.argon2id });
+            //     await db.user.update({userPasswordHashed: hash}, {where: {userID: userID}})
+            // }
+
+            if (req.body.userFirstName) {
+                await db.user.update({userFirstName: req.body.userFirstName}, {where: {userID: userID}})
             }
 
-            if (req.body.password) {
-                const hash = await argon2.hash(req.body.password, { type: argon2.argon2id });
-                await db.user.update({userPasswordHashed: hash}, {where: {userID: userID}})
+            if (req.body.userLastName) {
+                await db.user.update({userLastName: req.body.userLastName}, {where: {userID: userID}})
             }
 
-            if (req.body.firstName) {
-                await db.user.update({userFirstName: req.body.firstName}, {where: {userID: userID}})
+            if (req.body.UserPhone) {
+                await db.user.update({userPhone: req.body.UserPhone}, {where: {userID: userID}})
             }
 
-            if (req.body.lastName) {
-                await db.user.update({userLastName: req.body.lastName}, {where: {userID: userID}})
+            if (req.body.userDOB) {
+                await db.user.update({userDOB: req.body.userDOB}, {where: {userID: userID}})
             }
 
-            if (req.body.phone) {
-                await db.user.update({userPhone: req.body.phone}, {where: {userID: userID}})
+            if (req.body.userPostCode) {
+                await db.user.update({userPostCode: req.body.userPostCode}, {where: {userID: userID}})
             }
 
-            if (req.body.dob) {
-                await db.user.update({userDOB: req.body.dob}, {where: {userID: userID}})
-            }
-
-            if (req.body.postCode) {
-                await db.user.update({userPostCode: req.body.postCode}, {where: {userID: userID}})
-            }
-
-            if (req.body.subscribe) {
-                await db.user.update({userIsSubscribe: req.body.subscribe}, {where: {userID: userID}})
-            }
+            // if (req.body.subscribe) {
+            //     await db.user.update({userIsSubscribe: req.body.subscribe}, {where: {userID: userID}})
+            // }
 
             user = await db.user.findByPk(userID);
             res.status(201).json(user)
         } catch (error) {
-            console.log(error);
             res.status(403).json({
-                error: error
+                message: "Failed to update user"
             })
         }
     }

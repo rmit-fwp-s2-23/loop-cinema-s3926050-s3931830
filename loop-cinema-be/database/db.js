@@ -38,7 +38,9 @@ db.location.hasMany(db.session, { foreignKey: { name: "locationID", allowNull: f
 db.session.belongsTo(db.location, { foreignKey: { name: "locationID", allowNull: false } })
 
 db.movie.hasMany(db.audience_review, { foreignKey: { name: "movieID", allowNull: false } });
+db.audience_review.belongsTo(db.movie, { foreignKey: { name: "movieID", allowNull: false } })
 db.user.hasMany(db.audience_review, { foreignKey: { name: "userID", allowNull: false } });
+db.audience_review.belongsTo(db.user, { foreignKey: { name: "userID", allowNull: false } })
 
 db.user.hasMany(db.reservation, { foreignKey: { name: "userID", allowNull: false } });
 db.reservation.belongsTo(db.user, { foreignKey: { name: "userID", allowNull: false } });
@@ -71,7 +73,7 @@ db.sync = async () => {
   await seedDataMovie();
   await seedDataTrailer();
   await seedDataSession();
-  // await seedDataAudienceReview();
+  await seedDataAudienceReview();
 };
 
 async function seedDataUser() {
@@ -286,7 +288,8 @@ async function seedDataMovie() {
       moviePoster: "https://xl.movieposterdb.com/23_06/2023/15398776/xl_oppenheimer-movie-poster_a9df9f84.jpg?v=2023-08-17%2011:42:56",
       movieBanner: "https://www.thebanner.org/sites/default/files/styles/article_detail_header/public/2023-08/MM-1207%20Oppenheimer.jpg?itok=0U-jOPJC",
       directorID: "D001",
-      ratingTypeID: "RT004"
+      ratingTypeID: "RT004",
+      movieAverageScore: 3
     },
     {
       movieID: "M124",
@@ -554,6 +557,20 @@ async function seedDataAudienceReview() {
       movieID: "M123", 
       userID: "U006"
     },
+    { 
+      audienceReviewID: 'AR004', 
+      audienceReviewComment: "Inception is a masterpiece that challenges the audience's perception of reality.", 
+      audienceReviewScore: 4, 
+      movieID: "M124", 
+      userID: "U004"
+    },
+    { 
+      audienceReviewID: 'AR005', 
+      audienceReviewComment: "The layers of dreams and the intricate storytelling left me amazed.", 
+      audienceReviewScore: 4, 
+      movieID: "M124", 
+      userID: "U005"
+    }
   ])
 }
 

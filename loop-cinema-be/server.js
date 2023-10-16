@@ -20,6 +20,7 @@ app.get("/", (req, res) => {
 // Add user routes
 require("./routes/user.routes.js")(express, app)
 require("./routes/movie.routes.js")(express, app)
+require("./routes/review.routes.js")(express, app)
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${process.env.PORT}`);

@@ -7,14 +7,15 @@ import AudienceReviewCardItem from "../Components/Fragments/AudienceReviewCardIt
 import useForm from "../CustomHooks/useForm";
 import ReviewValidate from '../Validations/ReviewValidate'
 import { getMovieByMovieId, getMovieTitleByMovieId } from "../data/movieRepo";
+import SessionList from "../Components/SessionList";
+import { useParams } from 'react-router-dom';
 
 function Movie(props) {
     /**This will be a complete section for a single movie with all its details and stuff.*/
     //Movie Detail
-    const location = useLocation();
+    const { id } = useParams();
+    console.log(id);
     const userId = JSON.parse(getCurrentUserId())
-    // console.log(JSON.parse(userId));
-    const lessDataMovieObj = location.state.movieData;
 
     //Fetching Movie Data
     const [movieObj, setMovieObj] = useState(null);
@@ -22,7 +23,7 @@ function Movie(props) {
     useEffect(()=>{
         const getMovieById = async () =>{
             try{
-                const response = await getMovieByMovieId(lessDataMovieObj.movieID);
+                const response = await getMovieByMovieId(id);
                 setMovieObj(response);
             }catch(e){
                 setMovieNotFoundError(e);
@@ -76,7 +77,7 @@ function Movie(props) {
     // }, [reviewing])
 
     /* 
-        TOGGLE MODAL
+        TOGGLE MODALS
     */
     const openReviewModal = () => {
         document.body.style.overflow = "hidden"
@@ -197,7 +198,7 @@ function Movie(props) {
                                 <h1 className="movie_heading">{movieObj.movieTitle}</h1>
                                 <div className="movie_details">
                                     <span className="movie_rating">{movieObj.ratingTypeName}</span>
-                                    <span clasName="movie_pipe">|</span>
+                                    <span className="movie_pipe">|</span>
                                     <span className="movie_duration">{movieObj.movieRuntime + " min"}</span>
                                     <span className="movie_pipe">|</span>
                                     <span className="movie_release-date">{movieObj.movieReleaseDate}</span>
@@ -218,12 +219,19 @@ function Movie(props) {
                     <article>
                         <hgroup>
                             <h1>Cast</h1>
-                            <h4>Actors</h4>
-                            <p>{movieObj.castIDs}</p>
                             <h4>Director</h4>
-                            <p>{movieObj.directorName}</p>
+                            <p>{movieObj.director.directorName}</p>
+                            <h4>Actors</h4>
+                            <p>
+                            {movieObj.castIDs.map((obj)=>{
+                                <span>obj.castName, </span>
+                                })
+                            }
+                            </p>
+                            <p>{movieObj.castIDs}</p>
                         </hgroup>
                     </article>
+                    <SessionList movieObj={movieObj} isLoggedIn={props.isLoggedIn}/>
                     <article className="audience-review">
                         <div className="my-account-profile-header">
                             <h2 className="audience-review-title">Reviews</h2>

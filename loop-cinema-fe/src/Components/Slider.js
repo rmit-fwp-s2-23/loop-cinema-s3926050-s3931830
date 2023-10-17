@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../css/components/Slider.css"
 import { Link} from "react-router-dom";
 import { getMovieList } from "../data/movieRepo";
@@ -9,11 +9,15 @@ function Slider() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [slides, setSlides] = useState(null);
 
-  useState( async() =>{
-    const response = await getMovieList()
-    console.log(response);
-    setSlides(response.slice(0, 4))
-    console.log(slides);
+  useEffect(() =>{
+    const loadMovies = async ()=>{
+      const response = await getMovieList()
+      console.log(response);
+      console.log(response.slice(0, 4));
+      setSlides(response.slice(0, 4));
+      console.log(slides);
+    }
+    loadMovies();
   },[]);
 
   const goToPrevious = ()=>{
@@ -35,7 +39,7 @@ function Slider() {
           <div className="carousel">
             <div className="left_arrow" onClick={goToPrevious}>&#8249;</div>
             <div className="right_arrow" onClick={goToNext}>&#8250;</div>
-            <Link className="movie_slide_link" to={"/Movie/" + slides[currentIndex].movieTitle} state={{movieData: slides[currentIndex]}}>
+            <Link className="movie_slide_link" to={"/Movie/" + slides[currentIndex].movieID} state={{movieData: slides[currentIndex]}}>
               <div className="movie_slide" style={{backgroundImage: `url(${slides[currentIndex].movieBanner})`}}>
                 <hgroup className="movie_slide_detail">
                   <h1>{slides[currentIndex].movieTitle}</h1>

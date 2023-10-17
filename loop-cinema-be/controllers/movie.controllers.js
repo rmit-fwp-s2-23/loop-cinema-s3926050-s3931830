@@ -6,7 +6,7 @@ const { Sequelize } = require("sequelize");
 // Get all movies
 exports.getAllMovies = async (req, res) => {
     const movies = await db.movie.findAll({
-        attributes: ['movieID', 'movieTitle', 'movieRuntime', 'moviePoster', 'movieAverageScore'],
+        attributes: ['movieID', 'movieBanner', 'movieTitle', 'movieApercu', 'movieRuntime', 'moviePoster', 'movieAverageScore'],
         include: [
             {
                 model: db.rating_type,

@@ -246,21 +246,21 @@ async function seedDataLocation() {
   await db.location.bulkCreate([
     {
       locationID: "L001",
-      locationName: "Loop Cinema, Bankstown",
+      locationName: "Loop Cinema,  Bankstown",
       locationAddress: "63 The Mall, Bankstown, NSW 2200",
       locationPhone: "0290033800",
       locationImage: "https://cdn.broadsheet.com.au/cache/2c/5f/2c5f0f82b01888628a20ff53550c6b94.jpg",
     },
     {
       locationID: "L002",
-      locationName: "Loop Cinema, District Dockland",
+      locationName: "Loop Cinema,  District Dockland",
       locationAddress: "440 Docklands Drive, Docklands, VIC 3008",
       locationPhone: "0390271540",
       locationImage: "https://media.timeout.com/images/103085905/750/562/image.jpg",
     },
     {
       locationID: "L003",
-      locationName: "Loop Cinema, Melbounre Central",
+      locationName: "Loop Cinema,  Melbounre Central",
       locationAddress: "Cnr Swanston & Latrobe Street, Melbourne, VIC 3000",
       locationPhone: "1300357357",
       locationImage: "https://headbox-media.imgix.net/spaces/22571/photos/aa639165-6939-4cb1-a599-749d5024484b_Rydges%20Sydney%20Central%20-%20Cinema%20HR.jpg?auto=format&ar=3%3A2&fit=crop&q=60&ixlib=react-9.5.4",

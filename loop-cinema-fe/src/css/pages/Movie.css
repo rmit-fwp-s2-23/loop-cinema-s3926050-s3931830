@@ -248,6 +248,11 @@
     border-bottom-right-radius: var(--border-radius);
 }
 
+#audience-review-dialog-form #commentReview .quill .ql-container .ql-editor p {
+    color: #9d9c9c;
+    font-size: 18px;
+}
+
 #audience-review-dialog-form .quill .ql-toolbar.ql-snow .ql-picker-label[role=button] {
     --background-color: inherit;
     --border-color: inherit;

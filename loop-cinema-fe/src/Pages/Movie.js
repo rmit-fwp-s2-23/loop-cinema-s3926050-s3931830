@@ -18,45 +18,14 @@ function Movie(props) {
     /**This will be a complete section for a single movie with all its details and stuff.*/
     //Movie Detail
     const { id } = useParams();
-    console.log(id);
     const userId = JSON.parse(getCurrentUserId())
 
     //Fetching Movie Data
     const [movieObj, setMovieObj] = useState(null);
     const [movieNotFoundError, setMovieNotFoundError] = useState(null);
-    useEffect(()=>{
-        const getMovieById = async () =>{
-            try{
-                const response = await getMovieByMovieId(id);
-                setMovieObj(response);
-            }catch(e){
-                setMovieNotFoundError(e);
-                console.log(e);
-            }
-        }
-        getMovieById();
-    },[]);
-
     const [currentMovieAudienceReviewList, setCurrentMovieAudienceReviewList] = useState([])
     const [reviewing, setReviewing] = useState(false)
-
-    const fetchReviewsFromDatabase = async () => {
-        await axios.get(`http://localhost:3001/api/reviews/movie/${movieID}`)
-        .then(response => {
-            setCurrentMovieAudienceReviewList(response.data);
-        })
-    }
-
-    const [aRComment, setARComment] = useState("");
-
-    const changeARComment = (event) => {
-        // console.log(typeof(event));
-        // event.persist();
-        setARComment(event)
-        setValues(values => ({ ...values, comment: event }));
-        console.log(aRComment);
-    }
-
+    
     // callback
     const reviewSuccess = () => {
         const elementBig = document.getElementById("audience-review-dialog");
@@ -81,18 +50,60 @@ function Movie(props) {
         isSubmitting
     } = useForm(reviewSuccess, ReviewValidate);
 
+    const fetchReviewsFromDatabase = async () => {
+        await axios.get(`http://localhost:3001/api/reviews/movie/${id}`)
+        .then(response => {
+            setCurrentMovieAudienceReviewList(response.data);
+            setValues(values => ({...values, movieID: id}))
+        })
+    }
+
+    const updateMovieScore = async () => {
+        await axios.patch(`http://localhost:3001/api/movies/movie/movieScore/${id}`)
+        .then(response => {
+            console.log(response.data.message);
+        }).catch(error => {
+            console.log(error.response.data.message);
+        })
+    }
+
+    useEffect(()=>{
+        const getMovieById = async () =>{
+            try {
+                const response = await getMovieByMovieId(id);
+                setMovieObj(response);
+            } catch(e) {
+                setMovieNotFoundError(e);
+                console.log(e);
+            }
+        }
+        getMovieById();
+        fetchReviewsFromDatabase()
+    }, []);
+
     // whenever callback is good -> add new review
     useEffect(() => {
-        if(movieObj != null){
+        if(movieObj !== null) {
             if (JSON.stringify(errors) === JSON.stringify({}) && isSubmitting) {
-                const reviewValue = {...values}
-                props.addNewReview(reviewValue, userId, movieObj.movieID)         
+                // const reviewValue = {...values}
+                fetchReviewsFromDatabase()
+                updateMovieScore()
+                props.addNewReview()       
+                
+                // reset values
+                // setValues({})
+                setReviewing(false)
             }
-            setCurrentMovieAudienceReviewList(getAudienceReviewListByMovieId(movieObj.movieID))
         }
-
-        fetchReviewsFromDatabase()
     }, [reviewing])
+
+    const [aRComment, setARComment] = useState("");
+    const changeARComment = (event) => {
+        // console.log(typeof(event));
+        // event.persist();
+        setARComment(event)
+        setValues(values => ({ ...values, comment: event }));
+    }
 
     // initialize from local storage to state
     // useEffect(() => {

@@ -48,3 +48,7 @@
     color: #9d9c9c;
     font-size: 18px;
 }
+
+.audience-review-list-item-comment-span > * {
+    color: #9d9c9c;
+}

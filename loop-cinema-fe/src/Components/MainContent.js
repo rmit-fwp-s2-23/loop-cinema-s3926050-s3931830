@@ -87,10 +87,10 @@ const MainContent = () => {
     }
 
     // add new review + update movie rating
-    const addNewReview = (reviewValue, userId, movieId) => {
-        createNewAudienceReview(reviewValue, userId, movieId)
-        updateAverageAudienceReviewScoreOfMovie(movieId)
-        window.location.reload()
+    const addNewReview = () => {
+        // createNewAudienceReview(reviewValue, userId, movieId)
+        // updateAverageAudienceReviewScoreOfMovie(movieId)
+        // window.location.reload()
 
         setTimeout(() => {
             setIsTemporaryMessageNewReview(true)

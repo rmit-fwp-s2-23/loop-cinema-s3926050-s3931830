@@ -42,7 +42,8 @@ const AudienceReviewCardItem = (props) => {
                 }
                 </div>
                 <div className="audience-review-list-item-comment">
-                    <span className='audience-review-list-item-comment-span'>{props.review.audienceReviewComment}</span>
+                    <span className='audience-review-list-item-comment-span' 
+                    dangerouslySetInnerHTML={{__html: props.review.audienceReviewComment}} />
                 </div>
             </div>
         </>

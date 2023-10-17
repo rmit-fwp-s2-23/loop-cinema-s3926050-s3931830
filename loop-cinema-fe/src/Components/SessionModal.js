@@ -91,6 +91,7 @@ const SessionModal = (props) => {
 
 
     function sendToLoginPage(){
+        document.body.style.overflow = "auto"
         navigate('/home');
     }
 

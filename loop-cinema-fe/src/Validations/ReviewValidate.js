@@ -37,6 +37,12 @@ export default async function ReviewValidate(values) {
         await axios.post(API_HOST + '/createReview', newReview)
         .then(async response => {
             // const audience_review = response.data
+            await axios.patch(`http://localhost:3001/api/movies/movie/movieScore/${movieID}`)
+            .then(response => {
+                console.log(response.data.message);
+            }).catch(error => {
+                console.log(error.response.data.message);
+            })
         })
         .catch(error => {
             if (error.response) {

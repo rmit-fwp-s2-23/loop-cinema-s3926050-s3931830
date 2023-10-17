@@ -58,15 +58,6 @@ function Movie(props) {
         })
     }
 
-    const updateMovieScore = async () => {
-        await axios.patch(`http://localhost:3001/api/movies/movie/movieScore/${id}`)
-        .then(response => {
-            console.log(response.data.message);
-        }).catch(error => {
-            console.log(error.response.data.message);
-        })
-    }
-
     useEffect(()=>{
         const getMovieById = async () =>{
             try {
@@ -87,7 +78,6 @@ function Movie(props) {
             if (JSON.stringify(errors) === JSON.stringify({}) && isSubmitting) {
                 // const reviewValue = {...values}
                 fetchReviewsFromDatabase()
-                updateMovieScore()
                 props.addNewReview()       
                 
                 // reset values

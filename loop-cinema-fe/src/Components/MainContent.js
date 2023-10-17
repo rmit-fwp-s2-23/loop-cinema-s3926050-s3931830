@@ -59,10 +59,30 @@ const MainContent = () => {
         // updateMovieAverageScoreBulk()
         // deleteUserByUserId(getCurrentUserId())    
         const userID = JSON.parse(getCurrentUserId())
-        await axios.delete(`http://localhost:3001/api/users/user/${userID}`)
-        .then(() => {
-            removeCurrentUserId()
-            setIsLoggedIn(false)
+
+        // delete reviews of user
+        await axios.delete(`http://localhost:3001/api/reviews/user/${userID}`)
+        .then(async response => {
+            console.log(response.data.message);
+
+            // update movie score
+            await axios.patch(`http://localhost:3001/api/movies/updateScoreBulk`)
+            .then(async response => {
+                console.log(response.data.message);
+
+                // delete user
+                await axios.delete(`http://localhost:3001/api/users/user/${userID}`)
+                .then(response => {
+                    console.log(response.data.message);
+
+                    removeCurrentUserId()
+                    setIsLoggedIn(false)
+                }).catch(error => {
+                    console.log(error.response.data.message);
+                })
+            }).catch(error => {
+                console.log(error.response.data.message);
+            })
         })
         .catch(error => {
             if (error.response) {

@@ -14,10 +14,10 @@ export default function ReviewValidate (values) {
     if (!values.score) {
         reviewErrors.score = 'Rating is required.';
     } 
-    if (!values.comment) {
+    if (!values.comment || values.comment.replace(/<(.|\n)*?>/g, "").trim().length === 0) {
         reviewErrors.comment = 'Comment is required.';
-    } else if (!/^.{1,250}$/.test(values.comment)) {
-        reviewErrors.phone = 'Comment can only have up to 250 characters.'
+    } else if (!/^.{1,600}$/.test(values.comment)) {
+        reviewErrors.comment = 'Comment can only have up to 600 characters.'
     } 
     
     return reviewErrors;

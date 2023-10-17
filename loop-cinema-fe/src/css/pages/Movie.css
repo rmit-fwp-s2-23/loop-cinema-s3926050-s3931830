@@ -204,6 +204,10 @@
     background-color: #cd242c!important;
 }
 
+#audience-review-dialog-form {
+    margin-bottom: 0;
+}
+
 #audience-review-dialog-form fieldset {
     font-size: 16px;
     margin-bottom: 0px;
@@ -217,4 +221,81 @@
 #audience-review-dialog-form textarea {
     font-size: 0.9rem;
     margin-bottom: 0;
+}
+
+#audience-review-dialog-form #commentReview {
+    margin-top: 10px;
+    margin-bottom: 100px;
+}
+
+#audience-review-dialog-form #commentReview .quill {
+    height: 180px;
+}
+
+#audience-review-dialog-form #commentReview .quill .ql-toolbar, #audience-review-dialog-form #commentReview .quill .ql-container {
+    --border-color: var(--form-element-border-color);
+    border: var(--border-width) solid var(--border-color);
+}
+
+#audience-review-dialog-form #commentReview .quill .ql-toolbar {
+    border-bottom: none;
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+}
+
+#audience-review-dialog-form #commentReview .quill .ql-container {
+    border-bottom-left-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+}
+
+#audience-review-dialog-form .quill .ql-toolbar.ql-snow .ql-picker-label[role=button] {
+    --background-color: inherit;
+    --border-color: inherit;
+    --color: inherit;
+    --box-shadow: inherit;
+    /* padding: inherit; */
+    /* border: inherit; */
+    padding-top: 0;
+    border-radius: inherit;
+    outline: inherit;
+    background-color: inherit;
+    box-shadow: inherit;
+    color: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    text-align: inherit;
+    /* cursor: inherit; */
+    transition: inherit;
+    margin-bottom: 0;
+}
+
+#audience-review-dialog-form .quill .ql-toolbar.ql-snow .ql-picker {
+    /* color: #fff */
+}
+
+#audience-review-dialog-form .quill .ql-toolbar.ql-snow .ql-picker-options {
+    /* background-color: #444; */
+}
+
+#audience-review-dialog-form .quill .ql-toolbar.ql-snow .ql-picker-options .ql-picker-item[role=button] {
+    --background-color: inherit;
+    --border-color: inherit;
+    --color: inherit;
+    --box-shadow: inherit;
+    /* padding: inherit; */
+    border: none;
+    padding-right: 0;
+    padding-left: 0;
+    border-radius: inherit;
+    outline: inherit;
+    background-color: inherit;
+    box-shadow: inherit;
+    color: #444;
+    font-weight: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    text-align: inherit;
+    /* cursor: inherit; */
+    transition: inherit
 }

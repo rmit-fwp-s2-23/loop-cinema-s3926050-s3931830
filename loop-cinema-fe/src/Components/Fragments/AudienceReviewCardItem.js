@@ -5,7 +5,7 @@ import '../../css/AudienceReviewCardItem.css'
  */
 const AudienceReviewCardItem = (props) => {
     function printStars(numStars) {
-        const wholeNumberPart = Math.floor(numStars);
+        const wholeNumberPart = Math.ceil(numStars);
         const decimalPart = numStars - wholeNumberPart;
 
         const starElements = [];
@@ -30,19 +30,19 @@ const AudienceReviewCardItem = (props) => {
     return (
         <>
             <div className="audience-review-list-item">
-                <h4 className="audience-review-list-item-user">{props.user.firstName + " " + props.user.lastName}</h4>
+                <h4 className="audience-review-list-item-user">{props.review.user.userFirstName + " " + props.review.user.userLastName}</h4>
                 <div className="audience-review-list-item-small">
-                    <span className='audience-review-list-item-small-email'>{props.user.email}</span>
+                    <span className='audience-review-list-item-small-email'>{props.review.user.userEmail}</span>
                     <img src={process.env.PUBLIC_URL + '/Images/black-circle.png'} className='audience-review-list-item-small-dot' />
-                    <span className='audience-review-list-item-small-email'>{props.review.updatedAt}</span>
+                    <span className='audience-review-list-item-small-email'>{props.review.updatedAt.slice(0,10)}</span>
                 </div>
                 <div className="card_stars">
                 {   
-                    printStars(props.review.score)
+                    printStars(props.review.audienceReviewScore)
                 }
                 </div>
                 <div className="audience-review-list-item-comment">
-                    <span className='audience-review-list-item-comment-span'>{props.review.comment}</span>
+                    <span className='audience-review-list-item-comment-span'>{props.review.audienceReviewComment}</span>
                 </div>
             </div>
         </>

@@ -1,4 +1,5 @@
 import {useLocation} from "react-router-dom"
+import 'react-quill/dist/quill.snow.css';
 import "../css/pages/Movie.css"
 import { useEffect, useState } from "react";
 import { createNewAudienceReview, getAudienceReviewListByMovieId } from '../data/reviewRepo'
@@ -6,6 +7,9 @@ import { getCurrentUserId, getUserByUserId, getUserInfoByUserId } from "../data/
 import AudienceReviewCardItem from "../Components/Fragments/AudienceReviewCardItem";
 import useForm from "../CustomHooks/useForm";
 import ReviewValidate from '../Validations/ReviewValidate'
+import axios from "axios";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 function Movie(props) {
     /**This will be a complete section for a single movie with all its details and stuff.*/
@@ -15,9 +19,27 @@ function Movie(props) {
     const userId = JSON.parse(getCurrentUserId())
     // console.log(JSON.parse(userId));
     const movieObj = location.state.movieData;
+    const movieID = movieObj.movie_id
 
     const [currentMovieAudienceReviewList, setCurrentMovieAudienceReviewList] = useState([])
     const [reviewing, setReviewing] = useState(false)
+
+    const fetchReviewsFromDatabase = async () => {
+        await axios.get(`http://localhost:3001/api/reviews/movie/${movieID}`)
+        .then(response => {
+            setCurrentMovieAudienceReviewList(response.data);
+        })
+    }
+
+    const [aRComment, setARComment] = useState("");
+
+    const changeARComment = (event) => {
+        // console.log(typeof(event));
+        // event.persist();
+        setARComment(event)
+        setValues(values => ({ ...values, comment: event }));
+        console.log(aRComment);
+    }
 
     // callback
     const reviewSuccess = () => {
@@ -49,7 +71,8 @@ function Movie(props) {
             const reviewValue = {...values}
             props.addNewReview(reviewValue, userId, movieObj.movie_id)         
         }
-        setCurrentMovieAudienceReviewList(getAudienceReviewListByMovieId(movieObj.movie_id))
+
+        fetchReviewsFromDatabase()
     }, [reviewing])
 
     // initialize from local storage to state
@@ -74,7 +97,7 @@ function Movie(props) {
 
     // print stars
     function printStars(numStars) {
-        const wholeNumberPart = Math.floor(numStars);
+        const wholeNumberPart = Math.ceil(numStars);
 
         const starElements = [];
         for (let i = 0; i < wholeNumberPart; i++) {
@@ -145,9 +168,17 @@ function Movie(props) {
                             }
                             <label for="comment">
                                 Comment *
-                                <textarea autoComplete="off" id="comment" name="comment" placeholder="Enter your comment..." 
+                                {/* <textarea autoComplete="off" id="comment" name="comment" placeholder="Enter your comment..." 
                                 value={values.comment || ''} onChange={handleChange} required rows="3"
-                                aria-invalid={`${errors.username && 'true'}`}/>
+                                aria-invalid={`${errors.username && 'true'}`}/> */}
+
+                                <div id="commentReview">
+                                    <ReactQuill theme="snow" id="comment" name="comment" 
+                                    // value={values.comment || ''} onChange={setCommentOfReview}  
+                                    value={aRComment} onChange={changeARComment}
+                                    />
+                                </div>
+
                                 {
                                     errors.comment && (
                                         <p className="input-text-help input-error">{errors.comment}</p>
@@ -219,10 +250,14 @@ function Movie(props) {
                     
                     <div className="audience-review-list">
                     {
+                        currentMovieAudienceReviewList.length > 0 ?
                         currentMovieAudienceReviewList.map((currentMovieAudienceReview) => (
-                            <AudienceReviewCardItem review={currentMovieAudienceReview} 
-                            user={getUserInfoByUserId(currentMovieAudienceReview.user_id)} />
-                        ))
+                            <AudienceReviewCardItem 
+                            review={currentMovieAudienceReview} 
+                            // user={getUserInfoByUserId(currentMovieAudienceReview.user_id)} 
+                            />
+                        )) :
+                        <p>There are no reviews for this movie</p>
                     }
                     </div>
                 </article>

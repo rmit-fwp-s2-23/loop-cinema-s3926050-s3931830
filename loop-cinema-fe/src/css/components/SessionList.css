@@ -1,0 +1,10 @@
+.sessions-location{
+    display: flex;
+    column-gap: 3%;
+    padding-top: 1vh;
+    padding-bottom: 3vh;
+}
+
+.sessions-location button{
+    width: 10vw;
+}

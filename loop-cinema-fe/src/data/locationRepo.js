@@ -1,3 +1,4 @@
+import http from "../http-common.js";
 import {locations} from "./database-brief.js";
 import { getAudienceReviewList, getAudienceReviewListByMovieId, getMovieIdFromAudienceReviewList } from "./reviewRepo.js";
 
@@ -20,9 +21,11 @@ const initLocationList = () => {
  * get location list from localStorage
  * @returns a list of locations (array)
  */
-const getLocationList = () => {
-    const response = localStorage.getItem(LOCATION_DATA);
-    return JSON.parse(response);  
+const getLocationList = async () => {
+    // const response = localStorage.getItem(LOCATION_DATA);
+    // return JSON.parse(response);  
+    const response = await http.get("/locations/");
+    return response.data;
 }
 
 export {

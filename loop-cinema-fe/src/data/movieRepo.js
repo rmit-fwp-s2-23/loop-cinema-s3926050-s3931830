@@ -1,6 +1,7 @@
+import axios from "axios";
 import {movies} from "./database-brief.js";
 import { getAudienceReviewList, getAudienceReviewListByMovieId, getMovieIdFromAudienceReviewList } from "./reviewRepo.js";
-
+import http from "../http-common.js";
 const MOVIE_DATA = "movie_data"
 
 /**
@@ -20,9 +21,12 @@ const initMovieList = () => {
  * get movie list from localStorage
  * @returns a list of movies (array)
  */
-const getMovieList = () => {
-    const response = localStorage.getItem(MOVIE_DATA);
-    return JSON.parse(response);  
+const getMovieList = async () => {
+    // const response = localStorage.getItem(MOVIE_DATA);
+    // return JSON.parse(response);
+    const response = await http.get("/movies/")
+   
+    return response.data
 }
 
 /**
@@ -62,23 +66,26 @@ const getMovieTitleByMovieId = (searchMovieId) => {
     return null
 }
 
-const getMovieByMovieId = (searchMovieId) => {
-    const movieList = getMovieList()
-    if (movieList !== null) {
-        const movieListLength = movieList.length;
-        for (let index = 0; index < movieListLength; index++) {
-            const movie = movieList[index];
-            if (searchMovieId === movie.movie_id) {
-                return movie
-            }
-        }
-        return null
-    }
-    return null
+const getMovieByMovieId = async (searchMovieId) => {
+    // const movieList = getMovieList()
+    // if (movieList !== null) {
+    //     const movieListLength = movieList.length;
+    //     for (let index = 0; index < movieListLength; index++) {
+    //         const movie = movieList[index];
+    //         if (searchMovieId === movie.movie_id) {
+    //             return movie
+    //         }
+    //     }
+    //     return null
+    // }
+    // return null
+    const response = await http.get(`/movies/movie/${searchMovieId}`)
+    return response.data
 }
 
-const updateAverageAudienceReviewScoreOfMovie = (movieId) => {
-    let movieList = getMovieList()
+const updateAverageAudienceReviewScoreOfMovie = async (movieId) => {
+    let movieList = await getMovieList()
+    
     const reviewList = getAudienceReviewListByMovieId(movieId)
     let newMovieObject = {...getMovieByMovieId(movieId)}
 
@@ -102,6 +109,7 @@ const updateAverageAudienceReviewScoreOfMovie = (movieId) => {
                 movieList.splice(index, 1, newMovieObject)
             }
         }
+        
         const newMovieList = [...movieList]   
         setMovieList(newMovieList)
     }
@@ -119,6 +127,8 @@ const updateMovieAverageScoreBulk = () => {
 
 export {
     initMovieList,
+    getMovieList,
+    getMovieByMovieId,
     getMovieTitleByMovieId,
     updateAverageAudienceReviewScoreOfMovie,
     updateMovieAverageScoreBulk

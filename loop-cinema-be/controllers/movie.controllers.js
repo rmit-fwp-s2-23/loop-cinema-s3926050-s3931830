@@ -6,7 +6,7 @@ const { Sequelize } = require("sequelize");
 // Get all movies
 exports.getAllMovies = async (req, res) => {
     const movies = await db.movie.findAll({
-        attributes: ['movieID', 'movieTitle', 'movieRuntime', 'moviePoster', 'movieAverageScore'],
+        attributes: ['movieID', 'movieBanner', 'movieTitle', 'movieApercu', 'movieRuntime', 'moviePoster', 'movieAverageScore'],
         include: [
             {
                 model: db.rating_type,
@@ -47,6 +47,21 @@ exports.getMovieById = async (req, res) => {
                 model: db.audience_review,
                 attributes: {exclude: ['movieID', 'createdAt']}
             },
+            {
+                model: db.genre,
+                as: "genreIDs", //specify alias
+                attributes: {exclude: ['createdAt', 'updatedAt']},
+                through: {attributes:[]}
+            },
+            {
+                model: db.cast,
+                as: "castIDs",
+                attributes: {exclude: ['createdAt', 'updatedAt']},
+                through:{attributes: []}
+            },
+            {
+                model: db.director
+            }
         ]
     });
 

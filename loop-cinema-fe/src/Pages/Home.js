@@ -32,13 +32,8 @@ function Home(props){
                         {/* <div className="upcomingButtons">
                             <UpcomingScreeningButtons/>
                         </div> */}
-                    <div className="sort_buttons">
-                        <div id="sort_label"><h1>Sort By:</h1></div>
-                        <button className="sort_button sort_rating" style={sort_rating_style} onClick={toggleSortRating}>Rating</button>
-                        
-                    </div>
                     <div className="home_latest_movies">
-                        <MovieList sortRatingStatus = {sortRatingStatus} />
+                        <MovieList sortRatingStatus = {sortRatingStatus} isLoggedIn={props.isLoggedIn} toggleSortRating={toggleSortRating} sort_rating_style={sort_rating_style}/>
                     </div>
 
                     {/* </StatusThemeProvider> */}

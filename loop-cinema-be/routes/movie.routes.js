@@ -5,6 +5,9 @@ module.exports = (express, app) => {
     // Select all movies.
     router.get("/", controller.getAllMovies);
 
+    // update all movie average score
+    router.patch("/updateScoreBulk", controller.updateAllMovieAverageScore)
+
     // get movie by id
     router.get("/movie/:movieID", controller.getMovieById);
 

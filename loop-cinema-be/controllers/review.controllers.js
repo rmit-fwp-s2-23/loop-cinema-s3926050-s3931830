@@ -78,3 +78,20 @@ exports.createReview = async (req, res) => {
         }
     }
 }
+
+exports.removeReviewsByUserId = async (req, res) => {
+    const userID = req.params.userID;
+
+    try {
+        await db.audience_review.destroy({where: {userID: userID}})
+        // status code 204 - no content -> no content being responsed
+        // use 200 if want to get a message
+        res.status(200).json({
+            message: `Delete reviews of user id ${userID} successfully!`
+        })
+    } catch (error) {
+        res.status(403).json({
+            message: `Delete reviews of user unsuccessfully!`
+        })
+    }
+}

@@ -289,7 +289,7 @@ async function seedDataMovie() {
       movieBanner: "https://www.thebanner.org/sites/default/files/styles/article_detail_header/public/2023-08/MM-1207%20Oppenheimer.jpg?itok=0U-jOPJC",
       directorID: "D001",
       ratingTypeID: "RT004",
-      movieAverageScore: 3
+      // movieAverageScore: 3
     },
     {
       movieID: "M124",

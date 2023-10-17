@@ -93,13 +93,48 @@ exports.updateMovieAverageScoreById = async (req, res) => {
             raw: true
         })
 
-        const audience_review_score = Math.ceil(Number(audience_review[0].audienceReviewSum) / Number(audience_review[0].audienceReviewCount))
-        await db.movie.update({movieAverageScore: audience_review_score}, {where: {movieID: movieID}})
+        if (audience_review[0].audienceReviewCount !== 0) {
+            const audience_review_score = Math.ceil(Number(audience_review[0].audienceReviewSum) / Number(audience_review[0].audienceReviewCount))
+            await db.movie.update({movieAverageScore: audience_review_score}, {where: {movieID: movieID}})
 
-        movie = await db.movie.findByPk(movieID);
+            // movie = await db.movie.findByPk(movieID);
+        }
 
         res.status(200).json({
             message: "Movie average score has been updated!"
         })
     }
+}
+
+exports.updateAllMovieAverageScore = async (req, res) => {
+    const movies = await db.movie.findAll()
+
+    if (movies === null) {
+        res.status(404).json({
+            message: "There are no movies"
+        })
+    } else {
+        movies.forEach(async movie => {
+            const audience_review = await db.audience_review.findAll({
+                attributes: [
+                    [Sequelize.fn('COUNT', Sequelize.col('audienceReviewScore')), 'audienceReviewCount'],
+                    [Sequelize.fn('SUM', Sequelize.col('audienceReviewScore')), 'audienceReviewSum']
+                ],
+                where: {
+                    movieID: movie.movieID
+                },
+                // to access dataValues
+                raw: true
+            })
+    
+            if (audience_review[0].audienceReviewCount !== 0) {
+                const audience_review_score = Math.ceil(Number(audience_review[0].audienceReviewSum) / Number(audience_review[0].audienceReviewCount))
+                await db.movie.update({movieAverageScore: audience_review_score}, {where: {movieID: movie.movieID}})
+            } 
+        });
+    }
+
+    res.status(200).json({
+        message: "All movie score has been updated!"
+    })
 }

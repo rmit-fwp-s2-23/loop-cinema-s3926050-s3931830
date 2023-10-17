@@ -17,8 +17,8 @@ module.exports = (express, app) => {
     // create user
     router.post("/createReview", controller.createReview);
 
-    // // delete user by id
-    // router.delete("/user/:userID", controller.removeUserById);
+    // delete review by user id
+    router.delete("/user/:userID", controller.removeReviewsByUserId);
 
     // // update user by id
     // router.patch("/user/:userID", controller.updateUserById);

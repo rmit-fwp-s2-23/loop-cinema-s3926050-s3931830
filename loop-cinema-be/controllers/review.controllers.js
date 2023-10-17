@@ -16,7 +16,7 @@ exports.getReviewsByMovieId = async (req, res) => {
         where: {
             movieID: movieID
         },
-        attributes: {exclude: ['createdAt', 'movieID']},
+        attributes: {exclude: ['createdAt']},
         include:
         [
             {
@@ -36,7 +36,7 @@ exports.getReviewsByUserId = async (req, res) => {
         where: {
             userID: userID
         },
-        attributes: {exclude: ['createdAt', 'userID']},
+        attributes: {exclude: ['createdAt']},
         include:
         [
             {
@@ -49,3 +49,32 @@ exports.getReviewsByUserId = async (req, res) => {
     res.status(200).json(audience_reviews)
 };
 
+exports.createReview = async (req, res) => {
+    const userID = req.body.userID;
+    const movieID = req.body.movieID;
+
+    const user = await db.user.findByPk(userID)
+    const movie = await db.movie.findByPk(movieID)
+
+    if (user === null || movie === null) {
+        res.status(404).json({
+            message: "Create review failed"
+        })
+    } else {
+        try {
+            const audience_review = await db.audience_review.create({
+                audienceReviewID: "AR" + moment().format('YYMMDDHHmmss'),
+                audienceReviewComment: req.body.audienceReviewComment,
+                audienceReviewScore: req.body.audienceReviewScore, 
+                movieID: movieID, 
+                userID: userID
+            });
+
+            res.status(201).json(audience_review)
+        } catch (error) {
+            res.status(403).json({
+                message: "Wrong format"
+            })
+        }
+    }
+}

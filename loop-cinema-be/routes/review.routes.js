@@ -14,8 +14,8 @@ module.exports = (express, app) => {
     // // login user
     // router.get("/login", controller.loginUser);
 
-    // // create user
-    // router.post("/createUser", controller.createUser);
+    // create user
+    router.post("/createReview", controller.createReview);
 
     // // delete user by id
     // router.delete("/user/:userID", controller.removeUserById);

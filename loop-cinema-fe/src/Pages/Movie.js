@@ -62,7 +62,6 @@ function Movie(props) {
 
             // successfully clear comment
             setARComment("")
-            console.log(values);
         })
     }
 
@@ -241,7 +240,7 @@ function Movie(props) {
                             <div className="movie_wrapper">
                                 <h1 className="movie_heading">{movieObj.movieTitle}</h1>
                                 <div className="movie_details">
-                                    <span className="movie_rating">{movieObj.ratingTypeName}</span>
+                                    <span className="movie_rating">{movieObj.rating_type.ratingTypeName}</span>
                                     <span className="movie_pipe">|</span>
                                     <span className="movie_duration">{movieObj.movieRuntime + " min"}</span>
                                     <span className="movie_pipe">|</span>
@@ -267,12 +266,13 @@ function Movie(props) {
                             <p>{movieObj.director.directorName}</p>
                             <h4>Actors</h4>
                             <p>
-                            {movieObj.castIDs.map((obj)=>{
-                                <span>obj.castName, </span>
+                            {
+                                movieObj.castIDs.map((obj) => {                                 
+                                    return <span>{obj.castName}, </span>
                                 })
                             }
                             </p>
-                            <p>{movieObj.castIDs}</p>
+                            {/* <p>{movieObj.castIDs}</p> */}
                         </hgroup>
                     </article>
                     <SessionList movieObj={movieObj} isLoggedIn={props.isLoggedIn}/>

@@ -46,7 +46,7 @@ function MovieList(props) {
                                             
                                             image={obj.moviePoster} 
                                             title={obj.movieTitle} 
-                                            rated={obj.ratingTypeName} 
+                                            rated={obj.rating_type.ratingTypeName} 
                                             runtime={obj.movieRuntime}
                                             stars = {obj.movieAverageScore}
                                             />

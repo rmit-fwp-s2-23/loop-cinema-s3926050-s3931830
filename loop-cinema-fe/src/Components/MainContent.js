@@ -26,6 +26,21 @@ const MainContent = () => {
     const [isTemporaryMessageDeleteReview, setIsTemporaryMessageDeleteReview] = useState(false)
     const [isTemporaryMessageUpdateReview, setIsTemporaryMessageUpdateReview] = useState(false)
 
+    const updateAverageMovieScoreBulk = async () => {
+        // update movie score
+        await axios.patch(`http://localhost:3001/api/movies/updateScoreBulk`)
+        .then(async response => {
+            console.log(response.data.message);
+        }).catch(error => {
+            console.log(error.response.data.message);
+        })
+    }
+
+    // update movie score of all movies when first time mounting
+    useEffect(() => {
+        updateAverageMovieScoreBulk()
+    }, [])
+
     useEffect(() => {
         const userId = getCurrentUserId()
         if (userId === null) { 
@@ -37,6 +52,7 @@ const MainContent = () => {
                 setIsTemporaryMessage(false)
             }, 2000)
         }
+        
     }, [isLoggedIn])
     
     const signOut = () => {

@@ -12,6 +12,7 @@ import MyAccountActivity from "../Pages/MyAccountActivity";
 import { updateAverageAudienceReviewScoreOfMovie, updateMovieAverageScoreBulk } from "../data/movieRepo";
 import { AboutUs } from "../Pages/AboutUs";
 import axios from "axios";
+import MyAccountReservation from "../Pages/MyAccountReservation";
 
 const MainContent = () => {
     const navigate = useNavigate()
@@ -171,6 +172,10 @@ const MainContent = () => {
         navigate("/account/activity")
     }
 
+    const navigateMyAccountReservation = () => {
+        navigate("/account/reservation")
+    }
+
     return (
         <>
             <div className="main-content">
@@ -179,6 +184,7 @@ const MainContent = () => {
                 isTemporaryMessageLogOut={isTemporaryMessageLogOut} 
                 navigateMyAccount={navigateMyAccount} navigateMyAccountProfile={navigateMyAccountProfile} 
                 navigateMyAccountActivity={navigateMyAccountActivity}
+                navigateMyAccountReservation={navigateMyAccountReservation}
                 isTemporaryMessageDeleteUser={isTemporaryMessageDeleteUser} 
                 isTemporaryMessageUpdateUser={isTemporaryMessageUpdateUser} 
                 isTemporaryMessageNewReview={isTemporaryMessageNewReview} 
@@ -191,11 +197,12 @@ const MainContent = () => {
                     <Route path="/AboutUs" element={<AboutUs/>}/>
                     <Route path="/account" element={<MyAccount isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} 
                     navigateMyAccountProfile={navigateMyAccountProfile} navigateMyAccount={navigateMyAccount} 
-                    navigateMyAccountActivity={navigateMyAccountActivity} />} />
+                    navigateMyAccountActivity={navigateMyAccountActivity} navigateMyAccountReservation={navigateMyAccountReservation}/>} />
                     <Route path="/account/profile" element={<MyAccountProfile isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} 
                     deleteUser={deleteUser} updateUser={updateUser}/>} />
                     <Route path="/account/activity" element={<MyAccountActivity isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} 
                     deleteReview={deleteReview} updateReview={updateReview} />} />
+                    <Route path="/account/reservation" element={<MyAccountReservation isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
 
                     {/* catch all wrong route */}
                     <Route

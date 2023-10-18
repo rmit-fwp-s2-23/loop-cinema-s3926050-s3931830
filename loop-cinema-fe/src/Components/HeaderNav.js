@@ -24,6 +24,11 @@ const HeaderNav = (props) => {
         props.navigateMyAccountActivity()
     }
 
+    const navigateMyAccountReservation = () => {
+        toggleAccountMenu()
+        props.navigateMyAccountReservation()
+    }
+
     // open or close my account menu
     const toggleAccountMenu = () => {
         setIsOpenMenu(prev => !prev)
@@ -70,6 +75,11 @@ const HeaderNav = (props) => {
                                 <div className="header-profile-button-hover-block-item">
                                     <button className="header-profile-button-hover-block-item-button" onClick={navigateMyAccountActivity}>
                                         <span className="header-profile-button-hover-block-item-text">My Activity</span>
+                                    </button>
+                                </div>
+                                <div className="header-profile-button-hover-block-item">
+                                    <button className="header-profile-button-hover-block-item-button" onClick={navigateMyAccountReservation}>
+                                        <span className="header-profile-button-hover-block-item-text">My Reservation</span>
                                     </button>
                                 </div>
                                 <div className="header-profile-button-hover-block-item">

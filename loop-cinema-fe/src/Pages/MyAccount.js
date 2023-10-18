@@ -57,6 +57,8 @@ const MyAccount = (props) => {
                     desc={"Manage your personal details, Looper account and preferences."} />
                     <MyAccountCardItem title={"My Activity"} img={"activity"} navigateTo={props.navigateMyAccountActivity}
                     desc={"Track your past activities and comments on movies in Loop Cinema."} />
+                    <MyAccountCardItem title={"My Reservation"} img={"reservation"} navigateTo={props.navigateMyAccountReservation}
+                    desc={"All of your reservations and a recap of their data, time, and location."} />
                 </div>
             </div>
         </>

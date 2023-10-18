@@ -11,17 +11,17 @@ module.exports = (express, app) => {
     // get reviews by user id
     router.get("/user/:userID", controller.getReviewsByUserId);
 
-    // // login user
-    // router.get("/login", controller.loginUser);
-
-    // create user
+    // create review
     router.post("/createReview", controller.createReview);
 
     // delete review by user id
     router.delete("/user/:userID", controller.removeReviewsByUserId);
 
-    // // update user by id
-    // router.patch("/user/:userID", controller.updateUserById);
+    // delete review by review id
+    router.delete("/review/:reviewID", controller.removeReviewByReviewId);
+
+    // update review by review id
+    router.patch("/review/:reviewID", controller.updateReviewByReviewId);
 
     // Add routes to server.
     app.use("/api/reviews", router);

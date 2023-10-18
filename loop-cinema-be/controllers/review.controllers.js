@@ -95,3 +95,51 @@ exports.removeReviewsByUserId = async (req, res) => {
         })
     }
 }
+
+exports.removeReviewByReviewId = async (req, res) => {
+    const reviewID = req.params.reviewID;
+
+    try {
+        // if try to parse the same reviewID that was deleted -> still get success but db is unaffected
+        // -> minor issues - come back later
+        await db.audience_review.destroy({where: {audienceReviewID: reviewID}})
+        // status code 204 - no content -> no content being responsed
+        // use 200 if want to get a message
+        res.status(200).json({
+            message: `Delete review id ${reviewID} successfully!`
+        })
+    } catch (error) {
+        res.status(403).json({
+            message: `Delete review unsuccessfully!`
+        })
+    }
+}
+
+exports.updateReviewByReviewId = async (req, res) => {
+    const reviewID = req.params.reviewID;
+
+    let audience_review = await db.audience_review.findByPk(reviewID);
+
+    if (audience_review === null) {
+        res.status(404).json({
+            message: `There are no review with the id ${reviewID}`
+        })
+    } else {
+        try {
+            if (req.body.audienceReviewComment) {
+                await db.audience_review.update({audienceReviewComment: req.body.audienceReviewComment}, {where: {audienceReviewID: reviewID}})
+            }
+
+            if (req.body.audienceReviewScore) {
+                await db.audience_review.update({audienceReviewScore: req.body.audienceReviewScore}, {where: {audienceReviewID: reviewID}})
+            }
+
+            audience_review = await db.audience_review.findByPk(reviewID);
+            res.status(201).json(audience_review)
+        } catch (error) {
+            res.status(403).json({
+                message: "Failed to update review"
+            })
+        }
+    }
+}

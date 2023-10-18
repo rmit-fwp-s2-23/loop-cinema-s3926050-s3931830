@@ -56,11 +56,15 @@ exports.getMovieById = async (req, res) => {
             {
                 model: db.cast,
                 as: "castIDs",
-                attributes: {exclude: ['createdAt', 'updatedAt']},
+                attributes: ['castName'],
                 through:{attributes: []}
             },
             {
                 model: db.director
+            },
+            {
+                model: db.rating_type,
+                attributes: ['ratingTypeName']
             }
         ]
     });

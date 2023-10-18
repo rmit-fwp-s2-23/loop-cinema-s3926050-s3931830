@@ -74,6 +74,8 @@ db.sync = async () => {
   await seedDataTrailer();
   await seedDataSession();
   await seedDataAudienceReview();
+
+  await seedDataMovieCast()
 };
 
 async function seedDataUser() {
@@ -139,18 +141,57 @@ async function seedDataCast() {
       return;
 
   await db.cast.bulkCreate([
-    {
-      castID: "C001",
-      castName: "Cillian Murphy"
-    },
-    {
-      castID: "C002",
-      castName: "David Krumholtz"
-    },
-    {
-      castID: "C003",
-      castName: "Emily Blunt"
-    }
+    {castID: "C001", castName: "Cillian Murphy"},
+    {castID: "C002", castName: "Emily Blunt"},
+    {castID: "C003", castName: "Matt Damon"},
+    {castID: "C004", castName: "Leonardo DiCaprio"},
+    {castID: "C005", castName: "Joseph Gordon-Levitt"},
+    {castID: "C006", castName: "Ellen Page"},
+    {castID: "C007", castName: "Tim Robbins"},
+    {castID: "C008", castName: "Morgan Freeman"},
+    {castID: "C009", castName: "Bob Gunton"},
+    {castID: "C010", castName: "Elijah Wood"},
+    {castID: "C011", castName: "Ian McKellen"},
+    {castID: "C012", castName: "Viggo Mortensen"},
+    {castID: "C013", castName: "Chadwick Boseman"},
+    {castID: "C014", castName: "Michael B. Jordan"},
+    {castID: "C015", castName: "Lupita Nyong'o"},
+    {castID: "C016", castName: "Sam Neill"},
+    {castID: "C017", castName: "Laura Dern"},
+    {castID: "C018", castName: "Jeff Goldblum"},
+    {castID: "C019", castName: "Sam Worthington"},
+    {castID: "C020", castName: "Zoë Saldana"},
+    {castID: "C021", castName: "Sigourney Weaver"},
+    {castID: "C022", castName: "Tom Hanks"},
+    {castID: "C023", castName: "Tim Allen"},
+    {castID: "C024", castName: "Don Rickles"},
+    {castID: "C025", castName: "John Travolta"},
+    {castID: "C026", castName: "Samuel L. Jackson"},
+    {castID: "C027", castName: "Uma Thurman"},
+    {castID: "C028", castName: "Matthew Broderick"},
+    {castID: "C029", castName: "James Earl Jones"},
+    {castID: "C030", castName: "Jeremy Irons"},
+    {castID: "C031", castName: "Daniel Radcliffe"},
+    {castID: "C032", castName: "Rupert Grint"},
+    {castID: "C033", castName: "Emma Watson"},
+    {castID: "C034", castName: "Tom Hanks"},
+    {castID: "C035", castName: "Robin Wright"},
+    {castID: "C036", castName: "Gary Sinise"},
+    {castID: "C037", castName: "Keanu Reeves"},
+    {castID: "C038", castName: "Laurence Fishburne"},
+    {castID: "C039", castName: "Carrie-Anne Moss"},
+    {castID: "C040", castName: "Jim Carrey"},
+    {castID: "C041", castName: "Kate Winslet"},
+    {castID: "C042", castName: "Mark Ruffalo"},
+    {castID: "C043", castName: "Robert Downey Jr."},
+    {castID: "C044", castName: "Chris Evans"},
+    {castID: "C045", castName: "Scarlett Johansson"},
+    {castID: "C046", castName: "Christian Bale"},
+    {castID: "C047", castName: "Heath Ledger"},
+    {castID: "C048", castName: "Aaron Eckhart"},
+    {castID: "C049", castName: "Mark Hamill"},
+    {castID: "C050", castName: "Harrison Ford"},
+    {castID: "C051", castName: "Carrie Fisher"}
   ])
 }
 
@@ -574,5 +615,79 @@ async function seedDataAudienceReview() {
   ])
 }
 
+async function seedDataMovieCast() {
+  const count = await db.movie_cast.count();
+
+  // Only seed data if necessary.
+  if (count > 0)
+      return;
+
+  await db.movie_cast.bulkCreate([
+    { movieID: "M123", castID: "C001" },
+    { movieID: "M123", castID: "C002" },
+    { movieID: "M123", castID: "C003" },
+    { movieID: "M124", castID: "C004" },
+    { movieID: "M124", castID: "C005" },
+    { movieID: "M124", castID: "C006" },
+    { movieID: "M125", castID: "C007" },
+    { movieID: "M125", castID: "C008" },
+    { movieID: "M125", castID: "C009" },
+    { movieID: "M126", castID: "C010" },
+    { movieID: "M126", castID: "C011" },
+    { movieID: "M126", castID: "C012" },
+    { movieID: "M127", castID: "C013" },
+    { movieID: "M127", castID: "C014" },
+    { movieID: "M127", castID: "C015" },
+    { movieID: "M128", castID: "C016" },
+    { movieID: "M128", castID: "C017" },
+    { movieID: "M128", castID: "C018" },
+    { movieID: "M129", castID: "C019" },
+    { movieID: "M129", castID: "C020" },
+    { movieID: "M129", castID: "C021" },
+    { movieID: "M130", castID: "C022" },
+    { movieID: "M130", castID: "C023" },
+    { movieID: "M130", castID: "C024" },
+    { movieID: "M131", castID: "C025" },
+    { movieID: "M131", castID: "C026" },
+    { movieID: "M131", castID: "C027" },
+    { movieID: "M132", castID: "C028" },
+    { movieID: "M132", castID: "C029" },
+    { movieID: "M132", castID: "C030" },
+    { movieID: "M133", castID: "C031" },
+    { movieID: "M133", castID: "C032" },
+    { movieID: "M133", castID: "C033" },
+    { movieID: "M134", castID: "C034" },
+    { movieID: "M134", castID: "C035" },
+    { movieID: "M134", castID: "C036" },
+    { movieID: "M135", castID: "C037" },
+    { movieID: "M135", castID: "C038" },
+    { movieID: "M135", castID: "C039" },
+    { movieID: "M136", castID: "C040" },
+    { movieID: "M136", castID: "C041" },
+    { movieID: "M136", castID: "C042" },
+    { movieID: "M137", castID: "C043" },
+    { movieID: "M137", castID: "C044" },
+    { movieID: "M137", castID: "C045" },
+    { movieID: "M138", castID: "C046" },
+    { movieID: "M138", castID: "C047" },
+    { movieID: "M138", castID: "C048" },
+    { movieID: "M139", castID: "C049" },
+    { movieID: "M139", castID: "C050" },
+    { movieID: "M139", castID: "C051" }
+  ])
+}
+
+// do not seed data of movie genre at this point as loop cinema has not include genre filter yet
+async function seedDataMovieGenre() {
+  const count = await db.movie_genre.count();
+
+  // Only seed data if necessary.
+  if (count > 0)
+      return;
+
+  await db.movie_genre.bulkCreate([
+    
+  ])
+}
 
 module.exports = db;

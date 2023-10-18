@@ -7,7 +7,7 @@ exports.getReservationsByUserId = async (req, res)=>{
         where: {
             userID: userID
         },
-        attributes: ['reservationID', 'reservationNumberOfSeat', 'sessionID'],
+        attributes: ['reservationID', 'reservationNumberOfSeat', 'sessionID', 'updatedAt'],
         include: [
             {
                 model: db.session,
@@ -26,7 +26,7 @@ exports.getReservationsByUserId = async (req, res)=>{
         ]
     });
 
-    res.status(200).json()
+    res.status(200).json(reservations)
 }
 
 //get a reservation by reservationID

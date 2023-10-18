@@ -569,6 +569,27 @@ async function seedDataSession() {
   ])
 }
 
+// async function seedDataReservation() {
+//   const count = await db.reservation.count();
+
+//   // Only seed data if necessary.
+//   if (count > 0)
+//       return;
+
+//   await db.reservation.bulkCreate([
+//     { sessionID: 'S001', sessionTime: "2023-11-01 10:00:00", movieID: "M123", locationID: "L001"},
+//     { sessionID: 'S002', sessionTime: "2023-11-01 14:00:00", movieID: "M123", locationID: "L001"},
+//     { sessionID: 'S003', sessionTime: "2023-11-01 18:00:00", movieID: "M123", locationID: "L001"},
+//     { sessionID: 'S004', sessionTime: "2023-11-01 14:30:00", movieID: "M124", locationID: "L001"},
+//     { sessionID: 'S005', sessionTime: "2023-11-01 19:30:00", movieID: "M124", locationID: "L001"},
+//     { sessionID: 'S006', sessionTime: "2023-11-01 14:00:00", movieID: "M124", locationID: "L002"},
+//     { sessionID: 'S007', sessionTime: "2023-11-01 18:00:00", movieID: "M125", locationID: "L002"},
+//     { sessionID: 'S008', sessionTime: "2023-11-01 09:00:00", movieID: "M125", locationID: "L003"},
+//     { sessionID: 'S009', sessionTime: "2023-11-01 12:00:00", movieID: "M126", locationID: "L003"},
+//     { sessionID: 'S010', sessionTime: "2023-11-01 18:00:00", movieID: "M126", locationID: "L003"},
+//   ])
+// }
+
 async function seedDataAudienceReview() {
   const count = await db.audience_review.count();
 

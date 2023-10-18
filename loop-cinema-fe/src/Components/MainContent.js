@@ -122,9 +122,9 @@ const MainContent = () => {
     }
 
     // delete review + update movie rating
-    const deleteReview = (reviewId, movieId) => {
-        deleteReviewByReviewId(reviewId)
-        updateAverageAudienceReviewScoreOfMovie(movieId)
+    const deleteReview = () => {
+        // deleteReviewByReviewId(reviewId)
+        // updateAverageAudienceReviewScoreOfMovie(movieId)
 
         setIsTemporaryMessageDeleteReview(true)
         setTimeout(() => {
@@ -133,9 +133,9 @@ const MainContent = () => {
     }
 
     // update review + update movie rating
-    const updateReview = (values) => {
-        updateReviewByReviewId(values)
-        updateAverageAudienceReviewScoreOfMovie(values.movie_id)
+    const updateReview = () => {
+        // updateReviewByReviewId(values)
+        // updateAverageAudienceReviewScoreOfMovie(values.movie_id)
 
         setIsTemporaryMessageUpdateReview(true)
         setTimeout(() => {

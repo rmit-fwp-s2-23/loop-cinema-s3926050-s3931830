@@ -1,21 +1,24 @@
 import { useEffect, useState } from 'react';
+import 'react-quill/dist/quill.snow.css';
 import useForm from '../../CustomHooks/useForm';
 import ReviewValidate from '../../Validations/ReviewValidate';
 import '../../css/MyAccountActivityCard.css'
+import ReactQuill from 'react-quill';
+import UpdateReviewValidate from '../../Validations/UpdateReviewValidate';
 
 /**
  * review card item in my account activity page
  */
 const MyAccountActivityCard = (props) => {
-    const CONFIRM_DELETE_DIALOG_ID = `my-account-activity-confirm-delete-comment-` + props.review.audience_review_id;
-    const UPDATE_DIALOG_ID = `my-account-activity-update-comment-` + props.review.audience_review_id;
-    const UPDATE_DIALOG_SUBMIT_BUTTON = `my-account-activity-update-comment-submit-` + props.review.audience_review_id;
+    const CONFIRM_DELETE_DIALOG_ID = `my-account-activity-confirm-delete-comment-` + props.review.audienceReviewID;
+    const UPDATE_DIALOG_ID = `my-account-activity-update-comment-` + props.review.audienceReviewID;
+    const UPDATE_DIALOG_SUBMIT_BUTTON = `my-account-activity-update-comment-submit-` + props.audienceReviewID;
 
-    const UPDATE_DIALOG_CHECKBOX_ID_1 = `my-account-activity-update-checkbox-` + props.review.audience_review_id + "-1";
-    const UPDATE_DIALOG_CHECKBOX_ID_2 = `my-account-activity-update-checkbox-` + props.review.audience_review_id + "-2";
-    const UPDATE_DIALOG_CHECKBOX_ID_3 = `my-account-activity-update-checkbox-` + props.review.audience_review_id + "-3";
-    const UPDATE_DIALOG_CHECKBOX_ID_4 = `my-account-activity-update-checkbox-` + props.review.audience_review_id + "-4";
-    const UPDATE_DIALOG_CHECKBOX_ID_5 = `my-account-activity-update-checkbox-` + props.review.audience_review_id + "-5";
+    const UPDATE_DIALOG_CHECKBOX_ID_1 = `my-account-activity-update-checkbox-` + props.review.audienceReviewID + "-1";
+    const UPDATE_DIALOG_CHECKBOX_ID_2 = `my-account-activity-update-checkbox-` + props.review.audienceReviewID + "-2";
+    const UPDATE_DIALOG_CHECKBOX_ID_3 = `my-account-activity-update-checkbox-` + props.review.audienceReviewID + "-3";
+    const UPDATE_DIALOG_CHECKBOX_ID_4 = `my-account-activity-update-checkbox-` + props.review.audienceReviewID + "-4";
+    const UPDATE_DIALOG_CHECKBOX_ID_5 = `my-account-activity-update-checkbox-` + props.review.audienceReviewID + "-5";
 
     // set updating state for comment when updating
     const [updating, setUpdating] = useState(false)
@@ -31,12 +34,20 @@ const MyAccountActivityCard = (props) => {
         handleSubmit,
         setValues,
         isSubmitting
-    } = useForm(updateSuccess, ReviewValidate);
+    } = useForm(updateSuccess, UpdateReviewValidate);
 
     // initialize first time values from localStorage
     useEffect(() => {
+        // console.log(props.review);
         setValues({...props.review})
+        // console.log(values);
     }, [])
+
+    const [aRComment, setARComment] = useState(props.review.audienceReviewComment);
+    const changeARComment = (event) => {
+        setARComment(event)
+        setValues(values => ({ ...values, audienceReviewComment: event }));
+    }
 
     useEffect(() => {
         if (JSON.stringify(errors) === JSON.stringify({}) && isSubmitting) {
@@ -46,7 +57,7 @@ const MyAccountActivityCard = (props) => {
             elementButton.setAttribute("aria-busy", true)
             setTimeout(() => {
                 elementButton.removeAttribute("aria-busy")
-                const inputCheckboxElementId = `my-account-activity-update-checkbox-` + props.review.audience_review_id + "-" + values.score
+                const inputCheckboxElementId = `my-account-activity-update-checkbox-` + props.review.audienceReviewID + "-" + values.audienceReviewScore
                 const inputCheckboxElement = document.getElementById(inputCheckboxElementId)
                 inputCheckboxElement.removeAttribute("checked")
 
@@ -54,9 +65,9 @@ const MyAccountActivityCard = (props) => {
                 document.body.style.overflow = "auto"
             }, 1000)
 
-            props.updateReviewOne(values)  
+            props.updateReviewOne(props.review.movieID)  
 
-            // cannot update one item 2 consecutive time if not reload -> investigate further
+            // cannot update one item 2 consecutive time if not reload -> investigate further ---> not experience this problem with db
             // window.location.reload()
         }
     }, [updating])
@@ -77,11 +88,13 @@ const MyAccountActivityCard = (props) => {
 
     // open update comment form
     const openUpdateDialog = () => {
+        console.log(values);
+        console.log(aRComment);
         document.body.style.overflow = "hidden"
         const element = document.getElementById(UPDATE_DIALOG_ID);
         element.setAttribute("open", true)
 
-        const inputCheckboxElementId = `my-account-activity-update-checkbox-` + props.review.audience_review_id + "-" + values.score
+        const inputCheckboxElementId = `my-account-activity-update-checkbox-` + props.review.audienceReviewID + "-" + values.audienceReviewScore
         const inputCheckboxElement = document.getElementById(inputCheckboxElementId)
         inputCheckboxElement.setAttribute("checked", true)
     }
@@ -92,7 +105,7 @@ const MyAccountActivityCard = (props) => {
         const element = document.getElementById(UPDATE_DIALOG_ID);
         element.removeAttribute("open")
 
-        const inputCheckboxElementId = `my-account-activity-update-checkbox-` + props.review.audience_review_id + "-" + values.score
+        const inputCheckboxElementId = `my-account-activity-update-checkbox-` + props.review.audienceReviewID + "-" + values.audienceReviewScore
         const inputCheckboxElement = document.getElementById(inputCheckboxElementId)
         inputCheckboxElement.removeAttribute("checked")
     }
@@ -113,7 +126,7 @@ const MyAccountActivityCard = (props) => {
             document.body.style.overflow = "auto"
         }, 1000)
 
-        props.deleteReviewOne(props.review.audience_review_id, props.review.movie_id)
+        props.deleteReviewOne(props.review.audienceReviewID, props.review.movieID)
     }
 
     // print stars
@@ -136,13 +149,13 @@ const MyAccountActivityCard = (props) => {
         <>
             <dialog id={UPDATE_DIALOG_ID}>
                 <article>
-                    <h2>Updating review for {props.movieTitle}</h2>          
+                    <h2>Updating review for {props.review.movie.movieTitle}</h2>          
                     <div className='login-dialog-content-form'>
                         <form onSubmit={handleSubmit} noValidate id="audience-review-dialog-form">
                             <fieldset>
                                 Rating *
                                 <label for={UPDATE_DIALOG_CHECKBOX_ID_1} className="audience-review-dialog-form-label-checkbox">
-                                    <input type="radio" id={UPDATE_DIALOG_CHECKBOX_ID_1} name="score" value="1" onChange={handleChange} autoComplete="off"/>
+                                    <input type="radio" id={UPDATE_DIALOG_CHECKBOX_ID_1} name="audienceReviewScore" value="1" onChange={handleChange} autoComplete="off"/>
                                     <div className="card_stars">
                                         {   
                                             printStars(1)
@@ -150,7 +163,7 @@ const MyAccountActivityCard = (props) => {
                                     </div>
                                 </label>
                                 <label for={UPDATE_DIALOG_CHECKBOX_ID_2} className="audience-review-dialog-form-label-checkbox">
-                                    <input type="radio" id={UPDATE_DIALOG_CHECKBOX_ID_2} name="score" value="2" onChange={handleChange} autoComplete="off"/>
+                                    <input type="radio" id={UPDATE_DIALOG_CHECKBOX_ID_2} name="audienceReviewScore" value="2" onChange={handleChange} autoComplete="off"/>
                                     <div className="card_stars">
                                         {   
                                             printStars(2)
@@ -158,7 +171,7 @@ const MyAccountActivityCard = (props) => {
                                     </div>
                                 </label>
                                 <label for={UPDATE_DIALOG_CHECKBOX_ID_3} className="audience-review-dialog-form-label-checkbox">
-                                    <input type="radio" id={UPDATE_DIALOG_CHECKBOX_ID_3} name="score" value="3" onChange={handleChange} autoComplete="off"/>
+                                    <input type="radio" id={UPDATE_DIALOG_CHECKBOX_ID_3} name="audienceReviewScore" value="3" onChange={handleChange} autoComplete="off"/>
                                     <div className="card_stars">
                                         {   
                                             printStars(3)
@@ -166,7 +179,7 @@ const MyAccountActivityCard = (props) => {
                                     </div>
                                 </label>
                                 <label for={UPDATE_DIALOG_CHECKBOX_ID_4}className="audience-review-dialog-form-label-checkbox">
-                                    <input type="radio" id={UPDATE_DIALOG_CHECKBOX_ID_4} name="score" value="4" onChange={handleChange} autoComplete="off"/>
+                                    <input type="radio" id={UPDATE_DIALOG_CHECKBOX_ID_4} name="audienceReviewScore" value="4" onChange={handleChange} autoComplete="off"/>
                                     <div className="card_stars">
                                         {   
                                             printStars(4)
@@ -174,7 +187,7 @@ const MyAccountActivityCard = (props) => {
                                     </div>
                                 </label>
                                 <label for={UPDATE_DIALOG_CHECKBOX_ID_5} className="audience-review-dialog-form-label-checkbox">
-                                    <input type="radio" id={UPDATE_DIALOG_CHECKBOX_ID_5} name="score" value="5" onChange={handleChange} autoComplete="off"/>
+                                    <input type="radio" id={UPDATE_DIALOG_CHECKBOX_ID_5} name="audienceReviewScore" value="5" onChange={handleChange} autoComplete="off"/>
                                     <div className="card_stars">
                                         {   
                                             printStars(5)
@@ -189,9 +202,17 @@ const MyAccountActivityCard = (props) => {
                             }
                             <label for="comment">
                                 Comment *
-                                <textarea autoComplete="off" id="comment" name="comment" placeholder="Enter your comment..." 
+                                {/* <textarea autoComplete="off" id="comment" name="comment" placeholder="Enter your comment..." 
                                 value={values.comment || ''} onChange={handleChange} required rows="3"
-                                aria-invalid={`${errors.username && 'true'}`}/>
+                                aria-invalid={`${errors.username && 'true'}`}/> */}
+
+                                <div id="commentReview">
+                                    <ReactQuill theme="snow" id="comment" name="audienceReviewComment" 
+                                    // value={values.comment || ''} onChange={setCommentOfReview}  
+                                    value={aRComment} onChange={changeARComment}
+                                    />
+                                </div>
+
                                 {
                                     errors.comment && (
                                         <p className="input-text-help input-error">{errors.comment}</p>
@@ -235,7 +256,8 @@ const MyAccountActivityCard = (props) => {
                         }
                     </div>
                     <div className="audience-review-list-item-comment">
-                        <span className='audience-review-list-item-comment-span'>{props.review.audienceReviewComment}</span>
+                        <span className='audience-review-list-item-comment-span'
+                        dangerouslySetInnerHTML={{__html: props.review.audienceReviewComment}} />
                     </div>
                     <div className="my-account-profile-confirm-delete-buttons my-account-profile-header-delete">
                         <button class="secondary outline" id="audience-review-dialog-form-cancel-post"

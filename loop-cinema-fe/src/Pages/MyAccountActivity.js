@@ -19,6 +19,9 @@ const MyAccountActivity = (props) => {
     // const [currentMovieAudienceReviewList, setCurrentMovieAudienceReviewList] = useState(getAudienceReviewListByUserId(userId))
     const [currentMovieAudienceReviewList, setCurrentMovieAudienceReviewList] = useState([])
 
+    // after a process done
+    const [processDone, setProcessDone] = useState(false)
+
     const fetchReviewsFromDatabase = async () => {
         await axios.get(`http://localhost:3001/api/reviews/user/${userId}`)
         .then(response => {
@@ -26,20 +29,53 @@ const MyAccountActivity = (props) => {
         })
     }
 
-    // initialize from local storage to state
+    // fetch data from db
     useEffect(() => {
         // setCurrentMovieAudienceReviewList(getAudienceReviewListByUserId(userId))
+        console.log(1);
         fetchReviewsFromDatabase()
-    }, [])
+    }, [processDone])
 
-    const deleteReviewOne = (reviewId, movieId) => {
-        props.deleteReview(reviewId, movieId)
-        setCurrentMovieAudienceReviewList(getAudienceReviewListByUserId(userId))
+    const deleteReviewOne = async (reviewId, movieId) => {
+        await axios.delete(`http://localhost:3001/api/reviews/review/${reviewId}`)
+        .then(async response => {
+            console.log(response.data.message);
+            setProcessDone(prev => !prev)
+
+            // update movie score
+            await axios.patch(`http://localhost:3001/api/movies/movie/movieScore/${movieId}`)
+            .then(async response => {
+                console.log(response.data.message);
+
+            }).catch(error => {
+                console.log(error.response.data.message);
+            })
+        })
+        .catch (error => {
+            console.log(error.response.data.message);
+        })
+
+        props.deleteReview()
+        // setCurrentMovieAudienceReviewList(getAudienceReviewListByUserId(userId))
+        // fetchReviewsFromDatabase()
+
+        
     }
 
-    const updateReviewOne = (values) => {
-        props.updateReview(values)
-        setCurrentMovieAudienceReviewList(getAudienceReviewListByUserId(userId))
+    const updateReviewOne = async (movieId) => {
+        // update movie score
+        await axios.patch(`http://localhost:3001/api/movies/movie/movieScore/${movieId}`)
+        .then(response => {
+            console.log(response.data.message);
+
+            setProcessDone(prev => !prev)
+
+        }).catch(error => {
+            console.log(error.response.data.message);
+        })
+
+        props.updateReview()
+        // setCurrentMovieAudienceReviewList(getAudienceReviewListByUserId(userId))
     }
 
     return (

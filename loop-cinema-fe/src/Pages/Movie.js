@@ -9,7 +9,6 @@ import useForm from "../CustomHooks/useForm";
 import ReviewValidate from '../Validations/ReviewValidate'
 import axios from "axios";
 import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
 import { getMovieByMovieId, getMovieTitleByMovieId } from "../data/movieRepo";
 import SessionList from "../Components/SessionList";
 import { useParams } from 'react-router-dom';
@@ -25,6 +24,7 @@ function Movie(props) {
     const [movieNotFoundError, setMovieNotFoundError] = useState(null);
     const [currentMovieAudienceReviewList, setCurrentMovieAudienceReviewList] = useState([])
     const [reviewing, setReviewing] = useState(false)
+    const [processDone, setProcessDone] = useState(false)
     
     // callback
     const reviewSuccess = () => {
@@ -38,7 +38,8 @@ function Movie(props) {
             document.body.style.overflow = "auto"
         }, 1000)
 
-        setReviewing(true)
+        // document.getElementById("audience-review-dialog").reset();
+        setReviewing(prev => !prev)
     }
 
     const {
@@ -54,7 +55,14 @@ function Movie(props) {
         await axios.get(`http://localhost:3001/api/reviews/movie/${id}`)
         .then(response => {
             setCurrentMovieAudienceReviewList(response.data);
-            setValues(values => ({...values, movieID: id}))
+            // still cannot clear checkbox after submit
+            // -> the box is checked but value is null
+            // -> this happens when create review -> create review again without reloading
+            setValues(values => ({...values, score: "", comment: null, movieID: id}))
+
+            // successfully clear comment
+            setARComment("")
+            console.log(values);
         })
     }
 
@@ -69,20 +77,24 @@ function Movie(props) {
             }
         }
         getMovieById();
-        fetchReviewsFromDatabase()
     }, []);
+
+    useEffect(() => {
+        fetchReviewsFromDatabase()
+        console.log(values);
+    }, [processDone])
 
     // whenever callback is good -> add new review
     useEffect(() => {
         if(movieObj !== null) {
             if (JSON.stringify(errors) === JSON.stringify({}) && isSubmitting) {
                 // const reviewValue = {...values}
-                fetchReviewsFromDatabase()
+                setProcessDone(prev => !prev)
                 props.addNewReview()       
                 
                 // reset values
                 // setValues({})
-                setReviewing(false)
+                // setReviewing(false)
             }
         }
     }, [reviewing])

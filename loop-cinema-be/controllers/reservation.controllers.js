@@ -1,6 +1,10 @@
 const db = require("../database/db")
 
-//get all reservation by userID
+/**
+ * 
+ * @param {*} req params (userID)
+ * @param {*} res 
+ */
 exports.getReservationsByUserId = async (req, res)=>{
     const userID = req.params.userID
     const reservations = await db.reservation.findAll({

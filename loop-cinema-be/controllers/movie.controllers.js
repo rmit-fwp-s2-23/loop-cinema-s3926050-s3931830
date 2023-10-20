@@ -3,7 +3,12 @@ const argon2 = require("argon2")
 const moment = require("moment");
 const { Sequelize } = require("sequelize");
 
-// Get all movies
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 200 - list of movies 
+ * @description get a list of all movies with specified fields
+ */
 exports.getAllMovies = async (req, res) => {
     const movies = await db.movie.findAll({
         attributes: ['movieID', 'movieBanner', 'movieTitle', 'movieApercu', 'movieRuntime', 'moviePoster', 'movieAverageScore'],
@@ -19,6 +24,13 @@ exports.getAllMovies = async (req, res) => {
 };
 
 // Get one movie by id (get necessary display info + id only)
+/**
+ * 
+ * @param {*} req params (movieID)
+ * @param {*} res 200 - the movie with movieID
+ * 
+ * @description get the movie with movieID with specified fields
+ */
 exports.getMovieById = async (req, res) => {
     const movieID = req.params.movieID;
     const movie = await db.movie.findOne({
@@ -74,6 +86,16 @@ exports.getMovieById = async (req, res) => {
 
 // have to call this api whenever reviews or movies is being modified
 // ---> need to search more how to solve this (db logic ? seperate function ?)
+/**
+ * 
+ * @param {*} req params(movieID)
+ * @param {*} res 200 - success message | 400 - no movie with movieID
+ * 
+ * @description update average movie score of the movie with movieID
+ * 
+ * @description have to call this api whenever review table is modified
+ * ---> need a better solution (call api within another api ? db logic auto update ? seperate function)
+ */
 exports.updateMovieAverageScoreById = async (req, res) => {
     const movieID = req.params.movieID;
 
@@ -110,6 +132,13 @@ exports.updateMovieAverageScoreById = async (req, res) => {
     }
 }
 
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 404 - no movies in db | 200 - success message
+ * 
+ * @description update all movie average score
+ */
 exports.updateAllMovieAverageScore = async (req, res) => {
     const movies = await db.movie.findAll()
 

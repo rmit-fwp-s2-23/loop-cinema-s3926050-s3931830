@@ -59,7 +59,7 @@ const RegisterForm = (props) => {
                     <h2 className='login-dialog-content-title'>Become a Looper</h2>
                     <div className='login-dialog-content-form'>
                         <form onSubmit={handleSubmit} noValidate>
-                            <label for="email">Email address *</label>
+                            <label htmlFor="email">Email address *</label>
                             <input autoComplete="off" type="email" id="email" name="email" placeholder="Email address" required
                             aria-invalid={`${errors.email && 'true'}`} onChange={handleChange} value={values.email || ''} />
                             {
@@ -68,7 +68,7 @@ const RegisterForm = (props) => {
                                 )
                             }
 
-                            <label for="password">
+                            <label htmlFor="password">
                                 Password *
                                 <input autoComplete="off" type="password" id="password" name="password" placeholder="Password" required 
                                 aria-invalid={`${errors.password && 'true'}`} onChange={handleChange} value={values.password || ''} />
@@ -83,7 +83,7 @@ const RegisterForm = (props) => {
                                 }
                             </label>
 
-                            <label for="confirmPassword">
+                            <label htmlFor="confirmPassword">
                                 Confirm password *
                                 <input autoComplete="off" type="password" id="confirmPassword" name="confirmPassword" 
                                 placeholder="Password confirm" required aria-invalid={`${errors.confirmPassword && 'true'}`} 
@@ -96,7 +96,7 @@ const RegisterForm = (props) => {
                             </label>
 
                             <div class="grid">
-                                <label for="firstName">
+                                <label htmlFor="firstName">
                                     First name *
                                     <input autoComplete="off" type="text" id="firstName" name="firstName" placeholder="First name" 
                                     required aria-invalid={`${errors.username && 'true'}`} onChange={handleChange} 
@@ -108,7 +108,7 @@ const RegisterForm = (props) => {
                                     }
                                 </label>    
 
-                                <label for="lastName">
+                                <label htmlFor="lastName">
                                     Last name *
                                     <input autoComplete="off" type="text" id="lastName" name="lastName" placeholder="Last name" 
                                     required aria-invalid={`${errors.username && 'true'}`} onChange={handleChange} 
@@ -121,7 +121,7 @@ const RegisterForm = (props) => {
                                 </label>          
                             </div>
 
-                            <label for="phone">Phone number *</label>
+                            <label htmlFor="phone">Phone number *</label>
                             <input autoComplete="off" type="text" id="phone" name="phone" placeholder="Phone number" required
                             aria-invalid={`${errors.phone && 'true'}`} onChange={handleChange} value={values.phone || ''} />
                             {
@@ -131,7 +131,7 @@ const RegisterForm = (props) => {
                             }
 
                             <div class="grid">
-                                <label for="dob">
+                                <label htmlFor="dob">
                                     Date of birth *
                                     <input autoComplete="off" type="date" id="dob" name="dob" placeholder="Date of birth" 
                                     required aria-invalid={`${errors.dob && 'true'}`} onChange={handleChange} 
@@ -143,7 +143,7 @@ const RegisterForm = (props) => {
                                     }
                                 </label>    
 
-                                <label for="postCode">
+                                <label htmlFor="postCode">
                                     Post code *
                                     <input autoComplete="off" type="text" id="postCode" name="postCode" placeholder="Post code" 
                                     required aria-invalid={`${errors.postCode && 'true'}`} onChange={handleChange} 
@@ -163,7 +163,7 @@ const RegisterForm = (props) => {
                                     value={true} />
                                     I would like to receive offers from Looper.
                                 </label> */}
-                                <label for="term_privacy">
+                                <label htmlFor="term_privacy">
                                     <input type="checkbox" id="term_privacy" name="term_privacy" disabled checked />
                                     I have read and agree to the Terms & Conditions.
                                 </label>

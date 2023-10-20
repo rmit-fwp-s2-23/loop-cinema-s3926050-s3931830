@@ -10,12 +10,12 @@ import { initLocationList } from './data/locationRepo.js';
 import { initFakeReviewCount, initFakeReviewTime } from './data/fakeReviewRepo.js';
 
 // init localStorage for first time user
-initUserList();
-initMovieList();
-initAudienceReviewList();
-initLocationList();
-initFakeReviewCount();
-initFakeReviewTime()
+// initUserList();
+// initMovieList();
+// initAudienceReviewList();
+// initLocationList();
+// initFakeReviewCount();
+// initFakeReviewTime()
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

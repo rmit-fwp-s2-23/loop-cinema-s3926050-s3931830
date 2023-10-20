@@ -25,29 +25,33 @@ beforeEach(() => {
     container = utils.container
 })
 
-test('render register form', () => {
-    expect(container).toBeInTheDocument();
-});
+// test('render register form', () => {
+//     expect(container).toBeInTheDocument();
+// });
 
-test("type in field", () => {
+/**
+ * successfully type in field and validate input field
+ * cannot create user in db when the form has invalid fields
+ */
+test("type in field & submit invalid register form", async () => {
+    // const dialog = container.querySelector("dialog");
+    // const form = dialog.getElementsByTagName("form");
+    const button = screen.getByText('Register', { selector: 'button'})
     const input = screen.getByLabelText("Email address *");
   
     // Simulate input.
     fireEvent.change(input, { target: { value: "usertest@gmail.com" } });
-  
     expect(input.value).toBe("usertest@gmail.com");
+
+    // Simulate click.
+    fireEvent.click(button);
+
+    const userLength = users.length
+
+    await axios.get(`http://localhost:3001/api/users/`)
+    .then(response => {
+        users = response.data
+    })
+
+    expect(users.length).toBe(userLength)
 });
-
-// test("submit empty form", () => {
-    // const dialog = container.querySelector("dialog");
-    // const form = dialog.getElementsByTagName("form");
-    // const button = screen.getByText('Register', { selector: 'button'})
-    // console.log(button);
-
-    // // Simulate click.
-    // fireEvent.click(button);
-    
-    // const error = screen.getByText('Email is required.', {selector: 'p'})
-    // console.log(error);
-    // expect(error.length).toBe(8)
-// });

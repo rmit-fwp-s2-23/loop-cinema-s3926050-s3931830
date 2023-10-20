@@ -330,7 +330,7 @@ async function seedDataMovie() {
       movieBanner: "https://www.thebanner.org/sites/default/files/styles/article_detail_header/public/2023-08/MM-1207%20Oppenheimer.jpg?itok=0U-jOPJC",
       directorID: "D001",
       ratingTypeID: "RT004",
-      // movieAverageScore: 3
+      movieAverageScore: 3
     },
     {
       movieID: "M124",
@@ -342,7 +342,8 @@ async function seedDataMovie() {
       moviePoster: "https://xl.movieposterdb.com/10_06/2010/1375666/xl_1375666_07030c72.jpg",
       movieBanner: "https://s3.eu-central-1.amazonaws.com/rausgegangen/Ts665W5SxmlqmkZsRwWD_inception-bannerjpg",
       directorID: "D001",
-      ratingTypeID: "RT002"
+      ratingTypeID: "RT002",
+      movieAverageScore: 4
     },
     {
       movieID: "M125",
@@ -354,7 +355,8 @@ async function seedDataMovie() {
       moviePoster: "https://xl.movieposterdb.com/05_03/1994/0111161/xl_8494_0111161_3bb8e662.jpg?v=2023-08-21%2006:57:05",
       movieBanner: "https://irs.www.warnerbros.com/hero-banner-jpeg/movies/media/browser/the_shawshank_redemption_25th_banner.jpg",
       directorID: "D002",
-      ratingTypeID: "RT005"
+      ratingTypeID: "RT005",
+      movieAverageScore: 5
     },
     {
       movieID: "M126",
@@ -366,7 +368,8 @@ async function seedDataMovie() {
       moviePoster: "https://xl.movieposterdb.com/04_12/2001/0120737/xl_166_0120737_158c8914.jpg",
       movieBanner: "https://www.wetanz.com/media//amasty/shopby/option_images/146768033123a810f5abad3aa0a1420b83498efab1.jpg",
       directorID: "D003",
-      ratingTypeID: "RT002"
+      ratingTypeID: "RT002",
+      movieAverageScore: 5
     },
     {
       movieID: "M127",
@@ -378,7 +381,8 @@ async function seedDataMovie() {
       moviePoster: "https://xl.movieposterdb.com/21_11/2018/1825683/xl_1825683_ebbf6bc0.jpg",
       movieBanner: "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/869ae92e-855f-4458-8e52-e9d04604a682/dcjxgyy-4e4e6040-c341-4d6a-9798-29fa00dfff5a.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg8PTM5ZWJkMzcyLTVhMjctNDZhZi04ZTI5LWE1ZTg1MjAwOTBiY1wvZGNqeGd5eS00ZTRlNjA0MC1jMzQxLTRkNmEtOTc9PTI5ZmEwMGRmZmY1YS5qLmdpaJ9V1HqK4GBjb7C9UPYlc1Vep4Tp0PLDMasXau-oXg",
       directorID: "D004",
-      ratingTypeID: "RT002"
+      ratingTypeID: "RT002",
+      movieAverageScore: 5
     },
     {
       movieID: "M128",
@@ -390,7 +394,8 @@ async function seedDataMovie() {
       moviePoster: "https://xl.movieposterdb.com/05_08/1993/0107290/xl_45298_0107290_be4e0db3.jpg",
       movieBanner: "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/554d27b6-5a27-46af-8e25-a5e8520090bc/d6fpuwi-ef5e1a54-b685-47d8-a040-25bc8cd0b994.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg9PTM5ZWJkMzcyLTVhMjctNDZhZi04ZTI1LWE1ZTg1MjAwOTBiY1wvZDZmcHV3aS1lZjVlMWE1NC1iNjg1LTQ3ZDgtYTA0PTI1YmM4Y2QwYjk5NC6qcGc",
       directorID: "D005",
-      ratingTypeID: "RT002"
+      ratingTypeID: "RT002",
+      movieAverageScore: 5
     },
     {
       movieID: "M129",
@@ -402,7 +407,8 @@ async function seedDataMovie() {
       moviePoster: "https://xl.movieposterdb.com/09_08/2009/499549/xl_499549_cd69e2ea.jpg",
       movieBanner: "https://www.beebibelle.com.au/assets/full/Avatar_Banner1.jpg?20220613140726",
       directorID: "D006",
-      ratingTypeID: "RT002"
+      ratingTypeID: "RT002",
+      movieAverageScore: 5
     },
     {
       movieID: "M130",
@@ -414,7 +420,8 @@ async function seedDataMovie() {
       moviePoster: "https://xl.movieposterdb.com/22_11/1995/178952/xl_toy-story-movie-poster_98469593.jpg",
       movieBanner: "https://i.insider.com/54f62b896da8119338df0cf4?width=700",
       directorID: "D007",
-      ratingTypeID: "RT001"
+      ratingTypeID: "RT001",
+      movieAverageScore: 5
     },
     {
       movieID: "M131",
@@ -426,7 +433,8 @@ async function seedDataMovie() {
       moviePoster: "https://xl.movieposterdb.com/05_08/1994/0110912/xl_42127_0110912_e6312b43.jpg",
       movieBanner: "https://100filmsinayear.files.wordpress.com/2016/09/pulp-fiction-banner.jpg",
       directorID: "D008",
-      ratingTypeID: "RT005"
+      ratingTypeID: "RT005",
+      movieAverageScore: 5
     },
     {
       movieID: "M132",
@@ -438,7 +446,8 @@ async function seedDataMovie() {
       moviePoster: "https://xl.movieposterdb.com/22_11/1994/323073/xl_the-lion-king-movie-poster_07016269.jpg",
       movieBanner: "https://i.pinimg.com/originals/10/f1/09/10f109cac6c14685bc63efb862ffbd77.jpg",
       directorID: "D009",
-      ratingTypeID: "RT001"
+      ratingTypeID: "RT001",
+      movieAverageScore: 5
     },
     {
       movieID: "M133",
@@ -632,6 +641,118 @@ async function seedDataAudienceReview() {
       audienceReviewScore: 4, 
       movieID: "M124", 
       userID: "U005"
+    },
+    {
+      audienceReviewID: "AR006",
+      audienceReviewComment: "The Shawshank Redemption is an emotionally gripping tale of friendship and survival.",
+      audienceReviewScore: 5,
+      movieID: "M125",
+      userID: "U006"
+    },
+    {
+      audienceReviewID: "AR007",
+      audienceReviewComment: "This film's message of hope and perseverance resonates deeply with me.",
+      audienceReviewScore: 5,
+      movieID: "M125",
+      userID: "U004"
+    },
+    {
+      audienceReviewID: "AR008",
+      audienceReviewComment: "The Fellowship of the Ring transports viewers to a magical world of adventure.",
+      audienceReviewScore: 5,
+      movieID: "M126",
+      userID: "U005"
+    },
+    {
+      audienceReviewID: "AR009",
+      audienceReviewComment: "This film's visuals and storytelling are simply breathtaking.",
+      audienceReviewScore: 4,
+      movieID: "M126",
+      userID: "U006"
+    },
+    {
+      audienceReviewID: "AR010",
+      audienceReviewComment: "Black Panther is a landmark film that celebrates African culture.",
+      audienceReviewScore: 5,
+      movieID: "M127",
+      userID: "U004"
+    },
+    {
+      audienceReviewID: "AR011",
+      audienceReviewComment: "The film's portrayal of Wakanda is mesmerizing and empowering.",
+      audienceReviewScore: 4,
+      movieID: "M127",
+      userID: "U005"
+    },
+    {
+      audienceReviewID: "AR012",
+      audienceReviewComment: "Jurassic Park ignited my fascination with dinosaurs and adventure.",
+      audienceReviewScore: 5,
+      movieID: "M128",
+      userID: "U006"
+    },
+    {
+      audienceReviewID: "AR013",
+      audienceReviewComment: "The suspense and dinosaur encounters kept me on the edge of my seat.",
+      audienceReviewScore: 4,
+      movieID: "M128",
+      userID: "U004"
+    },
+    {
+      audienceReviewID: "AR014",
+      audienceReviewComment: "Avatar transported me to a mesmerizing alien world.",
+      audienceReviewScore: 5,
+      movieID: "M129",
+      userID: "U005"
+    },
+    {
+      audienceReviewID: "AR015",
+      audienceReviewComment: "The film's visuals and message are both awe-inspiring.",
+      audienceReviewScore: 4,
+      movieID: "M129",
+      userID: "U006"
+    },
+    {
+      audienceReviewID: "AR016",
+      audienceReviewComment: "Toy Story sparked nostalgia and captivated audiences of all ages.",
+      audienceReviewScore: 5,
+      movieID: "M130",
+      userID: "U004"
+    },
+    {
+      audienceReviewID: "AR017",
+      audienceReviewComment: "The film's charm and creativity remain unmatched in animation.",
+      audienceReviewScore: 4,
+      movieID: "M130",
+      userID: "U005"
+    },
+    {
+      audienceReviewID: "AR018",
+      audienceReviewComment: "Pulp Fiction's narrative complexity and memorable moments are captivating.",
+      audienceReviewScore: 5,
+      movieID: "M131",
+      userID: "U006"
+    },
+    {
+      audienceReviewID: "AR019",
+      audienceReviewComment: "The film's unique structure and sharp dialogue make it a timeless classic.",
+      audienceReviewScore: 4,
+      movieID: "M131",
+      userID: "U004"
+    },
+    {
+      audienceReviewID: "AR020",
+      audienceReviewComment: "The Lion King's emotional depth and memorable songs make it a timeless favorite.",
+      audienceReviewScore: 5,
+      movieID: "M132",
+      userID: "U005"
+    },
+    {
+      audienceReviewID: "AR021",
+      audienceReviewComment: "The film's themes of responsibility and courage resonate with audiences of all ages.",
+      audienceReviewScore: 5,
+      movieID: "M132",
+      userID: "U006"
     }
   ])
 }

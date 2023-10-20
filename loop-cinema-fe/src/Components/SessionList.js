@@ -35,6 +35,7 @@ function compareDatetime(a, b) {
     const element = document.querySelector(`.${classSessionID}`);
     element.removeAttribute("open");
     e.stopPropagation();
+    window.location.reload(); 
   }
 
 
@@ -46,8 +47,8 @@ const SessionBasedOnLocation = (props) =>{
         {movieSessions.length !== 0 ? (
             movieSessions.sort(compareDatetime).map((session)=>(
                 <>  
-                    <SessionModal sessionID={session.sessionID} closeSessionModal={closeSessionModal} setResetSession={props.setResetSession} isLoggedIn={props.isLoggedIn}/>
-                    <button className="open-session-modal" data-sessionid={session.sessionID} onClick={openSessionModal}>{moment(session.sessionTime).format('DD-MM-YYYY')}</button>
+                    <SessionModal key={session.sessinoID} sessionID={session.sessionID} closeSessionModal={closeSessionModal} setResetSession={props.setResetSession} isLoggedIn={props.isLoggedIn}/>
+                    <button className="open-session-modal" data-sessionid={session.sessionID} onClick={openSessionModal}>{moment(session.sessionTime).format('hh:mm DD/MM')}</button>
                 </>
             ))
         ):(

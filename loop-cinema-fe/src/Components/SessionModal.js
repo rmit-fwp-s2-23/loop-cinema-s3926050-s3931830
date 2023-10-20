@@ -36,7 +36,7 @@ const SessionModal = (props) => {
         const elementBig = document.querySelector(`.${sessionDetail.sessionID}`);
         const elementButton = document.getElementById("session-booking-dialog-form-comfirm-post");
 
-        elementButton.setAttribute("aria-busy", true)
+        
 
         console.log("Starting createReservation")
         console.log(typeof getCurrentUserId());
@@ -50,7 +50,8 @@ const SessionModal = (props) => {
 
         console.log("starting update session")
         console.log(sessionDetail.sessionID)
-        //TODO: Update Session
+        
+        //Update Session
         await updateSession({
             sessionID: sessionDetail.sessionID,
             value: {
@@ -58,11 +59,10 @@ const SessionModal = (props) => {
             }
         })
 
-        setTimeout(() => {
-            elementButton.removeAttribute("aria-busy")
-            elementBig.removeAttribute("open")
-            document.body.style.overflow = "auto"
-        }, 1000)
+        
+        
+        elementBig.removeAttribute("open")
+        document.body.style.overflow = "auto"
 
         
         setResetSessionDetails(prev => !prev);

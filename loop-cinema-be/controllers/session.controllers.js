@@ -2,7 +2,7 @@ const db = require("../database/db")
 
 // Get all sessions
 exports.getAllSessions = async (req, res) => {
-    const sessions = await db.sessions.findAll({
+    const sessions = await db.session.findAll({
         attributes: {exclude: ['createdAt', 'updatedAt']},
         include: [
             {

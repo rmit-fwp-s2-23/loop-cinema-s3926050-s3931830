@@ -1,4 +1,5 @@
-const db = require("../database/db")
+const db = require("../database/db");
+const reservation = require("../models/reservation");
 
 //get all reservation by userID
 exports.getReservationsByUserId = async (req, res)=>{
@@ -26,13 +27,13 @@ exports.getReservationsByUserId = async (req, res)=>{
         ]
     });
 
-    res.status(200).json()
+    res.status(200).json(reservations)
 }
 
 //get a reservation by reservationID
 exports.getReservationsByReservationId = async (req, res)=>{
     const reservationID = req.params.reservationID
-    const reservations = await db.reservation.findAll({
+    const reservation = await db.reservation.findAll({
         where: {
             reservationID: reservationID
         },
@@ -54,6 +55,7 @@ exports.getReservationsByReservationId = async (req, res)=>{
             }
         ]
     })
+    res.status(200).json(reservation)
 }
 
 
